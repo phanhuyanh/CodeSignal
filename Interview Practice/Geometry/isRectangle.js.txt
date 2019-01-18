@@ -1,0 +1,30 @@
+function isRectangle(points) {
+    
+    const [[x1, y1], [x2, y2], [x3, y3], [x4, y4]] = points;
+    const vectoX = [x1-x2 , y1-y2];
+    const vectoY = [x2-x3,y2-y3];
+    const vectoX1 = [x3-x4,y3-y4];
+    
+    if(vectoX[0] * vectoY[0] + vectoX[1] * vectoY[1] !== 0) return false;
+    
+    var k;
+    
+    if( vectoX[0] != 0 ){
+        
+        k = vectoX1[0] / vectoX[0];
+        
+        if( vectoX[1] * k !== vectoX1[1] ) return false;
+        
+    }
+    else{
+        if(vectoX[1] != 0){
+            
+            k = vectoX1[1] / vectoX[1];
+            
+            if( vectoX[0] * k !== vectoX1[0] ) return false;
+        }
+        else return false;
+    }
+    
+    return vectoX[0]**2 + vectoX[1]**2 === vectoX1[0]**2 + vectoX1[1]**2;
+}

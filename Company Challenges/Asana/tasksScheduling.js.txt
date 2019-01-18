@@ -1,0 +1,639 @@
+function tasksScheduling(workingHours, tasks) {
+    
+    function f( workingHours  , tasks ){
+        
+        var W = workingHours;
+        
+        var days = 0;
+        
+        tasks.sort((a,b) => b-a);
+            
+        if(tasks[0] > workingHours) return -1;
+        
+        while(tasks.length) {
+            
+            workingHours -= tasks[0];
+            
+            
+            if( workingHours < tasks[tasks.length-1] ) {
+                    
+                    tasks = tasks.slice(1);
+                    
+                    workingHours = W;
+                    
+                    days++;
+                    
+                    continue;
+            }
+            if( workingHours == tasks[tasks.length-1]) {
+                    
+                    tasks = tasks.slice(1);
+                    
+                    tasks = tasks.slice(0 , tasks.length-1);
+                    
+                    workingHours = W;
+                    days++;
+                    
+                    continue;
+            }
+            
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] ) {
+                
+                 tasks = F(tasks , workingHours);
+                    
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+            }
+            
+            if( workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] ) {
+                
+                    tasks.splice(tasks.length-1 , 1);
+                    tasks.splice(tasks.length-1 , 1);
+                    tasks = tasks.slice(1);
+                    workingHours = W;
+                    days++;
+                    continue;
+            }
+            
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3]) {
+                
+                    tasks = P(tasks , workingHours);
+                    //console.log(tasks)
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+            }
+            
+            if (workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3]) {
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                //console.log(tasks)
+                workingHours = W;
+                days++;
+                continue;
+            }
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] ) {
+                    
+                    tasks = Q(tasks , workingHours);
+                    
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+                    
+            }
+            if( workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] ) {
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;
+                    
+            }
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5]){
+                    
+                   tasks = E(tasks , workingHours);
+                    
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue; 
+            }
+            if(workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] ) {
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;
+                    
+            }
+            if(workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6]) {
+                    
+                    tasks = R(tasks , workingHours);
+                
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+            }
+            if(workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6]) {
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;  
+            }
+            if(workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7]) {
+                    tasks = T(tasks , workingHours);
+                
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+            }
+            if( workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] ){
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;    
+            }
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] ) {
+                    
+                    tasks = Y(tasks , workingHours);
+                
+                    days++;
+                    
+                    workingHours = W;
+                    
+                    continue;
+            }
+            if( workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] )  {
+                
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;  
+            }
+            if( workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] + tasks[tasks.length-9] ) {
+                    
+                    tasks = U(tasks , workingHours);
+                    
+                    days++;
+                    
+                    workingHours =W;
+                    continue;
+                    
+                    
+                    
+            }
+            if( workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] + tasks[tasks.length-9] )    {
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;  
+            }
+            if(workingHours < tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] + tasks[tasks.length-9] + tasks[tasks.length-10]) {
+                    
+                    tasks = I(tasks , workingHours);
+                    
+                    days++;
+                    workingHours = W;
+                    continue;
+                    
+            }
+                
+            if(workingHours == tasks[tasks.length-1] + tasks[tasks.length-2] + tasks[tasks.length-3] + tasks[tasks.length-4] + tasks[tasks.length-5] + tasks[tasks.length-6] + tasks[tasks.length-7] + tasks[tasks.length-8] + tasks[tasks.length-9] + tasks[tasks.length-10])    {
+                    
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks.splice(tasks.length-1,1);
+                tasks = tasks.slice(1);
+                workingHours = W;
+                    
+                days++;
+                continue;  
+            }
+            
+        }
+        
+        return days;
+  
+    }
+    
+    
+    function I( a , w) {
+            
+            var mark = false;
+        
+        x = y = z = t = d = g = h = l = m = -1
+            
+        for(let i = 0 ; i<a.length-8 ; i++){
+                
+                for(let j = i+1 ; j<a.length-7 ; j++) {
+                        
+                        for(let k = j+1 ; k<a.length-6 ; k++) {
+                                
+                                for(let k1 = k+1 ; k1<a.length-5 ; k1++){
+                                        
+                                        for(let k2 = k1+1 ; k2<a.length-4 ; k2++){
+                                                
+                                                for(let k3 = k2+1 ; k3<a.length-3 ; k3++){
+                                                        
+                                                        for(let k4 = k3+1 ; k4<a.length-2 ; k4++){
+                                                                
+                                                                for(let k5 = k4+1 ; k5<a.length-1 ; k5++){
+                                                                        
+                                                                               for(let k6 = k5+1 ; k6<a.length ; k6++){
+                                                                                       if(mark) break;
+                                                        
+                                                                               if(a[i] + a[j] + a[k] + a[k1] + a[k2] + a[k3] + a[k4] + a[k5] + a[k6] <= w){
+                                                                
+                                                                               x = i;
+                                                                               y= j
+                                                                               z = k
+                                                                               t = k1
+                                                                               d = k2
+                                                                               g = k3
+                                                                               h = k4
+                                                                               l =k5
+                                                                                       m = k6
+                                                                               mark = true;
+                                                                               }
+                                                        }
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
+        a.splice(m,1)
+        a.splice(l,1)
+        a.splice(h,1)
+        a.splice(g,1)
+        a.splice(d,1)
+        a.splice(t,1)
+        a.splice(z,1)
+        a.splice(y,1)
+        a.splice(x,1)
+        a = a.slice(1);
+            return a;
+            
+            
+    }
+    
+    function U( a , w) {
+            
+            var mark = false;
+        
+        x = y = z = t = d = g = h = l = -1
+            
+        for(let i = 0 ; i<a.length-7 ; i++){
+                
+                for(let j = i+1 ; j<a.length-6 ; j++) {
+                        
+                        for(let k = j+1 ; k<a.length-5 ; k++) {
+                                
+                                for(let k1 = k+1 ; k1<a.length-4 ; k1++){
+                                        
+                                        for(let k2 = k1+1 ; k2<a.length-3 ; k2++){
+                                                
+                                                for(let k3 = k2+1 ; k3<a.length-2 ; k3++){
+                                                        
+                                                        for(let k4 = k3+1 ; k4<a.length-1 ; k4++){
+                                                                
+                                                                for(let k5 = k4+1 ; k5<a.length ; k5++){
+                                                                        
+                                                                               if(mark) break;
+                                                        
+                                                                               if(a[i] + a[j] + a[k] + a[k1] + a[k2] + a[k3] + a[k4] + a[k5] <= w){
+                                                                
+                                                                               x = i;
+                                                                               y= j
+                                                                               z = k
+                                                                               t = k1
+                                                                               d = k2
+                                                                               g = k3
+                                                                               h = k4
+                                                                               l =k5
+                                                                               mark = true;
+                                                        }
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
+        a.splice(l,1)
+        a.splice(h,1)
+        a.splice(g,1)
+        a.splice(d,1)
+        a.splice(t,1)
+        a.splice(z,1)
+        a.splice(y,1)
+        a.splice(x,1)
+        a = a.slice(1);
+            return a;
+            
+            
+    }
+            
+        
+    
+    function Y( a , w) {
+            
+            var mark = false;
+        
+        x = y = z = t = d = g = h = -1
+            
+        for(let i = 0 ; i<a.length-6 ; i++){
+                
+                for(let j = i+1 ; j<a.length-5 ; j++) {
+                        
+                        for(let k = j+1 ; k<a.length-4 ; k++) {
+                                
+                                for(let k1 = k+1 ; k1<a.length-3 ; k1++){
+                                        
+                                        for(let k2 = k1+1 ; k2<a.length-2 ; k2++){
+                                                
+                                                for(let k3 = k2+1 ; k3<a.length-1 ; k3++){
+                                                        
+                                                        for(let k4 = k3+1 ; k4<a.length ; k4++){
+                                                                
+                                                                if(mark) break;
+                                                        
+                                                               if(a[i] + a[j] + a[k] + a[k1] + a[k2] + a[k3] + a[k4] <= w){
+                                                                
+                                                                x = i;
+                                                                y= j
+                                                                z = k
+                                                                t = k1
+                                                                d = k2
+                                                                g = k3
+                                                                h = k4
+                                                                mark = true;
+                                                        }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
+        a.splice(h,1)
+        a.splice(g,1)
+        a.splice(d,1)
+        a.splice(t,1)
+        a.splice(z,1)
+        a.splice(y,1)
+        a.splice(x,1)
+        a = a.slice(1);
+            return a;
+            
+            
+    }
+        
+    function T(a , w) {
+            
+        var mark = false;
+        
+        x = y = z = t = d = g = -1
+            
+        for(let i = 0 ; i<a.length-5 ; i++){
+                
+                for(let j = i+1 ; j<a.length-4 ; j++) {
+                        
+                        for(let k = j+1 ; k<a.length-3 ; k++) {
+                                
+                                for(let k1 = k+1 ; k1<a.length-2 ; k1++){
+                                        
+                                        for(let k2 = k1+1 ; k2<a.length-1 ; k2++){
+                                                
+                                                for(let k3 = k2+1 ; k3<a.length ; k3++){
+                                                        
+                                                        if(mark) break;
+                                                        
+                                                        if(a[i] + a[j] + a[k] + a[k1] + a[k2] + a[k3] <= w){
+                                                                
+                                                                x = i;
+                                                                y= j
+                                                                z = k
+                                                                t = k1
+                                                                d = k2
+                                                                g = k3
+                                                                mark = true;
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
+        a.splice(g,1)
+        a.splice(d,1)
+        a.splice(t,1)
+        a.splice(z,1)
+        a.splice(y,1)
+        a.splice(x,1)
+        a = a.slice(1);
+            return a;
+            
+    }    
+        
+    function R(a ,  w) {
+            
+            var mark = false;
+            x = y = z = t = d = -1
+            
+            for(let i = 1; i<a.length-4 ; i++) {
+                
+            for(let j = i+1 ; j<a.length-3 ; j++){
+                    
+                    for(let k = j+1 ; k<a.length-2 ; k++){
+                            
+                            for(let k1 = k+1 ; k1<a.length-1 ; k1++){
+                                    
+                                    for(let k2 = k1+1 ; k2<a.length ; k2++) {
+                                            
+                                            if(mark) break;
+                                    
+                                            if( a[i] + a[j] + a[k] + a[k1] + a[k2] <=w ){
+                                            
+                                            x = i;
+                                            y = j;
+                                            z = k;
+                                            t = k1;
+                                            d = k2;
+                                            mark = false;
+                                    }
+                                    }
+                            }
+                    }
+            }
+        }
+         a.splice(d,1);   
+         a.splice(t,1);   
+         a.splice(z,1);   
+         a.splice(y,1);   
+         a.splice(x,1);
+         a = a.slice(1);
+         return a;
+            
+    }    
+        
+    function E(a , w) {
+            
+            var mark = false;
+            x = y = z = t =-1
+            
+            for(let i = 1; i<a.length-3 ; i++) {
+                
+            for(let j = i+1 ; j<a.length-2 ; j++){
+                    
+                    for(let k = j+1 ; k<a.length-1 ; k++){
+                            
+                            for(let k1 = k+1 ; k1<a.length ; k1++){
+                                    
+                                    if(mark) break;
+                                    
+                                    if( a[i] + a[j] + a[k] + a[k1] <=w ){
+                                            
+                                            x = i;
+                                            y = j;
+                                            z = k;
+                                            t = k1;
+                                            mark = false;
+                                    }
+                            }
+                    }
+            }
+        }
+         a.splice(t,1);   
+         a.splice(z,1);   
+         a.splice(y,1);   
+         a.splice(x,1);
+         a = a.slice(1);
+         return a;
+    }    
+        
+    function Q(a ,  w) {
+        var mark = false;    
+        x = y = z = -1;
+        for(let i = 1; i<a.length-2 ; i++) {
+                
+            for(let j = i+1 ; j<a.length-1 ; j++){
+                    
+                    for(let k = j+1 ; k<a.length ; k++){
+                            
+                            if(mark) break
+                            
+                            if(a[i] + a[j] + a[k] <=w) {
+                                    
+                                   x = i;
+                                    y = j;
+                                    z = k;
+                                    mark = true;
+                            }
+                    }
+            }
+        }
+         
+         a.splice(z,1);   
+         a.splice(y,1);   
+         a.splice(x,1);
+         a = a.slice(1);
+        return a;
+
+    }    
+        
+    function P( a , w ) {
+            
+            var mark = false;
+        
+            x = y = -1
+        
+            for(let i = 1;  i<a.length-1 ; i++) {
+                    
+                    for(let j = i+1 ; j<a.length ; j++){
+                            
+                            if(mark) break
+                           
+                            if(a[i] + a[j] <= w){
+                                    
+                                  x = i;
+                                  y = j;
+                                  mark = true;  
+                                    
+                                    
+                            }
+                    }
+            }
+            
+            a.splice(y,1);
+            a.splice(x,1);
+            a = a.slice(1);
+            //console.log(a)
+            return a;
+            
+    }
+    function F( a , w ) {
+            
+            for(let i = 1 ; i<a.length ; i++)
+                    if(a[i] <= w){
+                            a.splice(i,1);
+                            break;
+                    }
+            a = a.slice(1);
+            return a;
+    }
+    return f( workingHours , tasks);
+    
+}

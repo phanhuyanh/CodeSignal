@@ -1,0 +1,15 @@
+int rounders(int value) {
+int dem=0;
+    int n=value;
+    while(n>10){
+        if(n%10 >=5){
+            n+=10-n%10;
+        }
+        else{
+            n-=n%10;
+        }
+        dem++;
+        n=n/10;
+    }
+    return n*(int)Math.pow(10,dem);
+}

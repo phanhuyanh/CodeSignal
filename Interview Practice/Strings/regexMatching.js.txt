@@ -1,0 +1,7 @@
+function regexMatching(pattern, test) {
+    
+    if(pattern[0] === `^` || pattern[pattern.length-1] === `$`) return new RegExp(`.*` + pattern + `.*`).test(test);
+    
+    return test.includes(pattern);
+    
+}

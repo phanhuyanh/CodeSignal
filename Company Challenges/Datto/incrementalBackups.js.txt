@@ -1,0 +1,12 @@
+function incrementalBackups(lastBackupTime, changes) {
+    
+    var Results = new Set()
+    
+    for(e of changes)
+        if(e[0] > lastBackupTime) Results.add(e[1])
+    
+    return [...Results].sort((a,b)=>a-b)
+    
+    
+    
+}

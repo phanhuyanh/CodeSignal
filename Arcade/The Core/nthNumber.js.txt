@@ -1,0 +1,4 @@
+function nthNumber(s, n) {
+  var re = new RegExp( n == 1 ? `(?:[0]*)(\\d+)`  : `(?:\\d+\\D+[0]*){${n-1}}(\\d+)`);
+  return re.exec(s)[1];
+}

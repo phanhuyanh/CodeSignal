@@ -1,0 +1,16 @@
+function stringsCrossover(s, r) {
+    var min=0;
+    for(var i=0 ; i<s.length-1 ; i++){
+        for(var j=i+1 ; j<s.length ; j++){
+            if(Crossover(s[i],s[j],r)) min++;
+        }
+    }
+    return min;
+}
+function Crossover(s1,s2,s){
+    for(var i=0 ; i<s.length ; i++){
+        if(s1[i] == s[i] || s2[i] == s[i]) continue;
+        else return false;
+    }
+    return true;
+}

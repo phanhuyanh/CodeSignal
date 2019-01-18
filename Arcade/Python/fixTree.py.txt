@@ -1,0 +1,2 @@
+def fixTree(tree):
+    return map(lambda x : " "*((len(tree[0]) -  len(filter(lambda x : x == '*', list(x))))/2) +"*"*(len(filter(lambda x : x == '*', list(x)))) + " "*((len(tree[0]) -  len(filter(lambda x : x == '*', list(x))))/2) , tree)

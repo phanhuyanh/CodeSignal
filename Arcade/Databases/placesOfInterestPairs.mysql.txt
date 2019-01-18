@@ -1,0 +1,7 @@
+CREATE PROCEDURE placesOfInterestPairs()
+
+	
+select s1.name place1 , s2.name place2 
+from sights s1 , sights s2 
+where distance(point(s1.x,s1.y) , point(s2.x,s2.y)) < 5 and s1.name < s2.name
+order by 1,2

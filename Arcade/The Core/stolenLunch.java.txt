@@ -1,0 +1,25 @@
+String stolenLunch(String note) {
+String stolenLunch="";
+    for(int i=0 ; i<note.length() ; i++)
+        stolenLunch+=change(note.charAt(i));
+    return stolenLunch;
+}
+char change(char x){
+    char y;
+        if(x>='0' && x<='9'){
+        y=change_alphabet(x);
+    }
+     else if(x>='a' && x<='j'){
+        y=change_number(x);
+    }
+    else return x;
+    return y;
+}
+char change_alphabet(char x){
+    int n=(int)'a'-(int)'0';
+    return (char)((int)x+n);
+}
+char change_number(char x){
+    int n=(int) 'a'-(int)'0';
+    return (char)((int)x-n);
+}

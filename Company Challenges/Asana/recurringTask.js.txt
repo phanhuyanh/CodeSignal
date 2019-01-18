@@ -1,0 +1,46 @@
+function recurringTask(firstDate, k, daysOfTheWeek, n) {
+        
+        function Reverse_Day(A){
+                
+                let t = A.split`/`;
+                    
+                return t[1] + "/" + t[0] + "/"+ t[2];
+        }
+        
+        firstDate = Reverse_Day(firstDate);    
+        
+        var results = [];
+        
+        const FirstDate = "01/01/2015";
+        
+        const NamesOfTheWeeks = ["Thursday", "Friday", "Saturday","Sunday", "Monday", "Tuesday", "Wednesday"];
+       
+        var date_direction = Math.abs(new Date(firstDate) - new Date(FirstDate))/864e5;
+        
+        var date_direction_mol = new Date(firstDate) - new Date(FirstDate) >=0 ? date_direction%7 : 7-date_direction%7 ;
+        
+        var i = 0;    
+            
+        while(results.length < n){
+                
+                for(let e of daysOfTheWeek){
+                            
+                            
+                        let direction_day = (v = NamesOfTheWeeks.indexOf(e) - date_direction_mol) <0 ? v+7 : v ;
+                            
+                            
+                        results.push(new Date(Date.parse(firstDate) + direction_day*864e5+864e5*7*i ).toJSON())
+                    }
+                    
+                    
+                i += k;
+            }
+           
+        return  results.map(e=>e.slice(0,10).split`-`.reverse().join`/`).sort((a,b)=>{
+                 
+                return Date.parse(Reverse_Day(a)) - Date.parse(Reverse_Day(b));
+                
+        }).slice(0,n);
+    
+        
+}

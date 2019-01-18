@@ -1,0 +1,15 @@
+boolean validTime(String time) {
+int n=time.length();
+    String obj[]=new String[2];
+    for(int i=0 ; i<n ; i++)
+        if(time.charAt(i)==':'){
+            obj[0]=time.substring(0,i);
+            obj[1]=time.substring(i+1,n);
+        }
+    int x =Integer.parseInt(obj[0]);
+    int y=Integer.parseInt(obj[1]);
+    if(x<=23 && y<60 && x>=0 && y>=0){return true;}
+    else{
+        return false;
+    }
+}

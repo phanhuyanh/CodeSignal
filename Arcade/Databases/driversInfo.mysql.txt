@@ -1,0 +1,62 @@
+/*Please add ; after each select statement*/
+
+
+CREATE PROCEDURE driversInfo()
+BEGIN
+
+declare done int default 0;
+
+declare name varchar(255) default "";
+
+declare cur cursor for 
+   select driver_name
+   from inspections
+   group by driver_name
+   order by driver_name;
+
+declare continue handler for not found set done = 1;
+
+
+
+drop table if exists tmp;
+
+create table tmp(
+
+    summary varchar(255)
+);
+
+
+
+
+insert into tmp
+   select concat(" Total miles driven by all drivers combined: ",sum(miles_logged))
+   from inspections;
+
+
+open cur;
+
+read_loop:loop
+
+fetch cur into name;
+
+if done = 1 then leave read_loop;
+end if;
+
+insert into tmp
+   select concat(" Name: ",name,"; number of inspections: ",count(*),"; miles driven: ",sum(miles_logged))
+   from inspections
+   where driver_name = name;
+
+insert into tmp
+   select concat("  date: ",date,"; miles covered: ", miles_logged)
+   from inspections
+   where driver_name = name
+   order by date ;
+
+end loop;
+
+close cur;
+
+select * from tmp;
+
+END

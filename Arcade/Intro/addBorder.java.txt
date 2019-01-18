@@ -1,0 +1,15 @@
+String[] addBorder(String[] picture) {
+    String [] res = new String[picture.length + 2];
+    for (int i = 0; i < picture.length; i ++) {
+        res[i+1] = "*" + picture[i] + "*";
+    }
+    
+    String firstLine = "";
+    for (int i = 0; i < picture[0].length()+2; i ++) {
+        firstLine += "*";
+    }
+    
+    res[0] = res[res.length-1] = firstLine;
+    
+    return res;
+}

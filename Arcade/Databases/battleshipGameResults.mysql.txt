@@ -1,0 +1,18 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE battleshipGameResults()
+BEGIN
+
+select size , sum(if(di = 0 ,1 , 0)) undamaged , sum(if(di < size and di <> 0 ,1 , 0)) partly_damaged , sum(if(di = size,1,0)) sunk
+from(
+    select id, size , sum(if((target_x between  upper_left_x and bottom_right_x ) and (target_y between upper_left_y and bottom_right_y),1,0) ) as di
+    from(
+        select l.id , l.upper_left_x , l.upper_left_y , l.bottom_right_x , l.bottom_right_y , o.target_x , o.target_y,  (bottom_right_x - upper_left_x + bottom_right_y - upper_left_y + 1) as size
+        from locations_of_ships  l , opponents_shots o
+
+    ) _
+
+    group by id
+) res
+group by size
+;
+END

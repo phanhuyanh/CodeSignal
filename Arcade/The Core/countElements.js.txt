@@ -1,0 +1,12 @@
+function countElements(inputString) {
+    
+    var res = 0;
+    
+    g = x => (res++ , '');
+    
+    inputString.replace(/\"[^"]*\"/g, x => g() ).replace(/true|false/g, x => g(x) ).replace(/\d+/g, x => g(x) );
+    
+    return res;
+       
+}
+

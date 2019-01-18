@@ -1,0 +1,14 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE bugsInComponent()
+BEGIN
+
+select b.title as bug_title , c.title as component_title  , (select count(*) from BugComponent where  component_id = c.id ) as bugs_in_component
+from Bug b , Component c , BugComponent B
+
+where b.num = B.bug_num and bug_num in (select bug_num
+                                        from BugComponent
+                                        group by bug_num
+                                        HAVING count(*) > 1) 
+       and c.id = B.component_id
+order by 3 desc , c.id   , b.num ;
+END

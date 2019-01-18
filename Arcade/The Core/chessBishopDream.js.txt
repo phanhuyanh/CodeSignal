@@ -1,0 +1,231 @@
+function chessBishopDream(boardSize, initPosition, initDirection, k) {
+    
+    const Pivot  = initPosition ;
+    
+    const len_row = boardSize[0]-1 ;
+    
+    const len_col = boardSize[1]-1 ;
+    
+    const Direction = initDirection[0] == -1 && initDirection[1] == 1 ? "top-to-right" :
+    
+    initDirection[0] == -1 && initDirection[1] == -1 ? "top-to-left" :
+    
+    initDirection[0] == 1 && initDirection[1] == 1 ? "down-to-right" : "down-to-left";
+    
+    var Temp = initPosition ;
+
+    var Results = [Temp];
+    
+    var TempDirection = Direction;
+    
+    var Obj_Direction  = {"top-to-right" : 0 , "top-to-left" : 1 , "down-to-right" : 2 , "down-to-left" : 3};
+    
+    function TopToRight(){
+        
+        if( Temp[0] !=0 && Temp[1] !=len_col ){
+                
+                Temp = [Temp[0]-1 , Temp[1]+1];
+                
+                Results.push(Temp);
+            }
+            
+            else{
+                
+                if(Temp[0] == 0){
+                    
+                    if(Temp[1] == len_col){
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "down-to-left";
+                    }
+                    
+                    else{
+                        
+                        Temp = [Temp[0] , Temp[1]+1];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "down-to-right";
+                        
+                    }
+                    
+                }
+                else{
+                    
+                    if(Temp[1] == len_col){
+                        
+                        Temp = [Temp[0]-1,Temp[1]];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-left";
+                        
+                    }
+                    
+                }
+            }
+        
+    }
+    
+    function DownToRight(){
+        if( Temp[0] != len_row && Temp[1] !=len_col){
+                
+                Temp = [Temp[0]+1 , Temp[1]+1];
+                
+                Results.push(Temp);
+                
+            }
+            else{
+                
+                if(Temp[0] == len_row){
+                    
+                    if(Temp[1] == len_col){
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-left";
+                    }
+                    else{
+                        
+                        Temp = [Temp[0] , Temp[1]+1];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-right";
+                    }
+                }
+                else{
+                    
+                    if(Temp[1] == len_col){
+                        
+                        Temp = [Temp[0]+1 , Temp[1]];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "down-to-left";
+                    }
+                }
+                
+            }
+    }
+    
+    function TopToLeft(){
+        if(Temp[0] !=0 && Temp[1] != 0){
+                
+                Temp = [Temp[0]-1 , Temp[1]-1];
+                
+                Results.push(Temp);
+            }
+            else{
+                
+                if(Temp[0] == 0){
+                    
+                    if(Temp[1] == 0){
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "down-to-right";
+                    }
+                    else{
+                    
+                        Temp = [Temp[0] , Temp[1]-1];
+                    
+                        Results.push(Temp);
+                    
+                        TempDirection = "down-to-left";
+                    }
+                }
+                else{
+                    
+                    if(Temp[1] == 0){
+                        
+                        Temp = [Temp[0]-1 , Temp[1]];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-right";
+                        
+                    }
+                }
+            }
+    }
+    function DownToLeft(){
+        if(Temp[0]!=len_row && Temp[1] !=0){
+                
+                Temp = [Temp[0]+1 , Temp[1]-1];
+                
+                Results.push(Temp);
+            }
+            else{
+                
+                if(Temp[0] == len_row){
+                    
+                    if(Temp[1] == 0){
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-right";
+                        
+                    }
+                    else{
+                        
+                        Temp = [Temp[0] , Temp[1]-1];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "top-to-left";
+                    }
+                }
+                else{
+                    
+                    if(Temp[1] == 0){
+                        
+                        Temp = [Temp[0]+1 , Temp[1]];
+                        
+                        Results.push(Temp);
+                        
+                        TempDirection = "down-to-right";
+                    }
+                    
+                }
+            }
+    }
+    
+    
+    do{
+        
+        if( Obj_Direction[TempDirection] == 0 )
+            
+            TopToRight();
+        
+        else
+            if(Obj_Direction[TempDirection] == 2)
+                
+                DownToRight();
+            
+            else
+                if(Obj_Direction[TempDirection] == 1)
+                            
+                    TopToLeft();
+                
+                else         
+                    DownToLeft();
+            
+             
+          
+    }while( Pivot[0] !=Temp[0] || Pivot[1] !=Temp[1] || Direction != TempDirection );
+    
+    Results.pop();
+    
+    return Results[k%Results.length];
+    
+}
+
+        
+       
+        
+
+        
+        
+      

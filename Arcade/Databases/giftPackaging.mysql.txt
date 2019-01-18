@@ -1,0 +1,41 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE giftPackaging()
+BEGIN
+
+drop table if exists temp;
+
+CREATE table temp(
+    id int primary key auto_increment,
+    package_type varchar(200)
+);
+
+set @length = (select count(*) from gifts);
+
+set @i = 1;
+
+while( @i <= @length ) do
+
+insert into temp
+    select _.id  , _.package_type 
+    from (
+        select g.id , g.height as h , p.package_type , p.height as b , g.length as a , p.length as c , g.width as  x , p.width as y
+        from gifts g , packages p
+
+        where g.length <= p.length and g.width <= p.width and g.height <= p.height
+        
+    ) _
+    where _.id = @i
+    order by (c-a + y-x) ,(h+ b) asc limit 1;
+
+set @i:= @i+1;
+
+end while;
+
+
+
+select package_type , count(*) as number
+from temp
+group by package_type
+
+;
+END

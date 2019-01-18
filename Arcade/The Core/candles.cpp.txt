@@ -1,0 +1,8 @@
+int candles(int c, int m) {
+int sum=c;int p=c;
+    while(p>=m){
+        sum+=(int)p/m;
+         p=(int)p/m+p%m;
+    }
+    return sum;
+}

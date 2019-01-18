@@ -1,0 +1,45 @@
+function opponentMatching(xp) {
+
+        
+        var xp_id = [];
+        
+        for( let i = 0 ; i<xp.length ; i++ ) {
+            
+            xp_id.push([ xp[i] , i ])
+            
+        }
+        
+        xp_id.sort((a,b)=> a[0] - b[0] || a[1] - b[1] )
+        
+        var results = [];
+            
+            while( xp_id.length > 1 ) {
+                    
+                    let min = 1e9;
+                
+                    let a , b;
+                    
+                    for( let i = 0 ; i<xp_id.length-1 ; i++ ) {
+                            
+                            for(let j = i+1 ; j< xp_id.length ; j++) {
+                                    
+                                    if( Math.ceil((xp_id[j][0] - xp_id[i][0])/2) < min ) {
+                                            
+                                            min = Math.ceil((xp_id[j][0] - xp_id[i][0])/2);
+                                            
+                                            a = xp_id[i][1];
+                                            
+                                            b = xp_id[j][1]
+                                    }
+                                    
+                            }
+                            
+                    }
+                
+                    results.push([a,b]);
+                    
+                    xp_id = xp_id.filter(e=> e[1] != a && e[1] != b )
+                    
+            }
+            return results.map(e=>e.sort((a,b)=>a-b))
+}

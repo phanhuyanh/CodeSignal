@@ -1,0 +1,4 @@
+
+newRoadSystem = r =>
+    
+!r.some((e,i)=>e.filter(e=>e==true).length != r.map(e=>e[i]).filter(f=> f==true).length)

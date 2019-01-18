@@ -1,0 +1,52 @@
+function parkingSpot(carDimensions, parkingLot, luckySpot) {
+                
+        if( luckySpot[2] - luckySpot[0] + 1 === carDimensions[1] && luckySpot[3] - luckySpot[1] + 1 === carDimensions[0] ){
+      
+                let mark = true;
+      
+                for( let i = luckySpot[0] ; i <= luckySpot[2] ; i++ )
+         
+                        for( let j = 0 ; j <= luckySpot[3] ; j++ )
+                                if( parkingLot[i][j] ) mark = false;
+   
+                if( mark ) return true;
+                       
+                       
+                mark = true;
+                       
+                       
+                for( let i = luckySpot[0] ; i<= luckySpot[2] ; i++ )
+                                                
+                        for( let j = parkingLot[0].length-1 ; j>= luckySpot[1] ; j-- )
+                                       
+                                if(parkingLot[i][j]) mark = false;
+              
+                if(mark) return true;
+     
+        }
+        
+        if( luckySpot[2] - luckySpot[0] + 1 === carDimensions[0] && luckySpot[3] - luckySpot[1] + 1 === carDimensions[1] ){       
+                        
+                let mark = true;
+                             
+                for( let j = luckySpot[1] ; j <= luckySpot[3] ; j++ )
+                                
+                        for( let i = 0 ; i <= luckySpot[2] ; i++ )
+                                        
+                                if(parkingLot[i][j]) mark = false;        
+                        
+                if(mark) return true;
+      
+                mark = true;
+        
+                for( let j = luckySpot[1] ; j <= luckySpot[3] ; j++ )
+                                
+                        for( let i = parkingLot.length-1 ; i >= luckySpot[0] ; i-- )
+                                        
+                                if(parkingLot[i][j]) mark = false;
+        
+                if(mark) return true;
+     
+        }
+        return false;
+}

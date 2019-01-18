@@ -1,0 +1,48 @@
+function cellsJoining(table, coords) {
+    
+    coords = coords.map((e,i) => i ? [e[0],e[1]+1] : [e[0]+1,e[1]] );
+    
+    coords = coords.map(([dx,dy])=>{
+        
+        const posR = table.map((e,i) => e[0] === "+" ? i : -1 ).filter(e=> e!= -1)[dx];
+        const posC = [...table[0]].map((e,i) => e[0] === "+" ? i : -1 ).filter(e => e != -1)[dy];
+        
+        return [posR,posC];
+        
+    });
+    
+    var table = table.map(e => [...e].map(f=>f))
+
+    const rowS = coords[1][0] ,
+          rowE = coords[0][0] ,
+          colS = coords[0][1] ,
+          colE = coords[1][1] ;
+    
+    for( let i = rowS  ; i <= rowE ; i++ ){
+        
+        for(let j = colS ; j <= colE ; j++ ){
+            
+            
+            if( ( !i || i == table.length - 1 ) && table[i][j] === "+" && j > colS && j < colE ){
+                
+                table[i][j] = "-";
+                
+                continue;
+                
+            }
+            if( ( !j || j == table[0].length-1 ) && table[i][j] === "+" && i > rowS && i < rowE ){
+                
+                table[i][j] = "|";
+                
+                continue;
+                
+            }
+            if( table[i][j].match(/[-+|]/) && i != rowS && i != rowE && j != colS && j != colE )
+                table[i][j] = ' ';
+            
+        }
+        
+    }
+    
+    return table.map(e => e.join``);
+}

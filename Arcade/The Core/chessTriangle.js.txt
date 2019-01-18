@@ -1,0 +1,46 @@
+function chessTriangle(n, m) {
+    
+    var res = 0;
+    
+    for( let i = 1 ; i <= n ; i++ ){
+        
+        for(let j = 1 ; j <= m ; j++){
+            
+            for( const [dx , dy] of [[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]] ){
+                
+                if( i + dx > 0 && i + dx <= n && j + dy > 0 && j + dy <= m )
+                    
+                    res += CountDirection(i , j , dx , dy , n , m);
+                
+            }
+            
+            
+        }
+        
+    }
+    return res;
+    
+}
+function CountDirection( i , j , dx , dy , n , m){
+    
+    var d = 0;
+    
+    if( j + dy - dx > 0 && j + dy - dx <= m ) d++
+    
+    if( j + dx + dy > 0 && j + dx + dy <= m ) d++
+    
+    if(i + dx + dy > 0 && i + dx + dy <= n) d++
+    
+    if( i + dx - dy > 0 && i + dx - dy <= n ) d++
+    
+    if( i + dx > 0 && i + dx <= n && j + dx > 0 && j + dx <= m ) d++
+    
+    if( i + dx > 0 && i + dx <= n && j - dx > 0 && j - dx <= m ) d++
+    
+    if( i + dy > 0 && i + dy <= n && j + dy > 0 && j + dy <= m ) d++
+    
+    if( i - dy > 0 && i - dy <= n && j + dy > 0 && j + dy <= m ) d++
+    
+    return d;
+    
+}

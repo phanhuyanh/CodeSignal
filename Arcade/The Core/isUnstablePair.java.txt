@@ -1,0 +1,115 @@
+
+boolean isUnstablePair(String f1, String f2) {int xet=0;
+if(f1==f2)   return false;
+    if(f1.length()<f2.length()){
+       
+    for(int i = 0; i<f1.length() ; i++)
+        if(f1.charAt(i)!=f2.charAt(i)){
+            xet= kiemtra(f1.substring(i,f1.length()),f2.substring(i,f2.length()));break;
+        }
+    }
+    else{
+            for(int i = 0; i<f2.length() ; i++)
+        if(f1.charAt(i)!=f2.charAt(i)){
+            xet= kiemtra(f1.substring(i,f1.length()),f2.substring(i,f2.length()));break;
+        }
+    }
+    if( xet==0){return false;}
+    return true;
+}
+int kiemtra(String s1,String s2){
+    if(same(s1,s2)){return 0;}
+    if(dif(s1)==false || dif(s2)==false){return 0;}
+    if(s1.length()<s2.length()){
+        
+    for(int i = 0 ;i<s1.length() ; i++){
+    if(s1.charAt(i)>='a'&& s1.charAt(i)<='z'){
+        if(s2.charAt(i)>='a'&& s2.charAt(i)<='z'){
+            if(s1.charAt(i)!=s2.charAt(i) && i==0){return 0;}
+        }
+    
+        else{
+           
+            if(s1.charAt(i)>Character.toLowerCase(s2.charAt(i))){return 0;}
+        }
+        
+    }
+    
+    
+    
+    else{
+        if(s2.charAt(i)>='A'&& s2.charAt(i)<='Z'){
+            if(s1.charAt(i)!=s2.charAt(i)){return 0;}
+        }
+        else{
+               if(i==s1.length()-1){
+               if( s1.charAt(i)==Character.toUpperCase(s2.charAt(i))){
+                   if(check(s1.substring(0,i))){return 0;}
+               }
+            }
+            if(s1.charAt(i)<Character.toUpperCase(s2.charAt(i))){return 0;}
+        }
+    }
+    
+    }
+    }
+    else{
+            for(int i = 0 ;i<s2.length() ; i++){
+    if(s2.charAt(i)>='a'&& s2.charAt(i)<='z'){
+        if(s1.charAt(i)>='a'&& s1.charAt(i)<='z'){
+            if(s1.charAt(i)!=s2.charAt(i)&& i==0 ){return 0;}
+        }
+        else{
+         
+            if(s2.charAt(i)>Character.toLowerCase(s1.charAt(i))){return 0;}
+        }
+        
+    }
+            
+    else{
+        if(s1.charAt(i)>='A'&& s1.charAt(i)<='Z'){
+            if(s2.charAt(i)!=s1.charAt(i)){return 0;}
+        }
+        else{
+            if(i==s2.length()-1){
+                if(s2.charAt(i)==Character.toUpperCase(s1.charAt(i))){
+                    if(check(s2.substring(0,i))){return 0;}
+                }
+            }
+            if(s2.charAt(i)<Character.toUpperCase(s1.charAt(i)) && check(s2.substring(0,i))){return 0;}
+        }
+    }
+    }
+    }
+ 
+    return 1;
+ 
+    
+}
+boolean dif(String s){int dem=0;
+  
+    for(int i =0 ; i<s.length() ; i++){
+    if((s.charAt(i)>='A' && s.charAt(i)<='Z') ||(s.charAt(i)>='a' && s.charAt(i)<='z' )){
+        dem++;
+    }
+
+}
+      return dem!=0;
+}
+boolean check(String s){
+    char x[]=s.toCharArray();
+    for(int i= 0; i<x.length ; i++){
+        if(x[i]>='A' && x[i]<='Z'){continue;}
+        else{
+            return false;
+        }
+    }
+    return true;
+}
+boolean same(String s1,String s2){
+if(s1.length()!=s2.length()){return false;}
+for(int i =0 ; i<s1.length() ; i++){
+    if(Character.toUpperCase(s1.charAt(i))!=Character.toUpperCase(s2.charAt(i)))
+        return false;
+}
+return true;}

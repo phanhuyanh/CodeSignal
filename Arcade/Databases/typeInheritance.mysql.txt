@@ -1,0 +1,39 @@
+/*Please add ; after each select statement*/
+
+Create function C(type varchar(255)) returns int deterministic
+
+BEGIN
+
+set @mark = 0;
+
+set @t = type;
+
+set @c = (select count(*) from inheritance where derived = @t);
+
+
+while(@c <> 0) do
+
+set @t = ( select base from inheritance where derived = @t limit 1 );
+
+if @t = 'Number' then set  @mark = 1;
+end if;
+
+set @c = (select count(*) from inheritance where derived = @t);
+
+
+end while;
+
+return @mark;
+
+END;
+
+CREATE PROCEDURE typeInheritance()
+BEGIN
+
+
+select var_name , type as var_type
+from variables
+where C(type) <> 0
+
+;
+END

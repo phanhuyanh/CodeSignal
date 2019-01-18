@@ -1,0 +1,9 @@
+int[][] rotateImage(int[][] a) {int k;
+int b[][]=new int [a.length][a.length];
+    for(int i=0;i<a.length;i++){k=a.length-1;
+        for(int j=0;j<a.length;j++){
+            b[i][j]=a[k--][i];
+        }
+    }
+    return b;
+}

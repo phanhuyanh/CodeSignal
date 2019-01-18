@@ -1,0 +1,26 @@
+function productExceptSelf(nums, m) {
+    
+    var a = new Array( nums.length ).fill(1);
+    
+    for( let i = 1 ; i < a.length ; i++ )
+        a[i] = (a[i-1]*nums[i-1])%m;
+    
+    var sum = 0;
+    
+    var suff = 1;
+    
+    for( let i = 0 ; i < a.length ; i++ ) {
+        
+        sum += ( a[ a.length - i - 1 ] * suff )%m;
+        
+        sum %= m;
+        
+        suff *= nums[ a.length - i - 1 ]
+        
+        suff %=m;
+        
+    }
+    
+    return a
+    
+}

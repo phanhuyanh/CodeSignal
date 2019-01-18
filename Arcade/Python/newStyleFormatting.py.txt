@@ -1,0 +1,21 @@
+import re
+def newStyleFormatting(s):
+    
+    return re.sub(r'%(.)',f,s)
+        
+def f(x):
+    if x.group(1) == '%': return '%'
+    return '{}'
+
+    
+    
+def newStyleFormatting1(s):
+    s = re.sub('%%','pct_var',s)
+    s = re.sub('%[a-z]','{}',s)
+    s = re.sub('pct_var','%',s)
+    
+    return s
+
+
+    
+    

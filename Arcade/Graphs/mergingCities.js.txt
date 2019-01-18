@@ -1,0 +1,50 @@
+function mergingCities(roadRegister) {
+    
+    var city = {} , c = 0 , hash = {} ;
+    
+    roadRegister.map((_,i) => {
+        
+        city[i] = [];
+        
+        _.map((e,j)=> e ? city[i].push(j) : 0 )
+        
+    })
+
+    for( let i of Object.keys(city) ) {
+        
+        i = +i
+            
+        let a = city[i] , b = city[i+1];
+        
+        if(  !b  || i % 2 || !a.includes(i+1) || !b.includes(i)  ) {
+                
+                if( hash[i] == null ) hash[i] = c++
+                
+                continue;
+        }
+
+        a = [...new Set(a.concat(b))];
+
+        city[i] = a;
+            
+        city[i+1] = null;    
+        
+        hash[i] = hash[i+1] = c++    
+     
+        
+    }
+
+    for( let i of Object.keys(city) ) 
+                
+        if(city[i]) city[i] = [...new Set(city[i].map(e=>hash[e]))]
+
+        
+    city = Object.values(city).filter(e => e)
+    
+    var road = Array.from({length : city.length } , _ => new Array(c).fill(false));    
+    
+    city.map((e,i)=>e.map(f => i == f ? road[i][i] = false :  road[i][f] = true  ))    
+        
+    return road
+}
+                            

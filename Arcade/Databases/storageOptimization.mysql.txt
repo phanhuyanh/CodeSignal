@@ -1,0 +1,40 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE storageOptimization()
+BEGIN
+select id , column_name , value
+from (
+select id , "name" as column_name , name as value , 1 dept
+
+from workers_info
+
+where name is not null or date_of_birth is not null or salary is not null
+
+union 
+
+select *
+
+from (
+    
+    (select id ,  "date_of_birth" as column_name , date_of_birth as value , 2 dept
+
+from workers_info
+
+where name is not null or date_of_birth is not null or salary is not null)
+    union 
+    
+    (select id , "salary" as column_name  ,salary as value , 3 dept
+
+from workers_info
+
+where name is not null or date_of_birth is not null or salary is not null)
+    
+)  r
+    
+) res
+
+where value is not null
+
+order by id , dept
+
+;
+END

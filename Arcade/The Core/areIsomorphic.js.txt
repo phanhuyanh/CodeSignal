@@ -1,0 +1,7 @@
+function areIsomorphic(a1, a2) {
+    if(a1.length != a2.length) return false;
+    for( i = 0 ; i<a1.length ; i++)
+        if(a1[i].length != a2[i].length) return false;
+   
+    return true;
+}

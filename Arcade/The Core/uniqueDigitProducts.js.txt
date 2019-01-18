@@ -1,0 +1,7 @@
+F  = (n, t = 1 ) => [...(''+n)].map(e => t *=+e) | t
+
+uniqueDigitProducts = (a, A = new Set() ) => a.map(e => A.add(F(e))) | A.size
+    
+   
+    
+

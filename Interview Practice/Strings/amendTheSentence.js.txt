@@ -1,0 +1,5 @@
+function amendTheSentence(s) {
+    
+    return s.match(/^[a-z]+/)  ? s.match(/^[a-z]+/) +" " + s.match(/[A-Z][a-z]*/g).map(e=>e.toLowerCase()).join` ` : s.match(/[A-Z][a-z]*/g).map(e=>e.toLowerCase()).join` ` 
+    
+}

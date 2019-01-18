@@ -1,0 +1,14 @@
+function ratingThreshold(threshold, ratings) {
+    
+    r = []
+        
+    return ratings.map(e=>{
+        
+        let avg = 0
+        
+        e.map(e=>avg+=e)
+        
+        return avg/e.length
+    }).filter((e,i)=> e<threshold ? r.push(i) : 0) &&  ( r.length>0 ? r : [])
+   
+}

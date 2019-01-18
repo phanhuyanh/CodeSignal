@@ -1,0 +1,15 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE trackingSystem()
+BEGIN
+
+
+select anonymous_id as anonym_id , 
+(select event_name from tracks where anonymous_id = t.anonymous_id and user_id is null order by received_at desc limit 1) as last_null , 
+(select event_name from tracks where anonymous_id = t.anonymous_id and user_id = anonymous_id order by received_at limit 1) as first_notnull
+
+from tracks t
+
+group by anonymous_id
+
+;
+END

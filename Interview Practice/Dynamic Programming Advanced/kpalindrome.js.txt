@@ -1,0 +1,31 @@
+function kpalindrome(s, k) {
+    
+    function isKpalindrome(s1, s2 , m , n) {
+        
+        var dp = Array.from({length : m + 1} , _ => new Array(n+1));
+        
+        for(let i = 0 ; i <= m ; i++){
+            
+             for(let j = 0 ; j <= n ; j++){
+                     
+                     if( i === 0) dp[i][j] = j;
+                     
+                     else if(j === 0) dp[i][j] = i;
+                     
+                     else if( s1[i-1] == s2[j-1]){
+                             
+                             dp[i][j] = dp[i-1][j-1];
+                     }
+                     else
+                             dp[i][j] = 1 + Math.min(dp[i - 1][j], // Remove from str1 
+                             dp[i][j - 1]); // Remove from str2 
+                     
+             }   
+                
+        }
+        return dp[m][n];
+    }
+    let numRemove = isKpalindrome(s , [...s].reverse() , s.length , s.length);
+    
+    return numRemove <= 2*k; 
+}

@@ -1,0 +1,61 @@
+function countAPI(calls) {
+       
+       calls = calls.map(e=> e.split`/`).map(e=> e.filter(f=> f!=``) ) 
+        
+       var hash = {};
+        
+        for( let i = 0 ; i< calls.length ; i++ ) {
+            
+                let [a,b,c] = calls[i];
+            
+                if(hash[a] == null) {
+                        
+                        hash[a] = [1 ,{}]
+                        
+                        
+                }
+                else{
+                    
+                    hash[a][0]++;
+                    
+                }
+            
+                if(hash[a][1][b] == null) {
+                    
+                    hash[a][1][b] = [1,{}];
+                }
+                else{
+                    
+                    hash[a][1][b][0]++;
+                    
+                }
+                if(hash[a][1][b][1][c] == null) {
+                
+                    hash[a][1][b][1][c] = 1
+                   
+                }
+                else hash[a][1][b][1][c]++;
+                
+        }
+        var res = [];
+        
+        for(let e of Object.keys(hash)) {
+                
+                res.push("--" + e + " (" + hash[e][0] + ")" );
+            
+                for( let f of Object.keys(hash[e][1]) ){
+                        
+                        res.push("----" + f + " (" + hash[e][1][f][0] + ")" );
+                        
+                        for( let g of Object.keys(hash[e][1][f][1]) ) {
+                                
+                                 res.push("------" + g + " (" + hash[e][1][f][1][g] + ")" );
+                        }
+                }
+                
+                
+        }
+       
+        return res
+
+}

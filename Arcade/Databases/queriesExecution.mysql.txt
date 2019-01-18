@@ -1,0 +1,12 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE queriesExecution()
+BEGIN
+	set @s := 
+        (select group_concat(concat('select "', query_name,'" query_name, (', code, ') val') separator ' union ') from queries)
+        
+    ;
+    
+prepare tmp from @s;
+execute tmp;
+deallocate prepare tmp;
+END

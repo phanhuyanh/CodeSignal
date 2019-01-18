@@ -1,0 +1,22 @@
+var x;
+ runnersMeetings = (p, s)=> {
+    m =1; M =-1;
+    for( i = 0; i<p.length-1 ; i++){
+        for(j =i+1 ; j<p.length ; j++){
+            let y=(s[j]-s[i])/(p[i]-p[j]);
+            if(y<=0){ continue;}
+            else{ 
+                if(m==1){
+                    x=y;
+                    m++;
+                }
+            else{
+                if(y==x) m++;
+            }
+        }
+        }
+        if(m>M && m!=1) M=m;
+        m=1;
+    }
+    return M;
+}

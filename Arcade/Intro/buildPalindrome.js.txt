@@ -1,0 +1,17 @@
+function buildPalindrome(st) {
+    
+    const stReverse = [...st].reverse();
+    var i = st.length ;
+    
+    while(1) {
+        
+        if(checkPalindrome(st + stReverse.slice(i).join``)) return st + stReverse.slice(i).join``
+        
+        i--;
+        
+    }
+}
+function checkPalindrome(s1){
+        
+        return s1 === [...s1].reverse().join``;
+} 

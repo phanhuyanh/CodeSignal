@@ -1,0 +1,19 @@
+function boxBlur(s) {
+    sum=0
+    boxBlur=[]
+    for( i =0 ; i<=s.length-3 ;i++){
+        v=[]
+        for( j =0 ; j<= s[0].length-3 ; j++){
+            for( k=i ; k< i+3 ; k++){
+                for( k1 =j ;k1<j+3 ; k1++){
+                    sum+= s[k][k1];
+                }
+            }
+            v.push(Math.floor(sum/9));
+               sum=0;
+        }
+        boxBlur.push(v);
+
+    }
+    return boxBlur
+}

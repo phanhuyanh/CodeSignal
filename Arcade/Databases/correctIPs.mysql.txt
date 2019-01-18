@@ -1,0 +1,18 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE correctIPs()
+BEGIN
+
+select *
+
+from ips
+
+where IS_IPV4(ip) and
+
+(
+    ip REGEXP '\.[0-9]{2}$' or
+    ip REGEXP '\.[0-9]{2}\.[0-9]+$'
+)
+
+order by id;
+
+END

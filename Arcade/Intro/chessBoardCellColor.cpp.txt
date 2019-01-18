@@ -1,0 +1,16 @@
+bool chessBoardCellColor(std::string cell1, std::string cell2) {
+   if(((int)cell2.at(0)-(int)cell1.at(0))%2==0){
+        if(((int)cell2.at(1)-(int)cell1.at(1))%2==0){
+            return true;
+        }
+        else{return false;}
+    }
+    else{
+        if(((int)cell2.at(1)-(int)cell1.at(1))%2!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}

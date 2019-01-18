@@ -1,0 +1,16 @@
+String htmlEndTagByStartTag(String s) {
+String obj="";
+    int n=s.length();
+    for(int i =0 ; i< n ; i++)
+        if(s.charAt(i)=='<' || (s.charAt(i)>='a' && s.charAt(i)<='z') || (s.charAt(i)>='A' && s.charAt(i)<='Z')){
+            
+            
+        obj+=s.charAt(i);
+                if(s.charAt(i)=='<'){
+                        obj+='/';
+                }
+        }
+        else break;
+        return obj+">";
+    
+}

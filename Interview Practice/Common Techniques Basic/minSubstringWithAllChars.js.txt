@@ -1,0 +1,27 @@
+function minSubstringWithAllChars(s, t) {
+    
+    var min_length = 1e9;
+    
+    var results = "";
+    
+    for( let i = s.length-2 ; i >=0 ; i-- ) {
+        
+        for( let j = i + 1 ; j <= s.length ; j++ ) {
+            
+            if( j - i >= t.length && ![...t].some(e => s.slice(i,j).indexOf(e) < 0 )) {
+                
+                if( j - i <= min_length ) {
+                    
+                    min_length = j - i;
+                    
+                    results = s.slice(i,j);
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    return results
+}

@@ -1,0 +1,27 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+function digitTreeSum(t) {
+    
+    var s = 0;
+    
+    function SumDigit(t , v){
+        
+        if(t.left == null && t.right == null) s+= +(v+t.value);
+        
+        else{
+            
+            if(t.left != null) SumDigit(t.left , v +t.value);
+            
+            if(t.right != null) SumDigit(t.right , v+t.value);
+            
+        }
+        
+    }
+    SumDigit(t , "");
+    return s;
+}

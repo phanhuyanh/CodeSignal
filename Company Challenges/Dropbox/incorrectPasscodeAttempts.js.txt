@@ -1,0 +1,17 @@
+function incorrectPasscodeAttempts(passcode, attempts) {
+    
+    s = 0
+    
+    for(e of attempts)
+        
+        if(e == passcode)
+            
+            s = 0
+            
+        
+        
+        else if(++s ==10) return true
+        
+    
+    return false
+}

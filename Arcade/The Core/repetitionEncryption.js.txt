@@ -1,0 +1,32 @@
+function repetitionEncryption(letter) {
+  var pattern = (
+    ( 
+      (
+        mark = {}
+        ,
+        letter = letter.match(/[a-zA-Z]+/g))
+                              .filter((e,i,a)=>{
+                                      if( i == a.length-1 ) return 0;
+                                      
+                       
+                                      if( e.toLowerCase() == a[i+1].toLowerCase() ){
+                                              
+                                              mark[i+1] = 1;
+                                              
+                                              return 1;
+                                              
+                                      }
+                       
+                                      return 0;
+                              }) ,
+      letter =  Object.keys(mark).join`-`) ,
+      new RegExp("\\d+","g") 
+                )  ;
+  var matches = letter.match(pattern);
+  if (matches) {
+    return matches.length;
+  }
+  else {
+    return 0;
+  }
+}

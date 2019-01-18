@@ -1,0 +1,45 @@
+function newYearCelebrations(takeOffTime, minutes) {
+    
+    var champagne = 0;
+    
+    minutes.unshift(0);
+    
+    takeOffTime = format(takeOffTime);
+    
+    var mark = takeOffTime == 1440 ? 0 : 1;
+    
+    if(!mark) champagne++
+    
+    for( let i = 1 ; i < minutes.length ; i++ ){
+        
+        const timezone = minutes[i] - minutes[i-1];
+        
+        takeOffTime += timezone;
+        
+        if( takeOffTime  >= 1440 && mark ){
+            
+            champagne++;
+            
+        }
+        takeOffTime -= 60;
+        
+        if(takeOffTime < 1440) mark = 1;
+        
+        else mark = 0;
+        
+        if(takeOffTime == 1440) champagne++
+        
+        console.log(takeOffTime)
+    }
+    
+    if(takeOffTime < 1440) champagne++;
+    
+    return champagne
+}
+function format(time){
+    
+    const [hh,mm] = time.split`:`;
+    
+    return hh == 0 && mm == 0 ? 1440 :  +hh * 60 + +mm;
+    
+}

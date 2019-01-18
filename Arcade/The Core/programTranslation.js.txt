@@ -1,0 +1,6 @@
+function programTranslation(solution, args) {
+  var argumentVariants = args.join('|');
+  var re = new RegExp("(?<=[^\\w\\$])(" + argumentVariants +")(?=[^\\w])","g");
+  var sub = x => '$' + x ;
+  return solution.replace(re, sub);
+}

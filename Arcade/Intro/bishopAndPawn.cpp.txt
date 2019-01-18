@@ -1,0 +1,13 @@
+bool bishopAndPawn(std::string bishop, std::string pawn) {
+int h=(int)bishop.at(0)-64;
+    int n=(int)bishop.at(1)-48;
+    int h1=(int)pawn.at(0)-64;
+    int n1=(int)pawn.at(1)-48;
+    if(h+n == h1+n1){
+        return true;
+    }
+    if( abs(h-n+7) == abs(h1-n1+7)){
+        return true;
+    }
+    return false;
+}

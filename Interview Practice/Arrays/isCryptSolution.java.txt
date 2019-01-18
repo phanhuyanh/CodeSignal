@@ -1,0 +1,33 @@
+boolean isCryptSolution(String[] a, char[][] b) {
+char anh_xa[]=new char[26];
+    for(int i=0;i<b.length;i++){
+        anh_xa[(int)b[i][0]-65]=b[i][1];
+    }
+    String c[]=new String[3];
+    for(int i=0;i<a.length;i++){
+       
+            c[i]=tham_chieu(a[i],anh_xa);
+        
+    }
+    if(a[0].length()!=1 && a[1].length()!=1){
+    if(c[0].charAt(0)=='0'  ||   c[1].charAt(0)=='0' || c[2].charAt(0)=='0'){
+        return false;
+    }
+    }
+    long mang[]=new long[3];
+    for(int i=0;i<3;i++){
+        mang[i]=Long.parseLong(c[i]);
+    }
+    if(mang[2]==mang[0]+mang[1]){return true;}
+    else{
+        return false;
+    }
+}
+String tham_chieu(String s2,char[] anh_xa){
+    char [] x=new char[s2.length()];
+    for(int i=0;i<s2.length();i++){
+        x[i]=anh_xa[(int)s2.charAt(i)-65];
+    }
+    String s1=new String(x);
+    return s1;
+}

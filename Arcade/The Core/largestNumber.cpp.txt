@@ -1,0 +1,8 @@
+int largestNumber(int n) {
+ int sum=1;
+    while(n!=0){
+        sum=sum*10;
+        n--;
+    }
+    return sum-1;
+}

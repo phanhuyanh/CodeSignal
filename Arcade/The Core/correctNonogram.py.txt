@@ -1,0 +1,10 @@
+def valid(req, data):
+    return [r for r in req if r != '-'] == ['{0}'.format(len(g)) for g in ''.join(data).split('.') if g != '']
+
+
+def correctNonogram(size, nonogramField):
+    a = (size+1)/2
+
+    n = nonogramField
+    return all([valid(n[a+s][:a], n[a+s][a:]) for s in range(size)]) and \
+           all([valid([row[a+s] for row in n[:a]], [row[a+s] for row in n[a:]]) for s in range(size)])

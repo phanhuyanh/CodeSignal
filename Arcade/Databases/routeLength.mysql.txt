@@ -1,0 +1,7 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE routeLength()
+
+select FORMAT(SUM( sqrt(power(c1.x-c2.x , 2) + power(c1.y - c2.y,  2)) ) , 9 )as total
+from cities c1 , cities c2
+
+where c1.id < c2.id and c1.id + 1 = c2.id

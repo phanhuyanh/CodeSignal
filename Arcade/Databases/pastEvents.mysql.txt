@@ -1,0 +1,8 @@
+CREATE PROCEDURE pastEvents()
+BEGIN
+   select name , event_date
+   from Events
+   where DATEDIFF((select max(event_date) from Events ), event_date) <=7 and 
+         DATEDIFF((select max(event_date) from Events ), event_date) >0
+   order by 2 desc;
+END

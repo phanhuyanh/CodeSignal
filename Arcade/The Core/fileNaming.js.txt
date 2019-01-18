@@ -1,0 +1,18 @@
+fileNaming = (names)=> {
+    var s=[];
+    for( i = 0 ; i<names.length ; i++){
+        if(s.indexOf(names[i]) == -1){
+            s.push(names[i]);
+        }
+        else{
+            let k=1;
+            var newname= names[i] +"(" +k +")";
+            while(s.indexOf(newname) !=-1){
+                k++;
+                newname = names[i] +"(" +k +")";
+            }
+            s.push(newname);
+        }
+    }
+    return s;
+}

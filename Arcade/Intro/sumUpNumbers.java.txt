@@ -1,0 +1,20 @@
+long sumUpNumbers(String a) {
+
+int n=a.length();
+    long sum=0; int dem=0;
+   String number[]=new String[n/2];
+    for(int i=0 ; i<n/2; i++) number[i]="0";
+    for(int i=0 ; i<n ; i++)
+        if(a.charAt(i)>='0' && a.charAt(i)<='9' ){
+            number[dem]+= a.charAt(i);
+            if(i+1<n)
+            if(a.charAt(i+1)>='0' && a.charAt(i+1)<='9'  ){continue;}
+            else dem++;
+        }
+  
+    for( int i=0 ;i<= dem ;i++){
+        long x=Long.parseLong(number[i]);
+        sum+=x;
+    }
+    return sum;
+}

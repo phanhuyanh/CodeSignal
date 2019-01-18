@@ -1,0 +1,15 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE expressionsVerification()
+BEGIN
+	select *
+from expressions
+where 
+(operation like '+' && a+b=c) || 
+(operation like '-' && a-b=c) ||
+(operation like '*' && a*b=c) ||
+(operation like '/' && a/b=c) 
+
+
+
+order by id;
+END

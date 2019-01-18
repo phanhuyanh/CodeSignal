@@ -1,0 +1,8 @@
+S =   n   => Math.max(...[...(''+n)]) -  Math.min(...[...(''+n)])
+
+digitDifferenceSort = a => {
+   
+    i = a.map( (_,i)=> i)
+    
+    return i.sort((e,f) =>  S(a[e]) - S(a[f]) || f-e ).map(e=>a[e])
+}

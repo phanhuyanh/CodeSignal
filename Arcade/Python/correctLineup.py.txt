@@ -1,0 +1,2 @@
+def correctLineup(athletes):
+    return  map(lambda (index , val) : athletes[index + 1] if index % 2 == 0 else athletes[index-1] , enumerate(athletes) )

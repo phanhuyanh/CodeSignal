@@ -1,0 +1,16 @@
+function regularMonths(currMonth) {
+    
+    let [mm,yyyy] = currMonth.split`-`;
+
+    let starDay = new Date(`${++mm%12}-01-${ Math.floor(mm / 12) + yyyy}`).toDateString().split` `[0];
+
+    while( starDay != "Mon" ){
+        
+        mm > 11 ? [mm = `01` , ++yyyy] : ++mm;
+        
+        starDay = new Date(`${mm}-01-${yyyy}`).toDateString().split` `[0];
+
+    }
+    
+    return (""+mm).padStart(2,'0') + `-${yyyy}`;
+}

@@ -1,0 +1,26 @@
+function sumInRange(nums, q) {
+    s = 0
+    modulo = 1e9+7
+  
+    R = {}
+    
+    R[-1] = 0
+    
+    sum = s = 0
+    for(i = 0 ; i<nums.length ; i++){
+        
+        sum +=nums[i]
+        
+        R[i]  = sum
+        
+        
+    }
+    
+    for(e of q){
+        
+        s += R[e[1]] - R[e[0]-1]
+       
+    }
+    
+    return s<0 ? modulo - (-s%modulo) : s%modulo
+}

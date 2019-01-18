@@ -1,0 +1,14 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE scholarshipsDistribution()
+BEGIN
+ 
+ select candidate_id as student_id 
+ from candidates
+
+ where candidate_id NOT IN (
+
+   select  student_id 
+
+   from   detentions 
+ );
+END

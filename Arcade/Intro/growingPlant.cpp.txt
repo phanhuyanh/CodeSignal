@@ -1,0 +1,12 @@
+int growingPlant(int up, int down, int d) {
+if( up >=d){
+    return 1;
+}
+    else{
+        if((d-down)%(up-down)!=0){
+            return ((d-down)/(up-down))+1;
+        }
+        else
+        return ((d-down)/(up-down));
+}
+}

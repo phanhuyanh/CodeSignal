@@ -1,0 +1,15 @@
+int rangeBitCount(int a, int b) {
+int sum=0;
+    for(int i=a ; i<=b; i++){
+  if(i==1 || i==2 || i==4 || i==8){
+      sum+=1;
+  }
+      if(i==3 || i==5 || i==6 || i==9 || i==10){
+          sum+=2;
+      }
+        if(i==0){sum+=0;}
+        if(i==7){sum+=3;}
+    
+}
+    return sum;
+}

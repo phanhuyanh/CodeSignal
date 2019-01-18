@@ -1,0 +1,25 @@
+function questEfficiencyItem(h, points, timeForQuests) {
+
+        var temp = [[timeForQuests,0]];
+        
+        var R;
+        
+        for( let i = 0 ; i<h.length ; i++ ) {
+                R = [];
+                for( let j = 0 ; j<temp.length ; j++ ) {
+                        
+                        if(temp[j][0] >= h[i] ){
+                                
+                                R.push( [temp[j][0]-h[i] , temp[j][1] + points[i]] );
+                                
+                        }
+                        R.push([temp[j][0] , temp[j][1]]);
+                        
+                }
+                temp = R;
+            
+        }
+        return temp.sort((a,b)=> b[1]-a[1] )[0][1]
+        
+    
+}

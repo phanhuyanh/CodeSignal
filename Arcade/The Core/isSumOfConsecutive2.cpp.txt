@@ -1,0 +1,35 @@
+int count=0;int dem=0;int sum=0;
+int isSumOfConsecutive2(int n) {
+int a[100];int chuaxet[100];
+    for(int i= 0 ; i<n ; i++) chuaxet[i]=1;
+    thu(a,0,chuaxet,n);
+    return count;
+}
+bool kiem_tra(int a[],int n){
+    for(int i= 0;  i<n-1; i++){
+        if(a[i]+1!=a[i+1]){return false;}
+    }
+    return true;
+}
+void thu(int a[],int i,int chuaxet[],int n){
+
+	for(int k=1; k<=n/2+1 ; k++){
+		if(chuaxet[k]==1){
+			a[i]=k;chuaxet[k]=0;dem++;
+			sum+=k;
+			if(sum==n){
+				if(kiem_tra(a,dem)){count++;
+				}
+				sum-=k;dem--;
+				chuaxet[k]=1;
+			}
+			else{
+				if(sum+ k+1<=n){
+					thu(a,i+1,chuaxet,n);
+				}
+				chuaxet[k]=1;sum-=k;dem--;
+			}
+		}
+	}
+	
+}

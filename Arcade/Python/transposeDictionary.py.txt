@@ -1,0 +1,2 @@
+def transposeDictionary(scriptByExtension):
+    return sorted(list([[scriptByExtension[x] , x] for x in scriptByExtension]))

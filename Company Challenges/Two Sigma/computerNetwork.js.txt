@@ -1,0 +1,50 @@
+function computerNetwork(n, network) {
+        
+        var min_direction = 1e9;
+        
+        var matrix = [];
+        
+        for( let i = 0 ; i < n ; i++ ) matrix[i] = new Array(n)
+        
+        for(let e of network){
+                
+                matrix[e[0]-1][e[1]-1] = e[2];
+                
+                matrix[e[1]-1][e[0]-1] = e[2];
+                
+        }
+        
+        var mark = new Array(n).fill(true);    
+            
+        
+        function thu( i , direction ) {
+            
+            if( i == n-1 && direction < min_direction )
+                min_direction = direction;
+            
+            else{
+                
+                for( var k = 0 ; k<n ; k++ ) {
+                    
+                    if( mark[k] ){
+                        
+                        mark[k] = false;
+                        
+                        thu( k , direction + matrix[i][k] )
+                        
+                        mark[k] = true;
+                        
+                    }
+                    
+                }
+                
+            }
+        }
+        mark[0] = false;
+        
+        thu(0, 0);
+            
+        return min_direction;
+
+    
+}

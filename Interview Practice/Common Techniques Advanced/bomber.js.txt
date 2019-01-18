@@ -1,0 +1,54 @@
+function bomber(field) {
+    
+    var max = 0;
+    
+    for(let i = 0 ; i < field.length ; i++) {
+        
+        for(let j = 0 ; j < field[0].length ; j++) {
+            
+            if(field[i][j] !== '0') continue;
+            
+            max = Math.max(max , countBomber(field , i , j));
+            
+        }
+        
+    }
+    return max;
+}
+function countBomber(matrix , i , j) {
+    
+    var count = 0;
+    
+    for(let k = j + 1 ; k < matrix[0].length ; k++){
+        
+        if(matrix[i][k] === "W") break;
+        
+        if(matrix[i][k] === "E") count++;
+        
+    }
+    
+    for(let k = j - 1 ; k >= 0 ; k--){
+        
+        if(matrix[i][k] === "W") break;
+        
+        if(matrix[i][k] === "E") count++;
+        
+    }
+    
+    for(let k = i + 1 ; k < matrix.length ; k++) {
+        
+        if(matrix[k][j] === "W") break;
+        
+        if(matrix[k][j] === "E") count++;
+        
+    }
+    
+    for(let k = i - 1 ; k >= 0 ; k--) {
+        
+        if(matrix[k][j] === "W") break;
+        
+        if(matrix[k][j] === "E") count++;
+        
+    }
+    return count;
+}

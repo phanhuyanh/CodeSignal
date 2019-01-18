@@ -1,0 +1,7 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE projectList()
+BEGIN
+select project_name,team_lead,income
+from Projects
+group by internal_id;
+END

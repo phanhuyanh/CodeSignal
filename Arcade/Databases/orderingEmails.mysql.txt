@@ -1,0 +1,8 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE orderingEmails()
+BEGIN
+	select id,email_title ,
+        if(size >= POW(2,20) , CONCAT(FLOOR(size/ POW(2,20))," Mb") ,if(size >= POW(2,10),CONCAT(FLOOR(size/POW(2,10))," Kb"),'0 Kb' )) as short_size
+        from emails
+        order by size desc;
+END

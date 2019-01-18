@@ -1,0 +1,8 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE suspectsInvestigation()
+BEGIN
+	select id,name,surname
+from Suspect
+where name like "B%" && surname like "Gre_n" && height<=170
+order by id;
+END

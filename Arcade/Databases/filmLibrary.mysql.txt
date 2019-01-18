@@ -1,0 +1,19 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE filmLibrary()
+BEGIN
+select a.actor , a.age
+from(
+	select m.movie
+    from(
+        select *
+        from movies
+        group by genre
+        order by count(genre) desc limit 1
+    ) _ , movies m
+    where _.genre = m.genre 
+) r ,    starring_actors s, actor_ages a
+
+where r.movie = movie_name and s.actor = a.actor
+order by age desc,actor;
+
+END

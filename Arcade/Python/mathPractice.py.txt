@@ -1,0 +1,2 @@
+def mathPractice(numbers):
+    return reduce(lambda x , y : x + y , map(lambda (i,x) : x * numpy.prod((numbers[i+1 if i !=0 else i + 2:])[::2]) if i % 2 != 0 or i ==0 else 0 , enumerate(numbers)) )

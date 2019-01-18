@@ -1,0 +1,101 @@
+int x;int k=0;
+boolean adaNumber(String l) {
+    int n=l.length();
+    if(kiem_tra(l)) return true;
+      if(check(l)) return false;
+    if(check_underscore(l)) return true;
+if(l.charAt(0)=='#' || l.charAt(n-1)!='#'){
+    return false;
+}
+    if(!kiemtra(l)){return false;}
+    String a[]=l.split("#");
+    if(check_(a)) return true;
+    return false;
+}
+boolean kiemtra(String l){
+    int n=l.length();
+    for(int i=0 ; i<n-1 ; i++)
+        if(l.charAt(i)=='#'){
+            if(l.charAt(i+1)=='#') return false;
+        }
+    return true;
+}
+boolean check_(String[] a){
+    
+    int n=a.length;
+    if(n>2) return false;
+    
+    x=chuyen(a[k]);
+    if(x<2 || x>16) return false;
+    if(kiemtra_under(a[k+1])) return false;
+    for(int i =0 ; i<a[k+1].length() ; i++){
+        if(swap(a[k+1].charAt(i)) >=x) return false;
+    }
+    return true;
+}
+int swap(char x){int m;
+    x=Character.toUpperCase(x);
+    if(x>='0' && x<='9'){
+        m=(int)x-48;
+    }
+                 else{
+                     if(x>='A' && x<='F'){
+                         m=(int)x-55;
+                     }
+                     else{
+                         if(x=='_'){
+                             m=0;
+                         }
+                         else{
+                         m=100;}
+                     }
+                 }
+                 return m;
+}
+boolean check_underscore(String l){
+    boolean xet=false;
+    int n=l.length();
+    for(int i=0 ; i<n ; i++){
+        if(l.charAt(i)=='_'){ xet=true;}
+    }
+    if(xet==false) return false;
+    for(int i=0 ; i<n ; i++)
+        if((l.charAt(i)<'0' || l.charAt(i)>'9') && l.charAt(i)!='_'){
+            return false;
+        }
+    return true;
+}
+int chuyen(String s){
+    String number="";
+    int n=s.length();
+    for(int i =0 ; i<n ; i++){
+        if((s.charAt(i)<'0' || s.charAt(i)>'9')&& s.charAt(i)!='_'){
+            return 0;
+        }
+        else{
+            if(s.charAt(i)!='_'){
+            number+=s.charAt(i);}
+        }
+    }
+    if(number==""){return 0;}
+    int x=Integer.parseInt(number);
+    return x;
+}
+boolean kiemtra_under(String s){
+    for(int i=0 ; i<s.length() ; i++)
+        if(s.charAt(i)!='_'){return false;}
+    return true;
+}
+boolean check(String s){
+    for(int i=0 ; i<s.length() ; i++){
+        if(s.charAt(i)!='_'){
+            return false;
+        }
+    }
+    return true;
+}
+boolean kiem_tra(String s){
+    for(int i=0 ;i<s.length() ; i++)
+        if(s.charAt(i)<'0' || s.charAt(i)>'9') return false;
+    return true;
+}

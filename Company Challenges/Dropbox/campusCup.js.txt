@@ -1,0 +1,28 @@
+function campusCup(emails) {
+        hash = {}
+        
+        r = {}
+        
+        for(e of emails){
+            
+            index = e.indexOf(`@`)+1
+            
+            hash[ E = e.slice(index)] = ~~hash[e.slice(index)] + 20
+                
+            if(hash[E] < 100) r[E] = 0    
+            if(hash[E] >=100 && hash[E]<200) r[E] = 3
+            if(hash[E] >=200 && hash[E]<300) r[E] = 8
+            if(hash[E] >=300 && hash[E]<500) r[E] = 15
+            if(hash[E] >=500 ) r[E] = 25
+           
+            
+            
+        }
+        Result = []
+            
+        for(e of Object.keys(r))
+                Result.push([e,r[e]])
+            
+        return Result.sort( (a,b)=> b[1]-a[1] ||  (a[0]<b[0] ? -1 : a[0] > b[0] ? 1 : 0 )).map(e=>e[0])
+        
+}

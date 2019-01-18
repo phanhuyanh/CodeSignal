@@ -1,0 +1,29 @@
+CREATE PROCEDURE soccerGameSeries()
+BEGIN
+
+select case
+    
+  when wins > 0 then 1
+  when wins < 0 then 2
+  when diff > 0 then 1
+  when diff < 0 then 2 
+  when home >0  then 1
+  when home < 0 then 2
+  else 0
+  end as winner
+
+from (
+select 
+      sum(if(s1 > s2, 1, -1)) wins,
+      sum(s1 - s2) diff,
+      sum(if(h = 2, s1, -s2)) home
+   from
+   (
+      select first_team_score s1, second_team_score s2, match_host h 
+      from scores
+   ) x
+) _
+;
+
+
+END

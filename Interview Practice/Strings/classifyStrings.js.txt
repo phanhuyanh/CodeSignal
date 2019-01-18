@@ -1,0 +1,26 @@
+function classifyStrings(s) {
+    
+    s = s.replace(/\?/g,"X");
+    //console.log(s)
+    if(/[aeoui]{3}/.test(s) || /[^aeouiX]{5}/.test(s) ||
+      
+       (/[aeoui]{2}X[^aeouiX]{4}/.test(s) )
+       
+       || /[^aeouiX]{4}X[aeoui]{2}/.test(s)
+       
+       || /[^aeouiX]{4}X[aeoui]X[^aeouiX]{3}X[aeoui]X[^aeiuoX]{4}/.test(s)
+       
+       || /[aeoui]{2}X[^aeouiX]{3}X[aeoui]{2}/.test(s)
+       
+       || /[^aeiuoX]{4}X[aeoui]X[^aeouiX]{4}/.test(s)
+       || /[aeoui]{2}X[^aeouiX]{3}X[aeoui]X[^aeouiX]{3}X[aeoui]{2}/.test(s)
+      ) return "bad"
+    
+    if(
+        /[aeouiX]{3}/.test(s) ||
+        /[^aeoui]{5}/.test(s)
+
+    ) return "mixed"
+    
+    return "good"
+}

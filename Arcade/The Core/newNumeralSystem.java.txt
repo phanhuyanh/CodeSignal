@@ -1,0 +1,14 @@
+String[] newNumeralSystem(char number) {
+    int n=(int)number-65;
+    String[] s=new String[n/2+1];
+    for(int i=0; i<s.length ; i++) s[i]="";
+    for(int i=0 ; i<=n/2 ;i++){
+        s[i]=change(i)+ " + " +change(n-i);
+    }
+    return s;
+}
+char change(int n){
+    int x=n+65;
+    char y=(char)x;
+    return y;
+}

@@ -1,0 +1,20 @@
+String decipher(String cipher) {
+    String decipher="";
+int n=cipher.length();
+    int i=0;
+    while(i<n){
+        if(Integer.parseInt(cipher.substring(i,i+2))>=97 && Integer.parseInt(cipher.substring(i,i+2))<=99){
+            decipher+=change_char(Integer.parseInt(cipher.substring(i,i+2)));
+            i=i+2;
+        }
+        else{
+            decipher+=change_char(Integer.parseInt(cipher.substring(i,i+3)));
+             i+=3;
+        }
+    }
+    return decipher;
+}
+char change_char(int x){
+   
+    return (char)(x);
+}

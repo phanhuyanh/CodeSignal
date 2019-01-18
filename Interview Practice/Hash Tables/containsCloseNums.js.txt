@@ -1,0 +1,13 @@
+containsCloseNums = ( nums , k ) => {
+    
+    h = {}
+    
+    for(i in nums){
+        
+        if(h[nums[i]])
+            if( i - h[nums[i]] <=k) return true    
+        
+         h[nums[i]] = i
+    }
+    return false
+}

@@ -1,0 +1,2 @@
+def twinsScore(b, m):
+    return map(lambda (index,val) : b[index] + m[index] , enumerate(b))

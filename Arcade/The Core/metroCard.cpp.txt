@@ -1,0 +1,26 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+arr_integer metroCard(int lastNumberOfDays) {
+arr_integer nextNumberofDays=alloc_arr_integer(3);
+if(lastNumberOfDays==28 ||lastNumberOfDays==30 ){
+    nextNumberofDays.size=1;
+    nextNumberofDays.arr[0]=31;
+}
+    else{
+        nextNumberofDays.size=3;
+        nextNumberofDays.arr[0]=28;
+        nextNumberofDays.arr[1]=30;
+             nextNumberofDays.arr[2]=31;           
+    }
+    return nextNumberofDays;
+}

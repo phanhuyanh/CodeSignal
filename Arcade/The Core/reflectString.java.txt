@@ -1,0 +1,12 @@
+String reflectString(String s) {
+String obj="";
+    for(int i=0 ; i<s.length() ; i++)
+        obj+=change(s.charAt(i));
+    return obj;
+}
+char change(char x){
+    int a=(int)x-97;
+    a=26-a-1;
+    char y=(char)(a+97);
+    return y;
+}

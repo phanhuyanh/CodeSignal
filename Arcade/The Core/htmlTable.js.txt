@@ -1,0 +1,25 @@
+function htmlTable(table, row, column) {
+    
+     var a = [];
+    
+     table =  table.match(/(?<=<table>).*(?=<\/table>)/g)[0];
+     
+     table =  table.split(/<tr>|<\/tr>/g).filter(e => e!= ``)
+    
+     for( let i = 0 ; i < table.length ; i++ ){
+          
+          let content = table[i];
+          
+          content = content.split(/<td>|<\/td>/g).filter(e=> e!=`` );
+          
+          a[i] = [];
+          
+          if(content.indexOf("<th>") != -1 ) continue;
+          
+          for( let col = 0 ; col < content.length ; col++ )
+               
+               a[i][col] = content[col];
+   
+     }
+     return a[row] && a[row][column] ? a[row][column] : "No such cell";
+}

@@ -1,0 +1,13 @@
+int[][] boxBlur(int[][] image) {
+int blur[][]=new int[image.length-2][image[0].length-2];
+      for(int i=0;i+3<=image.length;i++){
+        for(int j=0;j+3<=image[0].length;j++){
+            for(int k=i;k<3+i;k++){
+                for(int k1=j;k1<3+j;k1++){
+                    blur[i][j]+=image[k][k1];
+                }
+            }
+            blur[i][j]= blur[i][j]/9;        }
+    }
+    return blur;
+}

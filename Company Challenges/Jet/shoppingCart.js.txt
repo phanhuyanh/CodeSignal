@@ -1,0 +1,54 @@
+function shoppingCart(requests) {
+         
+         var hash_shopping = {};
+         
+         for( let i in requests ) {
+             
+             let e = requests[+i];
+             
+             let tmp = e.split`:`.map(e=>e.trim());
+             
+             if( tmp[0] == 'checkout' ) {
+                 
+                 hash_shopping = {};
+                 
+                 continue;
+                 
+             }
+             
+             if( tmp[0] == 'add'){
+                 
+                 if( hash_shopping[tmp[1]] ){
+                     
+                     hash_shopping[tmp[1]][0]++;
+                     
+                 }
+                 else hash_shopping[tmp[1]] = [1 , i];
+                 
+                 continue
+             }
+             
+             if( tmp[0] == 'remove' ) {
+                 
+                 hash_shopping[tmp[1]] = null;
+                 
+                 continue
+             }
+             
+             let count = tmp[2][0] == "+" ? +tmp[2].slice(1) : - +tmp[2].slice(1);
+             
+             hash_shopping[tmp[1]][0] += count 
+     
+          }
+         
+         var results = [];
+         
+         for( let element of Object.keys(hash_shopping) ) {
+             
+             if(hash_shopping[element])
+                 results.push([element + " : " + hash_shopping[element][0] , hash_shopping[element][1] ] )
+             
+         }
+         
+         return results.sort((a,b)=> a[1] - b[1] ).map(e=>e[0]);  
+}

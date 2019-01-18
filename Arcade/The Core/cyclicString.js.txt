@@ -1,0 +1,18 @@
+
+function cyclicString(s) {
+    for (i = 1;i<=s.length;i++) {
+        part = s.substring(0,i);
+        isRoot = true;
+        for (j = 0;j<s.length;j++) {
+            if (s[j] != part[j % part.length]) {
+                isRoot = false;
+                break;
+            }
+        }
+        if (isRoot) {
+            return i;
+        }
+    }
+    return 0;
+
+}

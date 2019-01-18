@@ -1,0 +1,12 @@
+std::string alphabeticShift(std::string inputString) {
+for(int i=0;i<inputString.size();i++){
+    if(inputString.at(i)=='z'){
+        inputString.at(i)='a';
+    }
+    else{
+        int n=(int)inputString.at(i)+1;
+        inputString.at(i)=(char)n;
+    }
+}
+    return inputString;
+}

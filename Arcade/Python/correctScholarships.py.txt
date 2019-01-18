@@ -1,0 +1,2 @@
+def correctScholarships(bestStudents, scholarships, allStudents):
+    return all(x in allStudents for x in bestStudents) and all( y in allStudents for y in scholarships ) and len(scholarships) < len(allStudents) and all(x in scholarships for x in bestStudents)

@@ -1,0 +1,6 @@
+sumOfTwo=(a, b, v,d=new Set(b))=>
+       
+       
+       a.some(e=>d.has(v-e))
+
+    

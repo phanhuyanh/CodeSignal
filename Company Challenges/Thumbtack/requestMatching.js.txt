@@ -1,0 +1,19 @@
+function requestMatching(pros, distances, travelPreferences) {
+ 
+        var merge = [];
+        
+        for( let i in pros ){
+            
+            merge.push([pros[i] , distances[i] , travelPreferences[i]]);
+        }
+        
+        var matching = merge.filter(e=> e[1] <= e[2] ).sort((a,b)=> a[1] - b[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 ) ) ;
+        
+        var non_matching = merge.filter(e=> e[1] > e[2]).sort((a,b)=> (a[1]-a[2] -b[1]+b[2] ) || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 ) );
+            
+        return matching.concat(non_matching).map(e=>e[0]).slice(0,5)
+        
+        
+    
+    
+}

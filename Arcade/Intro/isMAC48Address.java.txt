@@ -1,0 +1,32 @@
+boolean isMAC48Address(String a) {
+int dem=0;int d_d=0;
+    int n=a.length();
+    
+    for(int i=0; i<n ; i++){
+        if(a.charAt(i)== '-'){
+            String s=a.substring(d_d,i);
+            if(kiem_tra(s)){
+                dem++;
+                d_d=i+1;
+            }
+            else return false;
+        }
+    }
+    String obj=a.substring(d_d,n);
+    if(kiem_tra(obj)){
+    return dem==5;}
+    else return false;
+}
+boolean kiem_tra(String s){
+    int n=s.length();
+    if(n!=2){return false;}
+    for(int i=0; i<n; i++){
+        if(( s.charAt(i)>='0' && s.charAt(i)<='9') || (s.charAt(i)>='A' && s.charAt(i)<='F')){
+            continue;
+        }
+        else{
+            return false;
+        }
+    }
+    return true;
+}

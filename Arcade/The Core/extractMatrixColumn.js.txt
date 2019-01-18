@@ -1,0 +1,6 @@
+function extractMatrixColumn(matrix, column) {
+    var s=[];
+    for( i = 0; i< matrix.length ; i++)
+        s.push(matrix[i][column]);
+    return s;
+}

@@ -1,0 +1,8 @@
+function crossingSum(matrix, a, b) {
+    var sum= -matrix[a][b];
+    for(i =0 ; i<matrix[a].length ; i++)
+        sum+=matrix[a][i];
+    for( i=0; i<matrix.length ; i++)
+        sum += matrix[i][b];
+    return sum;
+}

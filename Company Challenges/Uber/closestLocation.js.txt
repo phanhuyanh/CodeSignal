@@ -1,0 +1,111 @@
+function closestLocation(address, objects, names) {
+        
+    function Replace(address , prefix_name){
+                
+        [...address].map(e => prefix_name =  prefix_name.replace(new RegExp(`${e}`,`i`) , ``) )
+                
+        return prefix_name.length;
+                
+    }
+    function C(a,b){
+                
+        var d = 0;
+                
+        [...a].map((e,i)=> d += e.toLowerCase() != b[i].toLowerCase() )
+
+        return d < 2;
+                
+    }
+                
+    var group = objects.map((e,i) => [e , names[i]] );
+                
+    group = group.filter( ([ point ,name]) => {
+                        
+                    
+        let prefix_name = name.split` `[0].toLowerCase();
+                       
+        if( address.length - prefix_name.length > 1 ) return false;
+                        
+        let case1 = prefix_name.slice(0, address.length);
+        let case2 = prefix_name.slice(0, address.length-1);
+        let case3 = prefix_name.slice(0, address.length+1);
+                        
+        return C(case1,address) ||  Replace(address,case2) === 0 ||  Replace(address,case3) === 1;
+
+    })
+               
+    return group.map(([points , names]) => {
+                        
+        if( points.length === 2 ) return [distance([0,0] , points),  names];
+                        
+        if( points.length === 4 ){
+                                
+                let p1 = [points[0] , points[1]];
+                let p2 = [points[2] , points[3]];
+                                
+                let distance_min = D_min(p1,p2);
+                                
+                return [distance_min,names];
+        }
+        else{
+                let p1 = [points[0] , points[1]];
+                let p2 = [points[2] , points[3]];
+                let p3 = [points[4] , points[5]];
+                let p4 = [points[6] , points[7]];
+                                
+                let a = [p1,p2,p3,p4];
+                                
+                let best = 1e9;
+                                
+                for( let i = 0 ; i< 3 ; i++ ){
+                                        
+                        for( let j = i + 1; j < 4 ; j++ ){
+                                                
+                                const P1 = a[i];
+                                const P2 = a[j];
+                                                
+                                if( P1[0] == P2[0] || P1[1] == P2[1] ){
+                                                        
+                                        best = Math.min(best , D_min(P1,P2))
+                                                        
+                                }
+                        }
+                }
+                                
+                return [best,names];
+        }
+                        
+        }).sort((a,b)=>a[0] - b[0])[0][1]             
+}
+        
+function D_min(p1,p2){
+                
+        let vecto1 = [-p1[0],-p1[1]];
+                                
+        let vecto2 = [p2[0] - p1[0] , p2[1] - p1[1]];
+                                
+        const v = vecto1[0] * vecto2[0] + vecto1[1] * vecto2[1];
+                                
+        const cos = v / ( (vecto1[0]**2 + vecto1[1]**2)**.5 * (vecto2[0]**2 + vecto2[1]**2)**.5 );
+                                
+        const degree = Math.acos(cos)*180/Math.PI;
+                                
+        if( degree > 90 ){
+                                        
+                let distance_min = Math.min(distance([0,0],p1) , distance([0,0],p2));
+                                        
+                return distance_min 
+        }
+        else{
+                                      
+                let distance_min = p1[0] === p2[0] ? p1[0] : p1[1];
+                                        
+                return Math.abs(distance_min)
+        }
+                
+} 
+function distance( [x0,y0] , [x1,y1] ){
+        
+        return ((x0-x1)**2 + (y0-y1)**2)**.5;
+                
+}

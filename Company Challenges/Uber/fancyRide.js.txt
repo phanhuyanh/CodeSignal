@@ -1,0 +1,10 @@
+function fancyRide(l, fares) {
+    
+    Uber = ["UberX" , "UberXL" , "UberPlus" , "UberBlack" , "UberSUV"]
+    
+    i = 0
+    
+    while( fares[i]*l <=20) i++
+    
+    return Uber[--i]
+}

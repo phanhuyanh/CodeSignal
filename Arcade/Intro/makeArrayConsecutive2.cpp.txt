@@ -1,0 +1,21 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+int makeArrayConsecutive2(arr_integer statues) {
+int max=statues.arr[0];
+    int min=statues.arr[0];
+    for(int i=1;i<statues.size;i++){
+        if(max<statues.arr[i]){max=statues.arr[i];}
+        if(min>statues.arr[i]){min=statues.arr[i];}
+    }
+    return max-min+1-statues.size;
+}

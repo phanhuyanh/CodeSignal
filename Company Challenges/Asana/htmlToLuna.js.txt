@@ -1,0 +1,36 @@
+function htmlToLuna(html) {
+        
+        if(html == "") return ""
+    
+        var stack = [];
+        
+        var v = "";
+        
+        var tags = html.match(/<[a-z /]+>/g);
+        
+        for(let i = 0 ; i<tags.length ; i++){
+                
+                if(tags[i] == "<img />"){
+                        
+                        v += "IMG({})" + (tags[i+1]  && !tags[i+1].includes("/") ? "," : "");
+                        
+                        continue;
+                }
+                
+                if( tags[i].includes("/")){
+                        
+                        stack.pop();
+                        
+                        v += "])" + (tags[i+1]  && !tags[i+1].includes("/") && stack[0]? ", " : "");
+                        
+                        
+                }
+                else{
+                        stack.push(tags[i]);
+                        
+                        v += tags[i].match(/\w+/g)[0].toUpperCase() +"(["  ;
+                }
+        }
+           
+        return v     
+}

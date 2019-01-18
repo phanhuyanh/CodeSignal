@@ -1,0 +1,25 @@
+int[][] minesweeper(boolean[][] matrix) {
+int [][] a=new int[matrix.length][matrix[0].length];
+    int [][] b =new int[matrix.length+2][matrix[0].length+2];
+    for(int i=0;i<matrix.length+2;i++){
+        for(int j=0;j<matrix[0].length+2;j++){
+            b[i][j]=0;
+        }
+    }
+    for(int i=1;i<=matrix.length;i++){
+        for(int j=1;j<=matrix[0].length;j++){
+            if(matrix[i-1][j-1]==true){
+                b[i-1][j-1]++;
+                b[i-1][j]++;b[i-1][j+1]++;b[i][j-1]++;b[i][j+1]++;
+                b[i+1][j-1]++;b[i+1][j]++;b[i+1][j+1]++;
+                
+            }
+        }
+    }
+    for(int i=0;i<matrix.length;i++){
+        for(int j=0;j<matrix[0].length;j++){
+            a[i][j]=b[i+1][j+1];
+        }
+    }
+    return a;
+}

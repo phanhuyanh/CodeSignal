@@ -1,0 +1,7 @@
+function fareEstimator(ride_time, ride_distance, cost_per_minute, cost_per_mile) {
+    
+    result = []
+    
+    cost_per_mile.map((e,i)=> result.push( cost_per_minute[i]*ride_time + e*ride_distance) )
+    return result
+}

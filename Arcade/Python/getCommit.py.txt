@@ -1,0 +1,2 @@
+def getCommit(commit):
+    return ''.join([x for i,x in enumerate(commit) if x.isalpha()])

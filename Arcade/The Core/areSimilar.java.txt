@@ -1,0 +1,18 @@
+int sum=0;boolean xet=false;
+boolean areSimilar(int[] a, int[] b) {
+int n=a.length;
+    int chuaxet[]=new int[n];
+    for(int i=0 ; i<n ; i++){
+        for(int j= 0 ; j<n ; j++){
+            if(a[i]==b[j] && chuaxet[j]==0){
+                xet=true;
+                chuaxet[j]=1;
+                if(i!=j && a[j]!=b[j]) sum++;
+                break;
+            }
+        }
+        if(xet==false) return false;
+        xet=false;
+    }
+    return sum==2 ||sum==0;
+}

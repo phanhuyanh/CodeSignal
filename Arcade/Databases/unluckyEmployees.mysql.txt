@@ -1,0 +1,22 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE unluckyEmployees()
+BEGIN
+
+set @i = 0;
+select name as dep_name , emp_number , total_salary
+from(select name , emp_number , total_salary , @i:=@i+1 as id
+from(select id,name , if(dep is null , 0 , count(*)) as emp_number , sum(salary) as total_salary
+
+from(select d.id , d.name , if(e.salary is null , 0 , e.salary) as salary , e.department as dep
+from Department d
+left join Employee e
+on d.id = e.department
+) _
+group by id
+having count(*)<=5
+order by total_salary desc , emp_number desc , id
+) r
+) res
+where id %2 <> 0
+;
+END

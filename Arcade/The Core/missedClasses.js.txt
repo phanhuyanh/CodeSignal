@@ -1,0 +1,25 @@
+function missedClasses(year, daysOfTheWeek, holidays) {
+   
+    var hash_day = { 
+
+        "Mon" : 1,
+        "Tue" : 2,
+        'Wed' : 3,
+        "Thu" : 4,
+        "Fri" : 5,
+        "Sat" : 6,
+        "Sun" : 7
+        
+    };
+    
+    return holidays.filter((holiday,i) => {
+
+        const day = new Date(`${holiday}-${ +holiday.split`-`[0] < 6 ?  year + 1 : year}`);
+        
+        const getDay = hash_day[day.toDateString().split` `[0]]
+        
+        return daysOfTheWeek.some( stt => stt === getDay  );
+        
+    }).length;
+
+}

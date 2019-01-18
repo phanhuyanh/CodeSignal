@@ -1,0 +1,21 @@
+function findProfession(level, pos) {
+    
+    function Unit( pos , l ){
+        
+        if( l == 1 ) return "Engineer";
+            
+        let posRoot = Math.ceil(pos/2);    
+        
+        let t = Unit( posRoot , l-1 );    
+            
+        if( t == "Engineer" ) {
+                
+                return pos % 2 ? "Engineer" : "Doctor"
+                
+        }
+        if( t == "Doctor" ) return pos % 2 ? "Doctor" : "Engineer"
+    }
+    
+    return Unit(pos, level)
+   
+}

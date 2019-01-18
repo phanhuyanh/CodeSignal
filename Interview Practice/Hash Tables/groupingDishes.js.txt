@@ -1,0 +1,35 @@
+groupingDishes = dishes => {
+    
+    dish = {}
+    
+    result = new Set()
+    
+    for(e of dishes){
+        
+        for(i in e){
+            
+            if(!+i) continue
+            
+            if(dish[e[i]]){
+                
+                dish[e[i]].push(e[0])
+                result.add(e[i])
+            }
+            else dish[e[i]] = [e[0]]
+        }
+    }
+   
+    R = []
+    
+    for(e of result){
+        
+        F = []
+        for(f of dish[e])
+            F.push(f)
+        F.sort()
+        F.unshift(e)
+        R.push(F)
+    }
+    
+    return R.sort((a,b)=> a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 )
+}

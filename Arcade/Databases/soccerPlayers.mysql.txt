@@ -1,0 +1,6 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE soccerPlayers()
+BEGIN
+    select group_concat(first_name,concat(' ',surname),concat(' #',player_number)  order by player_number asc separator '; ') as players
+    from soccer_team;
+END

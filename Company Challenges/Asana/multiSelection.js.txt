@@ -1,0 +1,32 @@
+function multiSelection(dimensions, tasks, mouseCoordinates) {
+    
+    function f( [width , height , yOffset]  ,tasks , [ [width_end , height_end], [ width_start,height_start] ]  ){
+        
+        var tasks_height = [[0 , height]];
+        
+        for(let i = 1 ; i<tasks.length ; i++){
+            
+            tasks_height[i] = new Array(2);
+            
+            tasks_height[i][0] = tasks_height[i-1][1] + yOffset;
+            
+            tasks_height[i][1] = tasks_height[i][0] + height;
+        }
+        
+        var results = [];
+            
+        var v = [height_start , height_end].sort((a,b)=>a-b);
+        
+        for(let i in tasks_height){
+                
+                let [x,y] = tasks_height[i];
+                
+                if( (x <= v[0] && y >=v[0] ) || ( x >=v[0] && y>v[0] && x<=v[1] && y<=v[1]) || ( x<=v[1] && y >=v[1])  )
+                        results.push(tasks[i]);
+        }
+        
+        return results;
+    }
+    
+    return f(dimensions , tasks , mouseCoordinates);
+}

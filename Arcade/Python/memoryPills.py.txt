@@ -1,0 +1,7 @@
+from itertools import dropwhile, count
+
+def memoryPills(pills):
+    gen = iter(pills[pills.index([i for i in pills if len(i) % 2 == 0][0]):] + ["","",""] )
+    next(gen)
+    return [next(gen) for _ in range(3)]
+ 

@@ -1,0 +1,17 @@
+roadsBuilding = (c, r) =>{
+    
+    B = []
+    
+    R = {}
+    
+    for(e of r)
+        R[e[0] + '-' + e[1]] = R[e[1] + '-' + e[0]] = 1
+    
+    for(i = 0 ; i<c-1  ; i++)
+        for(j = i+1 ; j<c ; j++)
+            if(!R[i + '-' + j])
+                
+                B.push([i,j])
+    
+    return B
+}

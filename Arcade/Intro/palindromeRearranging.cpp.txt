@@ -1,0 +1,31 @@
+bool palindromeRearranging(std::string inputString) {
+int n=inputString.size();
+    int chuaxet[26];int chua_duyet[26];
+    for(int i=0;i<26;i++){
+        chuaxet[i]=0;chua_duyet[i]=1;
+    }
+    if(n%2==0){
+        for(int i=0;i<n;i++){
+            chuaxet[(int)inputString.at(i)-97]++;
+        }
+        for(int i=0;i<n;i++){
+            if(chuaxet[(int)inputString.at(i)-97]%2!=0){return false;break;}
+        }
+        return true;
+    }
+    else{
+         for(int i=0;i<n;i++){
+            chuaxet[(int)inputString.at(i)-97]++;
+        }
+        
+        int dem=0;
+         for(int i=0;i<n;i++){
+             if(dem>1){return false;break;}
+             if(chuaxet[(int)inputString.at(i)-97]%2!=0 && chua_duyet[(int)inputString.at(i)-97]==1){
+                 dem++;
+                 chua_duyet[(int)inputString.at(i)-97]=0;
+             }
+         }
+        return true;
+    }
+}

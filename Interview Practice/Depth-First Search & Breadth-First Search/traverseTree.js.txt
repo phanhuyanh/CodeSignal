@@ -1,0 +1,31 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+
+function traverseTree(t) {
+    
+    if(t == null) return  []
+    
+    a = []
+    
+    Queue = []
+    
+    Queue.push(t)
+    
+    while(Queue.length !=0){
+        
+        v = Queue.shift()
+        
+        a.push(v.value)
+        
+        if(v.left !=null)  Queue.push(v.left)
+        
+        if(v.right !=null) Queue.push(v.right)
+    }
+    
+   return a
+}

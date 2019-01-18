@@ -1,0 +1,28 @@
+//
+// Definition for singly-linked list:
+// typedef struct list_##name {
+//   type value;
+//   struct list_##name *next;
+// } list_##name;
+//
+// list_##name *alloc_list_##name(type v) {
+//   list_##name *l = calloc(1, sizeof(list_##name));
+//   l->value = v;
+//   return l;
+// }
+//
+list_integer * removeKFromList(list_integer * l, int k) {
+list_integer *p[100000];int i=1;
+if(l==NULL){return NULL;}
+    p[0]=alloc_list_integer(0);
+    while(l!=NULL){
+        if(l->value!=k){
+    p[i]=alloc_list_integer(l->value);
+    p[i-1]->next=p[i];
+            i++;
+        }
+        l=l->next;
+    }
+
+    return p[0]->next;
+}

@@ -1,0 +1,30 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE placesOfInterest()
+BEGIN
+
+select country , SUM(adventure_park) as adventure_park	,SUM(golf) as golf , SUM(river_cruise) as river_cruise , SUM(kart_racing) as kart_racing
+
+from (select country , 
+
+       if(SUM(leisure_activity_type like "Adventure park")>0 , num,'0') as "adventure_park",
+       if(SUM(leisure_activity_type like "Golf")>0 , num,'0') as "golf",
+       if(SUM(leisure_activity_type like "River cruise")>0 , num,'0') as "river_cruise",
+       if(SUM(leisure_activity_type like "Kart racing")>0 , num,'0') as "kart_racing"
+
+from	(SELECT country , leisure_activity_type ,   SUM(number_of_places) as num
+
+from countryActivities
+
+group by country,leisure_activity_type
+order by country asc) t
+
+
+group by country ,leisure_activity_type
+
+order by country asc) s
+
+group by country
+
+order by country asc;
+
+END

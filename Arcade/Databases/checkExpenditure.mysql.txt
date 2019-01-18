@@ -1,0 +1,16 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE checkExpenditure()
+BEGIN
+
+
+select id ,if(SUM(expenditure_sum) - value < 0 , 0 , SUM(expenditure_sum) - value ) as loss
+
+from expenditure_plan , allowable_expenditure
+
+where WEEK(monday_date) >= left_bound and WEEK(monday_date) <= right_bound
+
+group by id
+
+;
+
+END

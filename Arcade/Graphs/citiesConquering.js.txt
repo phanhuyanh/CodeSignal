@@ -1,0 +1,43 @@
+function citiesConquering(n, roads) {
+    
+    var Results = new Array(n).fill(-1);
+    
+    var count_day = 1;
+    
+    var matrix = new Array(n);
+    
+    for(let i = 0 ; i<n ; i++)
+        matrix[i] = new Array(n).fill(false);
+    
+    for(let e of roads)
+        matrix[e[0]][e[1]] = true,
+        matrix[e[1]][e[0]] = true
+    
+    while(matrix.some((e,i)=> e.filter(f=> f==true).length<2 && Results[i] <0) ){
+        
+        let tmp = new Array(n).fill(0);
+        
+        for(let i = 0 ;  i<matrix.length ; i++){
+            
+            if(matrix[i].filter(f=> f == true).length <2 && Results[i]<0){
+                tmp[i] = 1;
+                
+                Results[i] = count_day;
+            }
+            
+        }
+        for(let i = 0 ; i<n ; i++){
+            
+            if(tmp[i]){
+                
+                for(let j = 0 ; j<n ; j++) {
+                    matrix[i][j] = false;
+                    matrix[j][i] = false;
+                }
+            }
+            
+        }
+        count_day++;
+    }
+    return Results;
+}

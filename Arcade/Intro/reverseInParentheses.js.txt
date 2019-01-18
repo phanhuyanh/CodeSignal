@@ -1,0 +1,17 @@
+function reverseInParentheses(S) {
+
+    while(S.match(/\([a-z]*\)/g)) {
+        
+        S = S.replace(/\([a-z]*\)/g, x => {
+            
+            t = x.match(/[a-z]+/g)
+
+            if(t == null) return "";
+            
+            return [...t[0]].reverse().join``
+            
+        });
+        
+    }
+    return S
+}

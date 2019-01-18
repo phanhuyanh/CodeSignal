@@ -1,0 +1,19 @@
+function deliveryFee(intervals, fees, deliveries) {
+            
+        var i = 0;
+            
+        var arr_intervals = intervals.map(e=>0);
+            
+        for( let element of deliveries ) {
+                
+            if( element[0] >= intervals[i] && ( i == intervals.length-1 ? element[1] <= 59  : element[0] < intervals[i+1] ) ) 
+                        
+                arr_intervals[i]++;
+                        
+            
+            else
+                arr_intervals[++i]++;
+      
+        }
+       return arr_intervals.map((e,i) => e/fees[i] ).every((f,j,a)=> j ? f == a[j-1]  : true);
+}

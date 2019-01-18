@@ -1,0 +1,16 @@
+boolean isTandemRepeat(String s) {
+if(s.length()%2!=0){
+    return false;
+}
+    String obj=s.substring(0,s.length()/2);
+    return kiemtra(obj+obj,s);
+}
+boolean kiemtra(String s1,String s2){
+    char x[]=s1.toCharArray();
+    char y[]=s2.toCharArray();
+    for(int i =0 ; i<x.length ; i++){
+        if(x[i]!=y[i])
+            return false;
+    }
+    return true;
+}

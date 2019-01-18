@@ -1,0 +1,7 @@
+function validTime(time) {
+    
+    const [hh,mm] = time.split`:`;
+    
+    return hh < 24 && mm < 60 ;
+    
+}

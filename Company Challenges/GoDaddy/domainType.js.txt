@@ -1,0 +1,16 @@
+function domainType(domains) {
+    
+    result = []
+    
+    for(e of domains){
+        
+        if(e.lastIndexOf(".org") == e.length - 4) result.push("organization")
+        
+        if( e.lastIndexOf(".com") == e.length-4) result.push("commercial")
+        
+        if( e.lastIndexOf(".net")  ==  e.length - 4) result.push("network")
+        
+        if( e.lastIndexOf(".info")  === e.length-5) result.push("information")
+    }
+    return result
+}

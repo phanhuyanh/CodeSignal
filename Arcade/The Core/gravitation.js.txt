@@ -1,0 +1,31 @@
+a=[]
+f=[]
+gravitation=r=>{
+	for(i =0 ; i<r.length ;i++){
+      for( j =0 ; j<r[0].length ; j++){
+         if(check(r,i,j)) a.push(j)
+      }
+      if(a.length>0) return a
+   }
+}
+check=(r,i,j)=>{
+	e=f[j]=( i==0 ? G(r,j) : F(f[j]))
+   return e[0]=='.' ? !e.some(l=>l=='#') : e.filter(l=>l=='#').length === e.length || e.indexOf('.')>e.lastIndexOf('#')
+}
+G=(r,j)=>{
+   e=[]
+   for(k= r.length-1 ; k>=0 ; k--)
+      e.push(r[k][j])
+   return e
+}
+F=(t)=>{
+   C=[]
+   p=t.indexOf('.')
+   if(p==-1 || p==t.length-1) return t
+   for( k =p+1 ; k<t.length ; k++)
+      C.push(t[k])
+   for( k =p-1 ; k>=0 ; k--)
+      C.unshift(t[k])
+   C.push('.')
+   return C
+}

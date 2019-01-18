@@ -1,0 +1,43 @@
+function packetDescrambler(seq, fragmentData, n) {
+            
+    if( ![...new Set(seq)].sort((a,b) => a-b).every( (e,i,a)=> i ?  e - 1 == a[i-1]  : 1 ) )  return "";
+            
+    var data = [];
+        
+    for( let i = 0 ; i<seq.length ; i++ ) data.push( [ seq[i] , fragmentData[i] ] );        
+        
+    data.sort((a,b) => a[0] - b[0] );
+        
+    var hash = {};
+            
+    for(let [a,b] of data) {
+                
+        if( !hash[a]  ) hash[a] = {};
+                                   
+        hash[a][b] = ~~ hash[a][b] + 1;
+         
+    }
+    var res = '';
+
+    for(let e of Object.keys(hash)){
+        
+        let tmp = hash[e];
+        
+        let mark = 1;
+        
+        for( let f of Object.keys(tmp) ) {
+       
+            if( tmp[f]/n > .5 ) {   
+                
+                res += f;
+                
+                mark = 0;
+            }
+        }
+        if(mark) return "";
+                
+    }
+  
+    return res[res.length-1] != '#' || [...res].filter(e=> e == '#').length != 1 ? "" : res; 
+  
+}

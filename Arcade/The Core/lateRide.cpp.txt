@@ -1,0 +1,14 @@
+int lateRide(int n) {
+int sum=0;
+int k=n/60;
+    int k1=n-k*60;
+    while(k!=0){
+        sum+=k%10;
+        k=k/10;
+    }
+    while(k1!=0){
+        sum+=k1%10;
+        k1=k1/10;
+    }
+    return sum;
+}

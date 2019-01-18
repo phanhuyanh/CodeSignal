@@ -1,0 +1,33 @@
+int rectangleRotation(int a, int b) {
+
+	int b1;int b2;int a1;int a2;int sum2;
+	float x1=(float)(a/(2*sqrt(2)));
+	float x2=(float)(b/(2*sqrt(2)));
+	 a1=(int)x1*2+1;
+	 a2=(int)x2*2+1;
+	int sum1=a1*a2;
+	float z1=x1-(int)x1;
+	
+	if(z1>=0.5){
+		
+		b1=a1+1;
+		
+	}
+
+	else{
+	
+		b1=a1-1;
+	}
+
+	float z2=x2-(int)x2;
+		if(z2>=0.5){
+			
+		b2=a2+1;
+	}
+	else{
+		b2=a2-1;
+	}
+
+sum2=b2*b1;
+return sum1+sum2;
+}

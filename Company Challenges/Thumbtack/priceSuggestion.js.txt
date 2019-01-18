@@ -1,0 +1,21 @@
+function priceSuggestion(contractData) {    
+        
+      contractData.sort((a,b)=>a-b);
+        
+      var first_group = contractData.slice(0,contractData.length/2);  
+      
+      var second_group = contractData.slice(contractData.length/2);
+        
+      var median_F = median(first_group);
+      
+      var median_S = median(second_group); 
+        
+      return  contractData.length < 2 ? [] :  [Math.floor(median_F), Math.ceil(median_S)] 
+   
+}
+function median( array , len = array.length) {
+      
+      
+      return len%2 ? array[len/2 | 0] : (array[len/2-1] + array[len/2])/2 ; 
+      
+}

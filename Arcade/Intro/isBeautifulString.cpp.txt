@@ -1,0 +1,16 @@
+bool isBeautifulString(std::string a) {
+int chuaxet[26];
+    for(int i=0; i<26; i++){
+        chuaxet[i]=0;
+    }
+    for(int i=0;i< a.size() ; i++){
+        chuaxet[ (int)a.at(i)-97]++;
+    }
+    for(int i=0; i<25; i++){
+        if(chuaxet[i+1] <= chuaxet[i]){continue;}
+        else{
+            return false;
+        }
+    }
+    return true;
+}

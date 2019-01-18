@@ -1,0 +1,8 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE habitatArea()
+BEGIN
+	
+   set @g := (SELECT CONCAT("LINESTRING(", group_concat(x,' ',y, '') , ")") FROM places);
+
+   SELECT ST_AREA(ST_ConvexHull(ST_GeomFromText(@g))) as area;
+END

@@ -1,0 +1,32 @@
+String longestWord(String text) {
+int n=text.length();
+    String word[]=new String[n/2];
+    for(int i=0 ; i< n/2 ; i++) word[i]="";
+    int dem=0;
+    for(int i=0 ; i<n; i++){
+        if((text.charAt(i)>='a' && text.charAt(i)<='z') || (text.charAt(i)>='A' && text.charAt(i)<='Z')){
+            word[dem]+= text.charAt(i);
+        }
+        else{
+            if(i==n-1) break;
+            if(((text.charAt(i+1)>='a' && text.charAt(i+1)<='z') || (text.charAt(i+1)>='A' && text.charAt(i+1)<='Z'))) 
+                dem++;
+        }
+    }
+    if(dem==0){
+        return word[0];
+    }
+    int max=0;
+    for(int i=0;i <dem; i++){
+        if(word[i].length()>max)
+            max=word[i].length();
+       
+    }
+    String obj="";
+    for(int i=0 ; i<dem ; i++ ){
+        if(word[i].length() == max){
+            obj=word[i];break;
+        }
+    }
+   return obj;
+}

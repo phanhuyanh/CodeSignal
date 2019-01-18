@@ -1,0 +1,17 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE validPhoneNumbers()
+BEGIN
+   select *
+
+   from phone_numbers
+   
+   where phone_number regexp '^[1]-[0-9]{3}-[0-9]{3}-[0-9]{4}$' 
+         
+         or 
+
+         phone_number regexp '^\\([1]\\)[0-9]{3}-[0-9]{3}-[0-9]{4}$' 
+         
+         
+        
+order by surname , name;
+END

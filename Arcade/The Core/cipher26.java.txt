@@ -1,0 +1,24 @@
+String cipher26(String message) {
+String cipher26="";
+    cipher26+=message.charAt(0);
+    for(int i=1 ; i<message.length() ; i++)
+        cipher26+=ma_hoa(cipher26,message.charAt(i));
+    return cipher26;
+}
+char ma_hoa(String s,char x){
+    int j;int sum=0;
+    int m=change_int(x);
+    int n=s.length();
+    for(int i=0 ; i<n ; i++)
+        sum+=change_int(s.charAt(i));
+    for( j=0 ; j<26 ; j++)
+        if((j+sum)%26==m)
+            break;
+    return change_char(j);
+}
+char change_char(int n){
+    return (char)(n+97);
+}
+int change_int(char s){
+    return (int)s-97;
+}

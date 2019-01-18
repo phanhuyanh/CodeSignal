@@ -1,0 +1,30 @@
+efficientRoadNetwork = (n, r)=> {
+    
+    R = []
+    
+    G = []
+    
+    for(i = 0 ; i<n ; i++) G[i] = []
+    
+    r.map(e=> R.push(e) && R.push([e[1],e[0]]) )
+    
+    for(i = 0; i<n ; i++){
+        
+        for(e of R)
+            if(e[0] == i)
+                
+                G[i].push(e[1])
+    }
+    
+    for( i = 0; i<n ; i++){
+        
+        for( j = 0 ; j<n ; j++){
+            
+            if(i == j) continue
+            
+            if(!G[i].some( e=> e == j || G[e].some(f=> f==j) )) return false
+        }
+    }
+    return true
+    
+}

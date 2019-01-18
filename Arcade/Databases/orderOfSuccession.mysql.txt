@@ -1,0 +1,7 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE orderOfSuccession()
+BEGIN
+	select CONCAT( if(gender like 'M' , 'King ','Queen ') , name) as name
+    from Successors
+    order by birthday asc;
+END

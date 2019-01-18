@@ -1,0 +1,61 @@
+function chessNotation(notation) {
+
+    /*
+     * r:xe
+     * n :ngua
+     * b:tinh
+     * p:tot
+     * q:hau
+     * k:vua
+     */
+    
+    var onBoard = Array.from( {length:8} , _ => new Array(8) );
+    
+    notation = notation.split`/`;
+    
+    
+    for( let row in notation ){
+        
+        const pos =  notation[row];
+        
+        let i = 0 , k = 0;
+        
+        while( pos[k] ){
+            
+            if( pos[k] <= 9 && pos[k] > 0 )
+                i += +pos[k++];
+            else
+                onBoard[row][i++] = pos[k++];
+        }
+        
+    }
+
+    var onBoardRotate = [];
+    
+    for( let col = 0 ; col < 8 ; col++ ){
+        
+        onBoardRotate[col] = "";
+        
+        let row = 7 , count = 0;
+        
+        while( row >= 0 ){
+        
+            if( onBoard[row][col] )
+                
+                onBoardRotate[col] += onBoard[row--][col];
+                
+            else{
+
+                for( ; row >= 0 && onBoard[row][col] == null ; row-- ,count++ ){}
+    
+                onBoardRotate[col] += count;
+                
+                count = 0;
+                
+            }
+        }
+        
+    }
+    
+    return onBoardRotate.join`/`
+}

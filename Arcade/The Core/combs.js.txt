@@ -1,0 +1,39 @@
+function combs(comb1, comb2) {
+		var min=100;
+		var xet=true;
+		function add_comb2(s,n){
+			var x="";
+			for(var i=1 ; i<=n ; i++){
+				x+=".";
+			}
+			return x+s;
+		}
+		for(var i=1; i<=comb1.length ; i++){
+			var comb3=add_comb2(comb2,i);
+			console.log(comb1);
+			console.log(comb3);
+			for(var j=0 ; j<comb1.length ; j++){
+				if(comb1[j]=="*" && comb3[j]=="*") { xet=false;break;}
+			}
+			if(xet==true){
+			var max=Math.max(comb1.length,comb3.length);
+			if(max<min) {min=max;}
+		}
+			xet=true;
+		}
+			for(var i=1; i<=comb2.length ; i++){
+			var comb3=add_comb2(comb1,i);
+			console.log(comb2);
+			console.log(comb3);
+			for(var j=0 ; j<comb2.length ; j++){
+				if(comb2[j]=="*" && comb3[j]=="*") { xet=false;break;}
+			}
+			if(xet==true){
+			var max=Math.max(comb2.length,comb3.length);
+			if(max<min) {min=max;}
+		}
+			xet=true;
+		}
+	return min;
+		
+}

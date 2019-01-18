@@ -1,0 +1,19 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+
+f= hasPathWithGivenSum=(t, s)=> {
+    if(t==null)
+        return !s ? true : false;
+    if(t.left && t.right)
+        return f(t.left,s-t.value) || f(t.right,s-t.value);
+    if(t.left==null)
+        return f(t.right,s-t.value);
+    else
+        return f(t.left,s-t.value);
+   
+}

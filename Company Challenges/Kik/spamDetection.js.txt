@@ -1,0 +1,146 @@
+function spamDetection(messages, spamSignals) {
+   
+    var results = []; 
+        
+    results.push( F1(messages) ); 
+    results.push( F2(messages) );
+    results.push( F3(messages) );
+    results.push( F4(messages , spamSignals) );
+        
+    return results;
+         
+     
+    
+    function F4( mess , spam ) {
+        
+        var hash_spam = {};
+        
+        spam = spam.sort((a,b)=> a < b ? -1 : a > b ? 1 : 0 );
+        
+        for( let e of spam ) hash_spam[e.toLowerCase()] = 1;
+        
+        var letter_spam = mess.filter(e => {
+            
+            let word = e[0].match(/[a-z]+/gi).map(f => f.toLowerCase() ).filter(f=> f != ``);
+            
+            if( word.some(f => hash_spam[f] == 1 ) ) return 1
+            
+            return 0
+            
+        } );
+        
+        if( letter_spam.length / mess.length > 0.5 ) {
+            
+            let r = [];
+            
+            for( let e of spam ) {
+                
+                let arr = mess.map(f=> f[0].match(/[a-z]+/gi).map(f=>f.toLowerCase()) ).filter(f=> f!= ``)
+                
+                if( arr.some(f => f.some(g=> g == e ) ) ) r.push(e)
+                
+            }
+            
+            r.sort((a,b)=> a < b ? -1 : a > b ? 1 : 0 )
+            
+            return  "failed: " +  r.join` `
+        }
+        
+        return "passed";
+    }
+    
+    function F3( mess ) {
+        
+        var hash_letter = {};
+        
+        for( let e of mess ) {
+            
+            if( hash_letter[e[0]] ) hash_letter[e[0].match(/[a-z]+/gi).filter(e=>e!=``).join` `]++
+            
+            else hash_letter[e[0].match(/[a-z]+/gi).filter(e=>e!=``).join` `] = 1;
+            
+        }
+        
+
+        
+        var res;
+        
+        for( let e of Object.keys(hash_letter) ){
+            
+            if( hash_letter[e] > 1 && hash_letter[e] / mess.length > 0.5 ){
+                
+                    return "failed: " + e;
+            }
+            
+        }
+        
+        return "passed";
+        
+        
+    }
+    
+    function F2( mess ) {
+        
+        var hash_id = {};
+        
+        for( let e of mess ){
+            if( hash_id[e[1]] )
+                hash_id[e[1]].push(e[0].match(/[a-z]+/gi).filter(e=>e!=``).join` `)
+            
+            else hash_id[e[1]] = [e[0].match(/[a-z]+/gi).filter(e=>e!=``).join` `]
+        }
+        
+        var res = [];
+
+        for( let e of Object.keys(hash_id) ) {
+            
+            let mark = {};
+            
+            let max = 0;
+            
+            for( let f of hash_id[e] ){
+                
+                if( mark[f] ) mark[f]++
+                
+                else mark[f] = 1;
+                
+            }
+            
+            for( let f of Object.keys(mark) )
+                if( mark[f] > 1 && mark[f] / hash_id[e].length > 0.5 )
+                    res.push(e)
+           
+        }
+        
+        return res.length == 0 ? 'passed' : "failed: " +  res.sort((a,b) => +a - +b ).join` `
+    }
+    function F1( mess ) {
+        
+        mess = mess.map(e => e[0].match(/[a-z]+/gi).filter(e => e != `` ) )
+        
+        var letter = mess.filter(e => e.length < 5 );
+        
+        return letter.length / mess.length >= 0.9 ? "failed: " + reduced_fraction( letter.length , mess.length ) : "passed";
+  
+    }
+    
+    function gcd( a , b ) {
+        
+        return b ? gcd(b , a%b) : a;
+        
+    }
+    
+    function reduced_fraction( a , b ) {
+        
+        var UCLN = gcd(a,b);
+        
+        a /= UCLN;
+        
+        b /= UCLN;
+        
+        return a + '/' + b; 
+        
+    }
+  
+    
+}

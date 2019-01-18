@@ -1,0 +1,21 @@
+R = []
+financialCrisis = r => 
+    
+    r.map((_,i) => R.push(r.filter((_,j) => i!=j).map(f=> f.filter((e,m)=> m!=i)))) && R
+    
+
+
+function financialCrisis2(roadRegister) {
+    
+    var Results = [];
+    
+    for(let i = 0 ; i<roadRegister.length ; i++){
+        
+        
+        let road = roadRegister.filter((e,j)=> j!=i).map(f =>f.filter((e,m)=> m!=i));
+        
+        Results.push(road);
+    }
+    return Results;
+    
+}

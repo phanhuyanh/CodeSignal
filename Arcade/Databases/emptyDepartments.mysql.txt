@@ -1,0 +1,9 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE emptyDepartments()
+
+
+select dep_name
+
+from departments d
+
+where not exists (select * from employees e where e.department = d.id)

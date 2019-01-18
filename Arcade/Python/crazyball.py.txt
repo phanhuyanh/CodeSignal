@@ -1,0 +1,4 @@
+from itertools import combinations
+
+def crazyball(players, k):
+    return  sorted(map(lambda x : sorted(x , key = lambda x :x) , list(combinations(players,k) )))

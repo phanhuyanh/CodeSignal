@@ -1,0 +1,13 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE top5AverageGrade()
+
+select round( AVG( grade ) , 2 )  as average_grade
+
+from (
+
+    select grade
+    from students
+    order by grade desc limit 5
+    
+) _ 
+

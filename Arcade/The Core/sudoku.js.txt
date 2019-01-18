@@ -1,0 +1,34 @@
+function sudoku(g) {
+    
+      for(k=0 ; k<=6 ;k=k+3){
+         for( j=0 ; j<=6 ; j=j+3){
+             s2=[]
+         for( i =k ; i<k+3 ; i++){
+                 for( j1= j ; j1<j+3 ; j1++){
+                     s2.push(g[i][j1]);
+                 }
+                
+             }
+             s2=s2.sort((a,b)=>a-b)
+             for(m =0 ; m<8 ; m++)
+                 if(s2[m]==s2[m+1]) return false;
+         }
+     }
+     for(j =0 ; j<9 ; j++){
+        s=[];
+    for(i=0 ; i<9 ; i++){
+        s.push(g[i][0])
+    }
+        s=s.sort();
+        for(i=0 ; i<8 ;i++)
+            if(s[i]==s[i+1]) return false;
+    }
+         for( i=0 ; i<9 ; i++){
+          
+            s1=g[i];
+            s1.sort();
+        for( j=0 ; j<8 ;j++)
+            if(s1[j]==s1[j+1]) return false;
+         }
+   return true;
+}

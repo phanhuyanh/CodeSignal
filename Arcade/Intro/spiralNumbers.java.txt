@@ -1,0 +1,13 @@
+int[][] spiralNumbers(int n) {
+int a[][]=new int[n][n];
+     int i=0 ;int j=0;int d=0;int dem=1;int hang=n-1;int cot=n-1;
+    while(dem<=n*n){
+        for( j=d ;j<=cot ; j++) a[d][j]=dem++;
+        for( i=d+1 ; i<=hang ; i++) a[i][cot]=dem++;
+        for( j=cot-1 ;j>=d ; j--) a[hang][j]=dem++;
+        for ( i=hang-1 ; i>d ;i--) a[i][d]=dem++;
+        hang--;cot--;d++;
+    }
+  
+    return a;
+}

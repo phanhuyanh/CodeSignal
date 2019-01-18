@@ -1,0 +1,25 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+arr_integer alternatingSums(arr_integer a) {
+arr_integer trong_luong=alloc_arr_integer(2);
+    int sum1=0;int sum2=0;
+    for(int i=0;i<a.size;i++){
+        if(i%2==0){
+            sum1+=a.arr[i];
+        }
+        else{sum2+=a.arr[i];}
+    }
+    trong_luong.arr[0]=sum1;
+    trong_luong.arr[1]=sum2;
+    return trong_luong;
+}

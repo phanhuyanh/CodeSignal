@@ -1,0 +1,1 @@
+mirrorBits =  a => '0b' +[...a.toString(2)].reverse().join`` - 0

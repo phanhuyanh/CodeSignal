@@ -1,0 +1,42 @@
+function namingRoads(roads) {
+    
+    roads.sort((a,b)=>a[2]-b[2])
+    
+    var last = roads[0];
+    
+    for(let i = 1 ; i<roads.length ; i++){
+        if(roads[i][0] == last[0] || roads[i][0] == last[1] || roads[i][1] == last[0] || roads[i][1] == last[1]) return false;
+        
+        last = roads[i];
+    }
+    return true;
+    
+}
+
+
+function namingRoads2(roads) {
+    
+    var O = {};
+    
+    for(let e of roads){
+        
+        if(O[e[0]]) O[e[0]].push(e[2])
+        else O[e[0]] = [e[2]]
+        
+        if(O[e[1]]) O[e[1]].push(e[2])
+        else O[e[1]] = [e[2]]
+        
+    }
+    
+    for(e of Object.keys(O)){
+        
+        let a = O[e].sort((a,b)=>a-b)
+        
+        for(let i = 0 ; i<a.length-1 ; i++)
+            if(a[i] + 1 == a[i+1]) return false;
+        
+    }
+    
+    return true;
+    
+}

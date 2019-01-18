@@ -1,0 +1,6 @@
+bool areEquallyStrong(int yourLeft, int yourRight, int friendsLeft, int friendsRight) {
+if(yourLeft+yourRight==friendsLeft+friendsRight){
+    if(yourLeft==friendsLeft || yourLeft==friendsRight){return true;}
+}
+    else{return false;}
+}

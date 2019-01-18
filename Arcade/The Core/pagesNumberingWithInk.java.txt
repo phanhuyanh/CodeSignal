@@ -1,0 +1,17 @@
+int pagesNumberingWithInk(int current, int n) {
+int sum=sum_digits(current);int dem=current;
+    while(sum<=n){
+        dem++;
+        sum+=sum_digits(dem);
+        
+    }
+    return dem-1;
+}
+int sum_digits(int n){
+    int sum=0;
+    while(n!=0){
+        sum++;
+        n=n/10;
+    }
+    return sum;
+}

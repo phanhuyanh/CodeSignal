@@ -1,0 +1,36 @@
+function serverFarm(jobs, servers) {
+        
+        var time_server = Array.from( Array(servers) , ((_,i)=> [0,i] ) ) ;
+        
+        jobs = jobs.map((e,i) => [e , i] ).sort((a,b)=> b[0] - a[0] || a[1] - b[1] )
+        
+        var res = [];
+        
+        for( let i = 0 ; i < servers ; i++ ) res[i] = [];
+        
+        var i = 0;
+        
+        while( i < jobs.length ) {
+            
+            let time = jobs.slice(i , i + servers);
+
+            let mark = new Array(servers).fill(1);
+            
+            for( let j = 0 ; j < time.length ; j++ ) {
+                    
+                 let g = time_server.filter((e,i) => mark[i] ).sort((a,b)=> a[0] - b[0] || a[1]-b[1] )[0];
+                    
+                 res[g[1]].push(time[j][1]);
+                    
+                 time_server[g[1]][0] += time[j][0];
+                    
+                 mark[g[1]] = 0;
+  
+            }
+            
+            i += servers;
+            
+            
+        }    
+        return res
+}

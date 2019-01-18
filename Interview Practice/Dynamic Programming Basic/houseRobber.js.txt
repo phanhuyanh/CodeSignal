@@ -1,0 +1,35 @@
+find_max=(r,n)=>{
+    var  m = r[0]
+    
+    for(let i=0 ; i<=n ; i++)
+        m = m > r[i] ? m : r[i]
+    return m
+}
+houseRobber=s=> {
+    var n = s.length
+    
+    var a = new Array(n).fill(0) 
+    
+    var MAX = s[0] ? s[0] : 0 
+    
+    
+    
+    a[0] = s[0] 
+    
+    a[1] = s[1] 
+    
+    if(n>1)
+        MAX = a[0] > a[1] ? a[0] : a[1]
+    
+    for(let i=2 ; i<n ; i++){
+        
+        let max = find_max(a,i-2);
+        
+        a[i] = max>0  ? max+s[i] : s[i] 
+        
+        MAX = MAX>a[i] ? MAX : a[i] 
+    }
+    return MAX
+}
+
+

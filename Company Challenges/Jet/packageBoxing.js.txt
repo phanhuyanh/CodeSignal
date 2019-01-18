@@ -1,0 +1,27 @@
+function packageBoxing(pkg, boxes) {
+    
+    var MinPosition = -1
+    
+    var MinArea = 1e10
+    
+    var box = boxes.map(e=>e)
+    
+    pkg = pkg.sort((a,b)=)
+    
+    box = box.map(e=> e.sort())
+    
+    for(i = 0 ; i<box.length ; i++){
+        if( pkg[0] <=box[i][0] && pkg[1] <=box[i][1] && pkg[2] <=box[i][2] ){
+            
+            if( ( m = box[i][0] * box[i][1] * box[i][2]) < MinArea ){
+                
+                MinArea = m
+                
+                MinPosition = i
+            }
+        }
+    }
+    
+    return MinPosition
+    
+}

@@ -1,0 +1,11 @@
+boolean isSmooth(int[] a) {
+int n=a.length;
+    if(a[0]!=a[n-1]){return false;}
+    if(n%2==0){
+        if(a[0]==a[n/2]+a[n/2-1]){return true;}
+    }
+    else{
+        if(a[0]==a[n/2]){return true;}
+    }
+    return false;
+}

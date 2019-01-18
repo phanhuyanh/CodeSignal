@@ -1,0 +1,10 @@
+sortByHeight = a => {
+    
+    
+    
+    Sort_Height = a.filter(e=>e!=-1).sort((a,b)=>a-b)
+    
+    i = 0
+    
+    return a.map(e=> e!=-1 ? Sort_Height[i++] : -1)
+}

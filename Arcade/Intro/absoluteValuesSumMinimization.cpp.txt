@@ -1,0 +1,20 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+int absoluteValuesSumMinimization(arr_integer a) {
+if(a.size%2==0){
+    return a.arr[a.size/2-1];
+}
+    else{
+        return a.arr[a.size/2];
+    }
+}

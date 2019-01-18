@@ -1,0 +1,33 @@
+int electionsWinners(int[] votes, int k) {
+int max=0;
+    int n=votes.length;
+    for(int i=0; i<n; i++){
+        if(votes[i]>max){
+            max=votes[i];
+        }
+    }
+    int dem=0;
+    if(k==0){
+        for(int i=0 ; i<n; i++){
+            if(votes[i]== max){
+                dem++;
+            }
+        }
+        if(dem==1){
+            return dem;
+        }
+        else{
+            return 0;
+        }
+    }
+    else{
+    int a[]=new int[n];
+        for(int i=0 ; i<n; i++){
+        a[i]=votes[i]+k;
+            if(a[i] >max){
+                dem++;
+            }
+    }
+    }
+   return dem;
+}

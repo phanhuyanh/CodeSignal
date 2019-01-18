@@ -1,0 +1,22 @@
+
+String findEmailDomain(String ad) {
+    String obj="";
+for(int i=ad.length()-1; i>=0; i--){
+    if(ad.charAt(i) == '@'){
+        break;
+    }
+    else{
+        obj+=ad.charAt(i);
+    }
+}
+ String ojb=dao_nguoc(obj);
+    return ojb;
+}
+String dao_nguoc(String s1){
+    String s="";
+  for(int i=s1.length()-1 ; i>=0; i--){
+      s+= s1.charAt(i);
+  }
+    return s;
+}
+

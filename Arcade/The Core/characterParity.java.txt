@@ -1,0 +1,8 @@
+String characterParity(char symbol) {
+if(symbol<'0' || symbol>'9') return "not a digit";
+    String obj="";
+    obj+=symbol;
+    int x=obj.chars().sum();
+    if(x%2==0) return "even";
+    return "odd";
+}

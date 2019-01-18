@@ -1,0 +1,15 @@
+function arrayConversion(a) {
+    var dem=1;
+    while(a.length!=1){
+        var y=[];
+        for(var i= 0 ;i<=a.length-2 ; i=i+2){
+            if(dem%2!=0){
+                y.push(a[i]+a[i+1]);
+            }
+            else y.push(a[i]*a[i+1]);
+        }
+        a=y;
+        dem++;
+    }
+    return a[0];
+}

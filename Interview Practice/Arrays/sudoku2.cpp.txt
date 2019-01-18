@@ -1,0 +1,60 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+bool sudoku2(arr_arr_char grid) {
+    int chuaxet[9];
+    for(int i=0;i<grid.size;i++){
+        for(int k=0;k<9;k++){
+            chuaxet[k]=0;
+        }
+        for(int j=0;j<grid.size;j++){
+            if(grid.arr[i].arr[j]=='.'){continue;}
+            else{
+                if(chuaxet[(int)grid.arr[i].arr[j]-49]==1){return false;break;}
+                else{
+                    chuaxet[(int)grid.arr[i].arr[j]-49]=1;
+                }
+            }
+        }
+    }
+   for(int j=0;j<grid.size;j++){
+        for(int k=0;k<9;k++){
+            chuaxet[k]=0;
+        }
+        for(int i=0;i<grid.size;i++){
+            if(grid.arr[i].arr[j]=='.'){continue;}
+            else{
+                if(chuaxet[(int)grid.arr[i].arr[j]-49]==1){return false;break;}
+                else{
+                    chuaxet[(int)grid.arr[i].arr[j]-49]=1;
+                }
+            }
+        }
+    }
+    for(int j=3;j<=9;j=j+3){
+        for(int i=3;i<=9;i=i+3){
+            for(int k=0;k<9;k++){chuaxet[k]=0;}
+            for(int q=i-3;q<i;q++){
+                for(int p=j-3;p<j;p++){
+                    if(grid.arr[q].arr[p]=='.'){continue;}
+                    else{
+                        if(chuaxet[(int)grid.arr[q].arr[p]-49]==1){return false;}
+                        else{
+                            chuaxet[(int)grid.arr[q].arr[p]-49]=1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}

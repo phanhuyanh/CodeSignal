@@ -1,0 +1,17 @@
+climbingStaircase = (n, k) => {
+    r=[]
+    b=( t, m , c ) =>{
+        if(!t){
+            return r.push(c);
+        }
+        for(var i=1 ; i<=m ; i++ ){
+            if(t>=i){
+                
+                b(t-i,m,[...c,i]);
+                
+            }
+        }
+    }
+    b(n , k, [])
+    return r
+}

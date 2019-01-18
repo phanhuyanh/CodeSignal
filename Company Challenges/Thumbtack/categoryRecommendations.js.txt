@@ -1,0 +1,37 @@
+function categoryRecommendations(requestData, proSelections) {
+ 
+        function jaccard( a , b  ) {
+            
+            return [...new Set(a)].filter(x=> new Set(b).has(x) ).length/ [...new Set(a.concat(b))].length ;
+                
+        }
+        var count_pro = {};
+            
+        var sum_pro = {};
+            
+            for( let i = 0 ; i<requestData.length ; i++ ) {
+                    
+                let jac = jaccard( requestData[i] , proSelections );
+                    
+                let tmp = [...new Set(requestData[i])].filter(x=> !(new Set(proSelections).has(x)) )
+                
+                for(let e of tmp) {
+                                
+                        count_pro[e] = ~~count_pro[e]+1;
+
+                        sum_pro[e]  ? sum_pro[e] += jac : sum_pro[e] = jac;
+                                
+                }
+            }
+        var results = [];
+            
+            for(let e of Object.keys(sum_pro)) 
+                    
+                    results.push([e,sum_pro[e]/count_pro[e]]);
+                    
+            
+        results.sort((a,b)=> b[1]-a[1] || ( a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 ) )
+            
+        return !results.length ? "" : results[0][1] ? results[0][0]   : ""
+        
+}

@@ -1,0 +1,85 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+function largestValuesInTreeRows(t) {
+   
+   if(t == null) return [];
+   
+   var a = [];
+   
+   var results = [t.value];
+   
+   if(t.left != null) a.push(t.left);
+   
+   if(t.right != null) a.push(t.right);
+   
+   while( a.length !=0){
+      
+      let arr_value = a.map(e=> e.value).sort((a,b)=> b-a);
+      
+      results.push(arr_value[0]);
+      
+      let tmp = [];
+      
+      for(let i = 0 ; i<a.length ; i++){
+         
+         let v = a[i];
+         
+         if(v.left != null) tmp.push(v.left);
+         if(v.right != null) tmp.push(v.right);
+         
+      }
+      
+      a = tmp;
+      
+   }
+   return results;
+}
+
+
+
+
+function largestValuesInTreeRows2(t) {
+   if(t == null) return []
+   
+   var  A = []
+   
+   var a = []
+    
+   a.push(t)
+    
+   while(a.length!=0){
+      let v = a.shift();
+      
+      A.push(v.value);
+      
+      if(v.left != null && v.right!=null){
+         if(v.left.value > v.right.value){
+            
+            a.push(v.left);
+         }
+         else a.push(v.right);
+      }
+      else{
+         
+         if(v.left ==null){
+            
+            if(v.right !=null) a.push(v.right);
+            
+            else break;
+         }
+         else{
+            if(v.right ==null){
+               a.push(v.left);
+            }
+            
+         }
+      }
+   }
+   
+   return A
+}

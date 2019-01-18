@@ -1,0 +1,25 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+function kthSmallestInBST(t, k) {
+    
+    var value;
+    
+    function Visited(t) {
+        
+        if( t.left ) Visited(t.left);
+        
+        if( --k == 0 ) value = t.value;
+        
+        if( t.right ) Visited(t.right);
+        
+    }
+    
+    Visited(t);
+    
+    return value;
+}

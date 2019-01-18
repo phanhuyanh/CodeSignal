@@ -1,0 +1,33 @@
+String integerToStringOfFixedWidth(int number, int width) {
+    String s=change_String(number);
+    int n=s.length();
+    String obj="";
+    if(n>=width){
+        obj=s.substring(n-width,n);
+    }
+    else{
+        for(int i=0; i<width-n ;i++)
+            obj+="0";
+        obj+=s;
+    }
+    return obj;
+}
+String change_String(int n){
+    String obj="";
+    while(n!=0){
+        obj+=change_char(n%10);
+        n=n/10;
+    }
+    obj=reverse(obj);
+    return obj;
+}
+char change_char(int n){
+    char x=(char)(n+48);
+    return x;
+}
+String reverse(String s){
+    String obj="";
+    for(int i=s.length()-1 ; i>=0 ; i--)
+        obj+=s.charAt(i);
+    return obj;
+}

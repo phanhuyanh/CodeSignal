@@ -1,0 +1,12 @@
+int[] removeArrayPart(int[] a, int l, int r) {int dem=0;
+int b[]=new int [a.length];
+    for(int i=0  ; i<a.length ; i++){
+        if( i >=l && i<=r){continue;}
+        else{
+            b[dem++]=a[i];
+        }
+    }
+                                              int c[]=new int[dem];
+                                              for(int i =0 ; i<dem ; i++) c[i]=b[i];
+return c;
+}

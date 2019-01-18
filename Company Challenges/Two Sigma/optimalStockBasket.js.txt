@@ -1,0 +1,26 @@
+function optimalStockBasket(stocks, riskBudget) {
+
+        var a = [];
+        
+        for( let i = 0 ; i< stocks.length+1 ; i++ )
+            a[i] = new Array( riskBudget+1 ).fill(0);
+        
+        for( let i = 1 ; i <= stocks.length ; i++ ) {
+            
+            let tmp = stocks[i-1];
+            
+            for( let j = 0 ; j<= riskBudget ; j++ ) {
+                
+                if( j < tmp[1] )
+                    
+                    a[i][j] = a[i-1][j];
+
+                else
+                    a[i][j] = Math.max( a[i-1][j-tmp[1]] + tmp[0] , a[i-1][j] );
+
+            }
+            
+        }
+        
+        return a[a.length-1].pop()
+}

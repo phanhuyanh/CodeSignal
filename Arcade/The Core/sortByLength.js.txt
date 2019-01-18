@@ -1,0 +1,11 @@
+sortByLength = a => 
+    
+    
+    index = a.map((_,i)=>i).sort((e,f)=> a[e].length - a[f].length || e -f ).map( _ => a[_] )
+    
+
+    
+  
+    
+     
+

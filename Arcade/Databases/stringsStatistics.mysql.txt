@@ -1,0 +1,96 @@
+/*Please add ; after each select statement*/
+
+
+CREATE FUNCTION get_total( chara varchar(200)) RETURNS INT DETERMINISTIC
+BEGIN
+
+set @t = (
+
+    select sum(l)
+    from(
+    
+        select LENGTH(str) - LENGTH(REPLACE(str,chara,"")) as l
+        from strs
+    ) _
+    
+);
+return @t;
+
+END;
+
+
+CREATE FUNCTION get_occurrence ( chara varchar(200)) returns int DETERMINISTIC
+
+BEGIN
+
+set @d = ( select count(*) from strs where position(chara in str) > 0 );
+
+return @d;
+
+END;
+
+CREATE FUNCTION get_max_occurrence ( chara varchar(200)) returns int DETERMINISTIC
+
+BEGIN
+
+set @t = (
+
+    select len
+    from(
+    
+        select LENGTH(str) - LENGTH(REPLACE(str,chara,"")) as len
+        from strs
+        
+    ) _
+    order by len desc limit 1
+    
+    
+);
+return @t;
+
+END;
+
+CREATE FUNCTION get_max_occurrence_reached( chara varchar(200) ) returns int DETERMINISTIC
+
+BEGIN
+
+set @len = get_max_occurrence( chara);
+
+set @r = ( select count(*) from strs where LENGTH(str) - LENGTH(REPLACE(str,chara,"")) = @len );
+
+return @r;
+END;
+
+CREATE PROCEDURE stringsStatistics()
+BEGIN
+
+drop table if exists tmp;
+
+CREATE table tmp(
+    id int primary key auto_increment,
+    letter varchar(200),
+    total int ,
+    occurrence int,
+    max_occurrence int,
+    max_occurrence_reached int
+
+);
+
+set @i = 97;
+
+while( @i <= 122 ) do
+
+set @k = char(@i);
+
+insert into tmp(letter,total,occurrence,max_occurrence,max_occurrence_reached) values( @k , get_total(  @k ) , get_occurrence(@k) , get_max_occurrence(@k), get_max_occurrence_reached(@k)  );
+
+set @i:= @i+1;
+
+end while;
+
+
+select letter , total , occurrence , max_occurrence , max_occurrence_reached
+from tmp
+where total > 0;
+END
+

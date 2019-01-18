@@ -1,0 +1,29 @@
+nQueens=n=>{
+    var hang = new Array(n).fill(true);
+    var cot =new Array(n).fill(true);
+    var cheo_huyen = new Array(2*n-1).fill(true);
+    var cheo_sac = new Array(2*n-1).fill(true);
+    if(n==1) return [[1]];
+    Q=[]
+    thu = ( h, c, c_h , c_s ,n, r, j)=>{
+       if(j==n)
+           Q.push(r)
+       
+        else
+            for(var i=0 ; i<n ; i++){
+                if(h[i] && c[j] && c_h[i-j+n-1] && c_s[i+j]){
+                    h[i]=false;
+                    c[j]=false;
+                    c_h[i-j+n-1]=false;
+                    c_s[i+j]=false;
+                    thu(h, c, c_h, c_s, n, [...r,i+1], j+1)
+                    h[i]=true;
+                    c[j]=true;
+                    c_h[i-j+n-1]=true;
+                    c_s[i+j]=true;
+                }
+            }
+    }
+    thu(hang,cot, cheo_huyen, cheo_sac, n, [], 0)
+    return Q
+} 

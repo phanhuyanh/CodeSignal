@@ -1,0 +1,4 @@
+from itertools import zip_longest
+
+def rockPaperScissors(players):
+    return sorted( [[x,y] for x in players for y in players if x!=y] , key = lambda x : (x[0],x[1]) )

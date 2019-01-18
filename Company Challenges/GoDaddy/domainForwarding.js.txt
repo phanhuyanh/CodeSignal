@@ -1,0 +1,36 @@
+function domainForwarding(redirects) {
+            
+      var hash = {} ,
+          res = [],
+          mark = redirects.map(e => 1);
+            
+      for( let [a,b] of redirects ) hash[a] = b;
+            
+      while( mark.some(e => e) ) {
+                  
+          let set = new Set();       
+                  
+          for( let i = 0 ; i < redirects.length ; i++ ) {
+                
+               const [a,b] = redirects[i];
+                        
+               if(mark[i] === false) continue;
+                        
+               if( !set.size || set.has(a) || set.has(b) ) {
+                              
+                    set.add(a);
+                    set.add(b);
+                    mark[i] = false;
+                              
+               }
+          }
+          let domain = [...set][0];
+                  
+          while( hash[domain] ) domain = hash[domain];
+                  
+          res.push([[...set].sort() , domain]);
+                  
+                  
+      }
+      return res.sort((a,b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0 ).map(e=>e[0]);   
+}

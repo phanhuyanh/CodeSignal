@@ -1,0 +1,26 @@
+greatRenaming = r =>  
+    
+    (r.unshift(r.pop()) ,r.map(e=> e.unshift(e.pop()) && e ))
+    
+
+
+
+function greatRenaming2(roadRegister) {
+    
+    roadRegister.unshift(roadRegister.pop());
+    
+    return roadRegister.map(e => {
+        
+        let l  = e.length
+        
+        a = new Array(l)
+        
+        for(let i = 1 ; i<e.length ; i++)
+            a[i] = e[i-1]
+        a[0] = e[l-1]
+        
+        return a
+        
+    })
+    
+}

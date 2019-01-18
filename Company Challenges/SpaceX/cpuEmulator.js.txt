@@ -1,0 +1,89 @@
+function cpuEmulator(subroutine) {
+    
+        var CPU = "R00 R01 R02 R03 R04 R05 R06 R07 R08 R09 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20 R21 R22 R23 R24 R25 R26 R27 R28 R29 R30 R31 R32 R33 R34 R35 R36 R37 R38 R39 R40 R41 R42".split` `;
+        
+        var hashTable = {};
+        
+        CPU.map(e=> hashTable[e] = 0 );
+        
+        var index = 0;
+            
+        while( index < subroutine.length ) {
+                
+                let tmp = subroutine[index];
+            
+                let [a,b] = tmp.split` `;
+                
+                  if( a == "NOP" ){
+                        
+                    index++;
+                    continue;
+                }
+                
+                
+                let x = b.split`,`;
+
+                if( a == "MOV" ) {
+                        
+                        hashTable[x[1]] = hashTable[x[0]] != null ? hashTable[x[0]] : +x[0];
+
+                }
+                
+                if( a == "ADD" ) {
+                        
+                        hashTable[x[0]] = ( hashTable[x[0]] + hashTable[x[1]] )%2**32;
+        
+                }
+            
+                if( a == "DEC" ) {
+                        
+                        hashTable[x[0]] = hashTable[x[0]] ? hashTable[x[0]] - 1 : 2**32-1;
+      
+                }
+                
+                
+                if( a == "INC" ) {
+                        
+                        hashTable[x[0]] = hashTable[x[0]] == 2**32-1 ? 0 : hashTable[x[0]] +1 ;
+        
+                }
+                
+            
+                if( a == "INV" ) {
+                        
+                        let temp =  hashTable[x[0]].toString(2).padStart(32,'0');
+                        
+                        
+                        temp = [...temp].map(e=> Math.abs(1- +e) ).join``
+                        
+                        
+                        hashTable[x[0]] = '0b' + temp - 0;
+          
+                }
+                     
+                if(a == "JMP" ) {
+                        
+                        index = +x[0]-1;
+                        
+                        continue
+                        
+                }
+            
+                if(a == "JZ" && !hashTable["R00"]) {
+                        
+                        index = +x[0]-1;
+                                
+                        continue
+         
+                }
+                index++
+        }
+        
+        return  "" + hashTable["R42"]
+        
+        
+        
+   
+        
+    
+}

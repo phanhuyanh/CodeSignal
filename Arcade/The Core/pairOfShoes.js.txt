@@ -1,0 +1,16 @@
+function pairOfShoes(shoes) {
+    var chuaxet=[];
+    for(var i=0 ; i<shoes.length ; i++)
+        chuaxet[i]=1;
+    for(var i=0 ; i<shoes.length-1 ; i++){
+        for(var j=i+1 ; j<shoes.length ; j++){
+            if(chuaxet[i]==1 && chuaxet[j]==1 && shoes[i][0]+shoes[j][0]==1 && shoes[i][1]==shoes[j][1]){
+                chuaxet[i]=0;
+                chuaxet[j]=0;
+            }
+        }
+    }
+    for(var i=0 ; i<shoes.length ; i++)
+        if(chuaxet[i]==1) return false;
+    return true;
+}

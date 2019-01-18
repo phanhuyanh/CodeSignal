@@ -1,0 +1,52 @@
+function singlePointOfFailure(connections) {
+    
+    var mark = connections.map(e => e.map(f => true ) ) , res = 0;
+
+    for( let edge = 0 ; edge < connections.length ; edge++ ) {
+        
+        for( let i = 0 ; i < connections[edge].length ; i++ ) {
+            
+            if( connections[edge][i] === 0 || mark[edge][i] === false ) continue;
+            
+            connections[edge][i] = 0;
+            
+            let disconnect = true;
+            
+            function DFS( k , visited) {
+                
+                if( k === i ) disconnect = false;
+                
+                else{
+                    
+                    for( var j = 0 ; j < connections[k].length ; j++ ) {
+                        
+                        if( !visited[j] && connections[k][j] ) {
+                            
+                            visited[j] = true;
+                            
+                            DFS( j , visited);
+                            
+                            //visited[j] = false;
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+            let visited = new Array(connections.length).fill(false);
+            
+            DFS(edge , visited);
+
+            connections[edge][i] = 1;
+            
+            mark[edge][i] = mark[i][edge] = false;
+            
+            if(disconnect) res++;
+            
+        }
+        
+    }
+    return res;
+}

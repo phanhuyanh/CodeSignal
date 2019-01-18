@@ -1,0 +1,16 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE freeSeats()
+BEGIN 
+select _.flight_id ,  _.number_of_seats - if( s.seat_no is null , 0 , count(*)) as free_seats
+from (select f.flight_id , f.plane_id , p.number_of_seats
+from flights f , planes p    
+where f.plane_id = p.plane_id 
+
+) _
+left join purchases s
+on s.flight_id = _.flight_id
+
+group by _.flight_id
+order by 1
+;
+END

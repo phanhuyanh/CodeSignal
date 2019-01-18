@@ -1,0 +1,10 @@
+sum = 0
+
+shuffledArray = s =>{
+        
+        s.map(e=> sum+=e)
+        
+        for(i in s)
+                if(s[i] == Math.floor(sum/2))
+                        return s.filter((a,b)=>b!=i).sort((x,y)=>x-y)
+}

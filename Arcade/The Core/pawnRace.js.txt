@@ -1,0 +1,84 @@
+function pawnRace(white, black, toMove) {
+    
+    const hash = { a : 0 , b : 1 , c : 2 , d: 3 , e : 4 , f : 5 , g: 6 , h: 7 };
+    
+    let [dxW , dyW] = [ 8 - +white[1] , hash[white[0]] ];
+    
+    let [dxB , dyB] = [ 8 - +black[1] , hash[black[0]]];
+    
+    if( Math.abs(dyW - dyB) > 1 ){
+        
+        let xW = dxW == 6 ? 5 : dxW;
+        
+        let xB = dxB == 1 ? 5 : 7 - dxB;
+        
+        toMove == "w" ? xW-- : xB--;
+        
+        return xB == xW ? toMove == "w" ? 'black' : 'white' : xB < xW ? 'black' : 'white';
+        
+    }
+    
+    if( dyB === dyW ){
+        
+        if( dxB < dxW ) return "draw";
+        
+        let xW = dxW == 6 ? 5 : dxW;
+        
+        let xB = dxB == 1 ? 5 : 7 - dxB;
+        
+        toMove == "w" ? xW-- : xB--;
+        
+        return xB == xW ? toMove == "w" ? 'black' : 'white' : xB < xW ? 'black' : 'white';
+        
+    }
+        
+    if( dxB == 1 && dxW == 6 ) return toMove == "w" ? 'black' : 'white';
+        
+    if( dxB == 1 ){
+        
+        let xW = dxW == 6 ? 5 : dxW;
+        
+        toMove == "w" ? xW-- : 0;
+            
+        if(xW != 2 && xW <=3  ) return 'white';
+            
+        return 'black';    
+    }
+    
+    if( dxW == 6 ){
+            
+         let xB = +black[1];
+            
+         toMove == "b" ? xB-- : 0;
+            
+         if( xB != 2 && xB <= 4  ) return 'black';
+            
+         return 'white';
+            
+    }
+        
+    var turn = toMove == "w" ? 0 : 1;
+    
+    while( 1 ){
+        
+        if( dxW - dxB == 1 ) return turn % 2 ? "black" : 'white';    
+            
+        if( turn % 2 ) {
+            
+              dxB++  
+                
+              if(dxB >= 7) return'black';
+        
+        }
+        else{
+            
+             dxW--   
+                
+             if(dxW <= 0) return 'white';   
+        }
+        turn++
+            
+    }
+    
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

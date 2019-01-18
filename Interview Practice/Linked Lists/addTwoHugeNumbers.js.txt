@@ -1,0 +1,33 @@
+// Definition for singly-linked list:
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+//
+function addTwoHugeNumbers(a, b) {
+     r = []
+     e = []
+     
+     while(a!=null){
+          r.push(a.value);
+          a=a.next;
+     }
+     while(b!=null){
+          e.push(b.value);
+          b=b.next;
+     }
+     r.reverse()
+     e.reverse()
+     i = 0
+     H = []
+     while(r[i]!=null || e[i]!=null){
+          e[i] ==null ? t=r[i] : r[i]==null ? t= e[i] : t=r[i]+e[i]
+          if( t >9999){
+               H.push(t%10000);
+               r[i+1] == null ? e[i+1]==null ? H.push(1) :e[i+1]++ : r[i+1]++;
+          }
+          else H.push(t)
+          i++
+     }
+     return H.reverse()
+}

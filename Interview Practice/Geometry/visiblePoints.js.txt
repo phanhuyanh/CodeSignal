@@ -1,0 +1,49 @@
+function visiblePoints(points) {
+    
+    var degrees = [] , max = -1e9;
+        
+    for( const [x,y] of points ){
+       
+       let a , angle;     
+            
+       if(x >= 0) a = [0,1] , angle = 0;
+            
+       else a = [0,-1] , angle = 180;
+            
+       const A = x*a[0] + y*a[1];         // vecto a * vecto b
+                
+       const lengthVecto = Math.sqrt(x**2 + y**2);
+                
+       const cosinAa = Math.acos(A / lengthVecto)*180/Math.PI;
+                
+       degrees.push(angle + cosinAa);     
+    }   
+    
+    degrees= degrees.map(e=> +e.toFixed(11)).sort((a,b) => a - b);
+    
+    for(let i = 0 ; i < degrees.length ; i++) {
+        const degree = degrees[i];
+        
+        let index = BinarySearch(degrees , degree + 45 , 0 , degrees.length);
+
+        if(index == degrees.length) max = Math.max(max , index - i);
+        
+        else max = Math.max(max,index - i + 1);
+           
+    }     
+    return max
+   
+}
+function BinarySearch(a , x , l , r) {
+    
+    const middle = (l + r) >> 1;
+    
+    if(middle === l ) return middle;
+    
+    if(x === a[middle]) return middle;
+    
+    if(x > a[middle]) return BinarySearch(a, x , middle  , r);
+    
+    else return BinarySearch(a, x , l , middle );
+    
+}

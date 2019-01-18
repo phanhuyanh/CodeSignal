@@ -1,0 +1,29 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE dancingCompetition()
+
+BEGIN
+
+set @min_f = (select min(first_criterion) from scores);
+set @max_f = (select max(first_criterion) from scores); 
+set @min_s = (select min(second_criterion) from scores); 
+set @max_s = (select max(second_criterion) from scores); 
+set @min_t = (select min(third_criterion) from scores); 
+set @max_t = (select max(third_criterion) from scores); 
+
+select arbiter_id , first_criterion , second_criterion , third_criterion
+from (
+select * , 
+  if( first_criterion <= @min_f or first_criterion >= @max_f , 1 , 0) +
+
+  if( second_criterion <= @min_s or second_criterion >= @max_s , 1 , 0) +
+
+  if( third_criterion <= @min_t or third_criterion >= @max_t , 1 , 0) as m
+  
+
+from scores
+) _
+where m < 2
+;
+
+
+END

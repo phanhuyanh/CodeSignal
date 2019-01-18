@@ -1,0 +1,22 @@
+int min;
+boolean higherVersion(String v1, String v2) {
+    v1=v1.replace("."," ");
+    v2=v2.replace("."," ");
+    String a[]=v1.split(" ");
+     String b[]=v2.split(" ");
+    if(a.length>b.length) min=b.length;
+    else min=a.length;
+    for(int i=0 ; i<min ; i++){
+        if(Integer.parseInt(a[i])>Integer.parseInt(b[i])){
+            return true;
+        }
+        else{
+             if(Integer.parseInt(a[i])<Integer.parseInt(b[i])){
+                 return false;
+             }
+            else continue;
+        }
+    }
+    if(a.length>min) return true;
+    return false;
+}

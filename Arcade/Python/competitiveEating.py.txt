@@ -1,0 +1,2 @@
+def competitiveEating(t, width, precision):
+    return ("{number:.{precision}f}".format(number = t,precision = precision)).center(width)

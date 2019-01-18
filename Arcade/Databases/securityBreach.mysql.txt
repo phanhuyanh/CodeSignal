@@ -1,0 +1,7 @@
+CREATE PROCEDURE securityBreach()
+BEGIN
+select first_name, second_name, attribute
+from users
+where attribute
+like concat('%_\%',first_name,'\_',second_name,'%%') COLLATE utf8_bin;
+END

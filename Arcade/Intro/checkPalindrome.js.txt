@@ -1,0 +1,1 @@
+checkPalindrome = s => s == [...s].reverse().join``

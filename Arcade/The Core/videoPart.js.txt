@@ -1,0 +1,20 @@
+function videoPart(part, total) {
+    
+    const part_time = part.split`:`.map(e => +e) ;
+    
+    const time = total.split`:`.map(e=>+e);
+    
+    const total_part_time = part_time[0]*3600 + part_time[1]*60 + part_time[2];
+
+    const total_time = time[0]*3600 + time[1]*60 + time[2];
+    
+    const UCLN = gcd(total_part_time,total_time);
+
+    return [ total_part_time/UCLN ,total_time/UCLN];
+    
+}
+function gcd(a,b){ 
+    
+    return b ? gcd(b,a%b) : a;
+    
+}

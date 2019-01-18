@@ -1,0 +1,25 @@
+function beautifulText(s, l, r) {
+    for( i =l ; i<=r ; i++){
+        var xet=true;
+        var a=[];
+        var pivot=0;
+        while(pivot<=s.length){
+            a.push(s.slice(pivot,pivot+i));
+            pivot+=i+1;
+        }
+        if(!check(a,s)) continue;
+        for( j = 0; j<a.length-1 ; j++){
+            if(a[j].length != a[j+1].length){ xet=false;break;}
+        }
+        if(xet) return true;
+    }
+    return false;
+}
+function check(a,s){
+    	var s1="";
+			for(var i=0 ; i<a.length-1 ; i++){
+				s1+=a[i]+" ";
+			}
+			s1+=a[a.length-1];
+    return s1==s;
+}

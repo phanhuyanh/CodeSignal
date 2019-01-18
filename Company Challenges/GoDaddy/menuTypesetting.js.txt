@@ -1,0 +1,42 @@
+function menuTypesetting(menu, numberOfItems) {
+    
+    var res = [] ,
+        temp = [];
+    
+    menu.map((e,i) => {
+        
+        const [directive , type] = e;
+       
+        if( temp.length === numberOfItems ){
+            
+            if( type === "Menu Item" && !menu[i+1] || menu[i+1][1] == "Section Header" ){
+                    
+                const dir = temp.pop();
+                    
+                res.push(temp);
+                    
+                temp = [dir, directive];    
+                    
+            }    
+            else{
+                
+                res.push(temp);
+                
+                temp = [directive];
+                
+            }    
+        }
+        else if( temp.length === numberOfItems-1 && type == "Section Header"){
+            
+            res.push(temp);
+            
+            temp = [directive];
+            
+        }
+        else temp.push(directive);        
+    });
+    
+    if( temp.length ) res.push(temp);
+    
+    return res;
+}

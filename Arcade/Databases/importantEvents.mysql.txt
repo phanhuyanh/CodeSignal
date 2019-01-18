@@ -1,0 +1,7 @@
+CREATE PROCEDURE importantEvents()
+BEGIN
+
+   select *
+   from events
+   order by weekday(event_date) , participants desc;
+END

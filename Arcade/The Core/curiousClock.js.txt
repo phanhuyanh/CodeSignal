@@ -1,0 +1,9 @@
+function curiousClock(someTime, leavingTime) {
+    
+     const time =  Date.parse(leavingTime) - Date.parse(someTime);
+    
+     const curTime = Date.parse(someTime) - time;
+     
+     return new Date(curTime).toISOString().replace("T"," ").slice(0,16);
+
+}

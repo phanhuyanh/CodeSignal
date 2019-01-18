@@ -1,0 +1,11 @@
+F=(m,i,j)=>{
+     if(!m[i][j]) return 0;
+     t=4
+     if(i>0 && m[i-1][j]) t--
+     if(j>0 && m[i][j-1]) t--
+     if(j<m[0].length-1 && m[i][j+1]) t--
+     if(i<m.length-1 && m[i+1][j]) t--
+     return t;
+}
+polygonPerimeter=(m,t=0)=> 
+ !m.map((e,i)=> e.map((f,j)=> t+=F(m,i,j))) |t 

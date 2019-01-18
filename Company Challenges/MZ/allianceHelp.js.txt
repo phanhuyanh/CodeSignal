@@ -1,0 +1,10 @@
+function allianceHelp(t, allianceSize) {
+
+    var incre = Math.floor(t/10) > 60 ? Math.floor(t/10) : 60;
+    
+    var time = t - incre*( allianceSize > 10 ? 10 : allianceSize );
+        
+    return time < 0 ? 0 : time ;
+    
+    
+}

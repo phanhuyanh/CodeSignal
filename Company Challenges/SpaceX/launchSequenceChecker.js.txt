@@ -1,0 +1,19 @@
+function launchSequenceChecker(systemNames, stepNumbers) {
+    
+    hashTable = {}
+    
+    for(i in  systemNames)
+        
+        if(hashTable[systemNames[i]] == null)
+            hashTable[systemNames[i]] = [stepNumbers[i]]
+        
+        else
+           
+            
+            hashTable[systemNames[i]].push(stepNumbers[i])
+        
+        
+    
+    return Object.keys(hashTable).every(e=> hashTable[e].every((f,i) => !i || f > hashTable[e][i-1] ) )
+    
+}

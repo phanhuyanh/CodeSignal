@@ -1,0 +1,26 @@
+function graphDistances(g, s) {
+    
+    g = g.map(e=> e.map(f=> f < 0 ? 1e9 : f ))
+    
+    for( let k  = 0 ; k < g[0].length ; k++){
+        
+        for(let i = 0 ; i < g[0].length ; i++){
+            
+            for( let j = 0 ; j < g[0].length ; j++ ) {
+            
+                if( g[i][k] + g[k][j] < g[i][j] ) {
+                    
+                    g[i][j] = g[i][k] + g[k][j]
+                
+                }
+            
+            }
+            
+        }
+    }
+    
+    g[s][s] = 0;
+   
+    return g[s];
+    
+}

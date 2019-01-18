@@ -1,0 +1,26 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE closestCells()
+
+select P.id id1 , Q.id id2
+
+from positions P , positions Q
+
+
+
+    
+where distance(point(P.x , P.y) , point(Q.x , Q.y)) = (
+    
+    
+   select  MIN( distance(point(p1.x , p1.y) , point(p2.x , p2.y)) ) as distance
+    
+   from positions p1
+
+   join positions p2 on (p1.id <> p2.id)
+    
+   where p1.id = P.id
+    
+   group by  p1.id
+
+)
+
+order by 1

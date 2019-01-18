@@ -1,0 +1,84 @@
+function longestPath(fileSystem) {
+    
+    fileSystem = fileSystem.replace(/\f/g,"|F").replace(/\t/g,"|T");
+    
+    fileSystem += "|F"
+
+    var root = {},
+        dept = 0 ,
+        i = 0    ,
+        best = 0 ,
+        child = "";
+
+    while( fileSystem[i] ) {
+        
+        let tmp = fileSystem.slice(i,i+2);
+
+        if( tmp == "|F" ) {
+           
+            if( dept == 0 ) {
+                
+                root[child] = [];
+                
+                if(root[0]) root[0].push(child)
+                
+                else root[0] = [child]
+                
+                
+            }
+            else {
+            
+                let t = root[dept-1];
+                
+                t = t[t.length-1];
+                
+                root[t].push(child)
+                
+                root[dept] = [child];
+            
+                root[child] = []
+                
+            }
+
+            child = ""
+            
+            dept = 0;
+            
+            i += 2;
+            
+            continue ;
+            
+        }
+        if( tmp == "|T" ) {
+            
+            dept++;
+            
+            i += 2;
+            
+            continue ;
+            
+        }
+        
+        child += fileSystem[i];
+       
+        i++;
+    }
+
+    function DFS(r ,c) {
+        
+        if( !root[r].length  ){
+           if( r.match(/^[a-z0-9 ]+\.[a-z0-9 ]+/i)  )
+               if( c.join`/`.length > best ) 
+                   best = c.join`/`.length
+        }
+        
+        else
+           for( var element of root[r]   ) 
+               DFS( element , [...c, element] )
+ 
+    }
+
+    for( let e of root[0] ) DFS(e,[e])
+   
+    return best
+}

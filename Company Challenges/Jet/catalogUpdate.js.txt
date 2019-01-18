@@ -1,0 +1,49 @@
+function catalogUpdate(catalog, updates) {
+         
+         var hash_catalog = {};
+         
+         for( let e of catalog ) {
+             
+             if( hash_catalog[e[0]] == null) {
+                 
+                 hash_catalog[e[0]] = [];
+                 
+             }
+             
+             for( let i = 1 ; i< e.length ; i++ ){
+                 
+                 hash_catalog[e[0]].push(e[i])
+                 
+             }
+             
+         }
+         
+         for( let item of updates ) {
+             
+             if( hash_catalog[item[0]] == null) {
+                 
+                 hash_catalog[item[0]] = [];
+                 
+             }
+             for( let i = 1 ; i< item.length ; i++ ){
+                 
+                 hash_catalog[item[0]].push(item[i])
+                 
+             }
+         }
+         var results = [];
+         
+         for( let element of Object.keys(hash_catalog) ) {
+             
+             results.push([element]);
+             
+             for( let e of hash_catalog[element] ){
+                 
+                 results[results.length-1].push(e)
+                 
+             }
+             
+         }
+         
+       return results.sort((a,b)=> a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 ).map(e => [e[0]].concat( e.slice(1).sort((a,b)=> a < b ? -1 : a > b ? 1 : 0 ) ) )      
+}

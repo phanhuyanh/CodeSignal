@@ -1,0 +1,37 @@
+function proCategorization(pros, preferences) {
+        
+        var category = {};
+        
+        for(let i = 0 ; i<pros.length ; i++) {
+            
+                for( let j = 0 ; j< preferences[i].length ; j++ ){
+                        
+                        let tmp =  preferences[i][j];
+                        
+                        if(category[tmp] == null) {
+                                
+                                category[tmp] = [pros[i]];
+                                
+                        }
+                        else{
+                                
+                                category[tmp].push(pros[i]);
+                        }
+                }
+                
+         }
+        
+         var products = [];
+            
+         for( let e of Object.keys(category) ) {
+                 
+                 products.push( [[ e] , category[e].sort((a,b)=> a < b ? -1 : a> b ? 1 : 0 ) ] )
+                    
+          }
+        
+        return products.sort((a,b)=> (a[0][0] < b[0][0] ? -1 : a[0][0] > b[0][0] ? 1 : 0 )   )
+        
+        
+        
+    
+}

@@ -1,0 +1,28 @@
+int deleteDigit(int n) {
+int a[7];
+    int dem=0;
+    while(n!=0){
+        a[dem++]=n%10;
+        n=n/10;
+    }
+    if(dem==2){
+        return (a[0]>a[1])?a[0]:a[1];
+    }
+    int k=0;int dem1=0;
+    int b[6];
+    for(int i=dem-1; i>=1; i--){
+        if(a[i]< a[i-1] && dem1!=1){
+            dem1++;
+continue;
+        }
+        else{
+            b[k++]=a[i];
+        }
+    }
+    b[k++]=a[0];
+    int x=0;int k1=k;
+    for(int i=0; i<k; i++){
+         x += b[i]*pow(10,--k1);
+    }
+    return x;
+}

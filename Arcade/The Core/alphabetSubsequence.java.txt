@@ -1,0 +1,13 @@
+boolean alphabetSubsequence(String s) {
+    int chuaxet[]=new int[26];
+int n=s.length();
+    for(int i=1 ; i<n ; i ++){
+        if(s.charAt(i)<=s.charAt(i-1) || chuaxet[(int)s.charAt(i)-97]>1){
+            return false;
+        }
+        else{
+            chuaxet[(int)s.charAt(i)-97]++;
+        }
+    }
+    return true;
+}

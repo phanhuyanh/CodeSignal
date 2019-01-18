@@ -1,0 +1,16 @@
+int phoneCall(int min1, int min2_10, int min11, int s) {
+int sum=0;
+    if(s<min1){return 0;}
+s=s-min1;
+    sum=1;
+    if(s>9*min2_10){
+        sum+=9;
+        s=s-9*min2_10;
+    }
+    else{
+        sum+=s/min2_10;
+        return sum;
+    }
+    sum+=s/min11;
+    return sum;
+}

@@ -1,0 +1,59 @@
+function contoursShifting(a) {
+    wd1 = Math.min(Math.ceil(a.length/2) , Math.ceil(a[0].length/2))
+    col=a[0].length;
+    row =a.length;
+    if(col==1 || row==1) return f(a)
+    k=0;wd=0;
+    while(wd<wd1){
+        s=[]
+        for(i=k ; i<col ;i++) s.push(a[k][i])
+        for( i =k+1 ; i<row ;i++) s.push(a[i][col-1])
+        if(k+1<row){
+              for( i =col-2 ; i>=k ;i--) s.push(a[row-1][i])
+        }
+        if(k+1<col){
+        for( i =row-2 ; i>k ;i--) s.push(a[i][k])}
+       
+        if(wd%2==0){
+            s=clockwise (s);
+        }
+        else{
+            s=counterclockwise(s);
+        }
+    
+        for(i=k ; i<col ;i++) a[k][i] =s.shift()
+        for( i =k+1 ; i<row ;i++) a[i][col-1] =s.shift()
+        if(k+1<row){
+        for( i =col-2 ; i>=k ;i--) a[row-1][i] =s.shift()
+        }
+        if(k+1<col){
+        for( i =row-2 ; i>k ;i--) a[i][k] =s.shift()
+        }
+        
+        wd++;
+        k++
+        col--
+        row--
+    }
+    return a
+}
+clockwise = s=>{
+    a=s.pop();
+    s.unshift(a);
+    return s;
+}
+counterclockwise=s=>{
+    a=s.shift();
+    s.push(a);
+    return s;
+}
+f=a=>{
+    if(a.length==1){
+        t=a[0].pop()
+        a[0].unshift(t)
+        return a
+    }
+    t=a.pop()
+    a.unshift(t)
+    return a
+}

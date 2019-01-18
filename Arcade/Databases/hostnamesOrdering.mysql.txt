@@ -1,0 +1,20 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE hostnamesOrdering()
+BEGIN 
+
+select id , hostname
+from (
+
+select * ,LOWER(concat(d1 ,' ' , d2,' ', d3)) as rev
+from(
+
+    
+    select * , substring_index(substring_index(concat("...",hostname),".",-1),'.',1) as d1 , substring_index(substring_index(concat("...",hostname),'.',-2),".",1) as d2 , substring_index(substring_index(concat("...",hostname),".",-3),".",1) as  d3
+    from hostnames
+) _
+
+order by rev
+) r
+
+;
+END

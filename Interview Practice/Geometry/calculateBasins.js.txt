@@ -1,0 +1,43 @@
+/* Thanks you for solution by Zero_cool*/
+function calculateBasins(grid) {
+    
+    const basins = {};
+    
+    for(let i = 0 ; i < grid.length ; i++) {
+        
+        for(let j = 0 ; j < grid[0].length ; j++) {
+            
+            const sink = search(i , j);
+            
+            if(!basins[sink]) basins[sink] = 0;
+            basins[sink]++;
+            
+        }
+    }
+    
+    function search(x , y) {
+        
+        let sink = true;
+        let [minX , minY] = [-1 , -1];
+        
+        for(const [dx , dy] of [[0 , -1] , [0 , 1] , [-1 , 0] , [1,0]]) {
+            
+            if( (x + dx) in grid 
+               && (y + dy) in grid[0]
+               && grid[x + dx][y + dy] < grid[x][y]){
+                
+                sink = false;
+                
+                if(minX === -1 || grid[x + dx][y + dy] < grid[minX][minY]) {
+                    
+                    minX = x + dx;
+                    minY = y + dy;
+                }
+            }
+            
+        }
+        return sink ? 200 * x + y : search(minX , minY);
+    }
+    
+    return Object.values(basins).sort((a,b) => b - a);
+}

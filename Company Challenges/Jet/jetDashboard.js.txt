@@ -1,0 +1,35 @@
+function jetDashboard(orders, n) {
+         
+         orders = orders.slice( orders.length-n );
+         
+         var results = [];
+         
+         var arr = [];
+         
+         for( let i = 0 ; i < orders.length ; i++ ) {
+             
+             arr.push(orders[i]);
+             
+             let t = 0;
+             
+             arr.map(e => t += e );
+             
+             let avg = ( t%arr.length  ? +(t/arr.length).toFixed(6) : +(t/arr.length).toFixed(1)  );
+             
+             let c = 0;
+             
+                 
+             for(let e of arr){
+                     
+                 c += (Math.abs(e-avg))**2 ;
+                     
+              }
+                 
+              c = arr.length - 1 ? +((c/(arr.length-1))**.5).toFixed(5) : -1;
+                 
+              results.push( [Math.max(...arr) , avg , c] );
+
+         }
+         
+         return results;
+}

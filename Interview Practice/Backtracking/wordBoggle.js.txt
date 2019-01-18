@@ -1,0 +1,74 @@
+function wordBoggle(board, words) {
+    
+    var mark = new Array(board.length);
+    
+    for(let i = 0 ; i<board.length ; i++)
+        mark[i] = new Array(board[i].length).fill(true);
+    
+    var h = {};
+    
+    for(let e of words) h[e] = 1;
+    
+    var lexi = {};
+    
+    for(let e of words){
+        
+        if(lexi[e[0]] == null) lexi[e[0]] = [];
+    }
+    
+    for(let e of Object.keys(lexi)){
+        
+        for(let i = 0 ; i<board.length ; i++){
+            
+            for(let j = 0 ; j<board[0].length ; j++){
+                
+                if(board[i][j] == e) lexi[e].push([i,j]);
+            }
+        }
+    }
+    
+    var Results = new Set();
+    
+    function thu( b , w , i , j , n , m , r , c , ml){
+        
+          if(h[r])
+            Results.add(r)
+        
+        
+          if(r.length <= ml){  
+            for(var k = i-1 ; k<=i+1 ; k++){
+                
+                for(var k1 = j-1 ; k1<=j+1 ; k1++){
+                    
+                    if(k>=0 && k<n && k1>=0 && k1<m && c[k][k1]){
+                        
+                        c[k][k1] = false;
+                        
+                        thu(b , w , k , k1 , n , m , r+b[k][k1] , c , ml);
+                        
+                        c[k][k1] = true;
+                    }
+                    
+                }
+            
+            }
+        }
+        
+    }
+    
+    
+    for(let e of Object.keys(lexi)){
+        
+        let tmp = words.filter(f=> f[0] == e);
+        
+        tmp.sort((a,b)=>b.length - a.length)
+        
+        for(let [i,j] of lexi[e]){
+            
+            thu(board , words , i , j , board.length , board[0].length , "" , mark , tmp[0].length);
+            
+        }
+        
+    }
+    return [...Results].sort();
+}

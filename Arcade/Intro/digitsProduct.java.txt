@@ -1,0 +1,20 @@
+int digitsProduct(int n) {
+    int x[]=new int[10];
+    if(n==1){return 1;}
+    if(n==0){return 10;}
+    int dem=0;int i=9; 
+    while(n!=1){
+        if(i==1){return -1;}
+        if(n%i==0){
+            x[dem++]=i;
+            n=n/i;
+            i=9;         
+        }
+        else{i--;}        
+    }
+    int sum=0;int k=dem-1;
+for(int j=dem-1 ; j>=0 ; j--){
+    sum+=x[j]*Math.pow(10,k--);
+}
+    return sum;
+}

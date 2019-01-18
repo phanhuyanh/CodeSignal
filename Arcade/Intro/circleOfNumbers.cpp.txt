@@ -1,0 +1,13 @@
+int circleOfNumbers(int n, int firstNumber) {
+if(firstNumber+n/2==n){
+    return 0;
+}
+    else{
+       if(firstNumber+n/2>n){
+           return firstNumber-n/2;
+       }
+        else{
+            return firstNumber+n/2;
+        }
+    }
+}

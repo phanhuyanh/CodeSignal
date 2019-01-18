@@ -1,0 +1,18 @@
+
+minesweeper=(m)=> 
+     m.map((t,i)=>t.map((s,j)=>s=count(m,i,j)));
+
+count=(m,i,j)=>{
+    var x=m.length;
+var y=m[0].length;
+      var s=0;
+	      if( j>=1 && m[i][j-1]) s++;
+	      if(j<=y-2 && m[i][j+1]) s++;
+	      if(i>0 && m[i-1][j]) s++;
+	      if(i>0 && j>=1 && m[i-1][j-1]) s++;
+	      if(i>0 && j<=y-2 && m[i-1][j+1]) s++;
+	      if(i<=x-2 && m[i+1][j]) s++;
+	      if(i<=x-2 && j>=1 && m[i+1][j-1]) s++;
+	      if(i<=x-2 && j<=y-2 && m[i+1][j+1]) s++;
+          return s;
+}

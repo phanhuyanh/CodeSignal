@@ -1,0 +1,35 @@
+areFollowingPatterns = ( s , p ) => {
+    
+    h = {}
+    
+    r = {}
+    
+    for(i in s){
+        
+        if(h[s[i]]) h[s[i]].push(p[i])
+        
+        else h[s[i]] = [p[i]]
+        
+        if(r[p[i]]) r[p[i]].push(s[i])
+        
+        else r[p[i]] = [s[i]]
+        
+    }
+    
+    
+    for(e of Object.keys(h) ){
+        
+        E = new Set(h[e])
+        
+        if([...E].length >1) return false
+    }
+    
+     for(e of Object.keys(r) ){
+        
+         E = new Set(r[e])
+        
+         if([...E].length >1) return false
+     }
+    
+    return true
+}

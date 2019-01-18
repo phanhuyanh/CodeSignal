@@ -1,0 +1,74 @@
+function maximalSquare(matrix) {
+    
+    //return null === '0'
+    
+    var dp = Array.from({length : matrix.length} , _ => new Array(matrix[0].length).fill(0));
+    
+    for(let i = 0 ; i < matrix.length ; i++) {
+        
+        for(let j = 0 ; j < matrix[0].length ; j++) {
+            
+            if(matrix[i][j] === '0') dp[i][j] = 0;
+            
+            else{
+                
+                if(dp[i-1] && dp[i-1][j-1] > 0) {
+                    
+                    const r = Math.floor(dp[i-1][j-1]**.5);
+                    let mark = true;
+                    for(let k = j - 1 ; k >= j - r ; k--) {
+                        if(matrix[i][k] === '0') {
+                            
+                            mark = false;
+                            break;
+                        }
+                        
+                    }
+                    for(let k = i - 1 ; k >= i - r ; k--)
+                        if(matrix[k][j] === '0') {
+                            
+                            mark = false;
+                            break;
+                        }
+                    
+                    if(mark) dp[i][j] = (r+1)**2;
+                    
+                }
+                if(dp[i-1] && dp[i-1][j] > 0) {
+                        
+                    
+                    const r = Math.floor(dp[i-1][j]**.5);
+                    let mark = true;
+                    
+                    for(let k = j - 1 ; k >= j - r ; k--){
+                        
+                        if(matrix[i][k] == null || matrix[i][k] === '0') {
+                            
+                            mark = false;
+                            break;
+                        }
+                    }
+                    
+                    for(let k = i - 1 ; k >= i - r ; k--) {
+                        
+                        if(matrix[k][j-r] == null || matrix[k][j-r] === '0') {
+                            
+                            mark = false;
+                            break;
+                        }
+                    }
+                    //if(i == 1 && j == 0) console.log(mark , matrix[i][j-1])
+                    if(mark) dp[i][j] = Math.max(dp[i][j] ,(r+1)**2);
+                    else dp[i][j] = 1;
+                }
+                else dp[i][j] = 1;
+            }
+        }
+    }
+    var results = 0;
+    
+    dp.map(e => results = Math.max(results , Math.max(...e)));
+    
+    return results;
+    
+}

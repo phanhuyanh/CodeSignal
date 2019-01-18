@@ -1,0 +1,28 @@
+int comfortableNumbers(int l, int r) {
+int sum=0;
+    for(int i=l ; i<r ; i++){
+        for(int j=i+1; j<=r ; j++){
+            if(comfortable(i,j)){
+                sum++;
+            }
+        }
+    }
+    return sum;
+}
+boolean comfortable(int a,int b){
+    if(b>= a-sum_digits(a) && b<= a+sum_digits(a)){
+        if(a>=b-sum_digits(b) && a<=b+sum_digits(b)){
+            return true;
+        }
+    }
+    return false;
+}
+int sum_digits(int n){
+    int sum=0;
+    while(n!=0){
+      int du=n%10;
+        sum+=du;
+        n/=10;
+    }
+    return sum;
+}

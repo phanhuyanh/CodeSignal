@@ -1,0 +1,65 @@
+function losslessDataCompression(inputString, width) {
+    
+        var res = "";
+        
+        var i = 0;
+        
+        while( i< inputString.length  ) {
+            
+            let window = i > width ? inputString.slice(i-width , i)  : inputString.slice(0,i)  ;
+            
+            if( window.indexOf(inputString[i]) == -1 ) {
+                
+                res += inputString[i];
+                
+                i++;
+                
+                continue;
+                
+            }
+            
+            let Max_length = 0;
+            
+            let TEMP_startIndex = -1;
+            
+            for(let startIndex = 0 ; startIndex <i ; startIndex++) {
+                loop:
+                for(let length = i-startIndex ; length > 0 ; length--) {
+                    
+                    let find = inputString.slice(startIndex , startIndex + length);
+                    
+                    if( inputString.slice(i , i + length) == find && window.indexOf(find) != -1 && startIndex >= (i>width ? i-width : 0) ) {
+                        
+                        if( length > Max_length ){ 
+                            
+                            Max_length = length;
+                            
+                            TEMP_startIndex = startIndex;
+                            
+                            break loop;
+                        }
+                        
+                    }
+    
+                }
+                
+            }
+            
+            if( TEMP_startIndex >= 0){
+                
+                res += "(" +TEMP_startIndex + "," + Max_length +  ")";
+                
+                i += Max_length;
+                
+            }
+            else{
+                res += inputString[i];
+                
+                i++;
+            }
+            
+        }
+        return res;
+        
+    
+}

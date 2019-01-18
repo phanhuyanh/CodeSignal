@@ -1,0 +1,7 @@
+function regularExpressionMatching(s, p) {
+    
+    var pattern = new RegExp(`^` + p + `$`);
+    
+    return pattern.test(s);
+    
+}

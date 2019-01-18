@@ -1,0 +1,37 @@
+function perfectCity(a, b) {
+    
+    function Convert( [x0,y0] ){
+
+        return Math.floor(x0) === x0 ? [[x0,Math.floor(y0)] , [x0 , Math.ceil(y0)]]
+        
+                                     : [[Math.floor(x0), y0] , [Math.ceil(x0) , y0]]
+
+                       
+    }
+                
+    function distance( [x0,y0] , [x1,y1] , [a0,b0] , [a1,b1] ){
+                    
+        return Math.abs(x0-x1) + Math.abs(y0-y1) + Math.abs(x0-a0) + Math.abs(y0-b0) + Math.abs(x1-a1) + Math.abs(y1-b1); 
+                        
+    }
+                
+    const g = Convert(a);
+               
+    const h = Convert(b);
+               
+    var best = 1e9;
+                
+    for(let e of g){
+                        
+        for(let f of h){
+                                
+            const d = distance(e,f,a,b);
+                                
+            if(d < best) best = d;
+                                
+        }
+                        
+    }
+                
+    return best;  
+}

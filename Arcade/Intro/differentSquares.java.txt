@@ -1,0 +1,43 @@
+int differentSquares(int[][] a) {
+int n=a.length;
+    int m=a[0].length;
+    int k=(m-1)*(n-1);
+    int dem=0;
+    String [] obj=new String[k];
+    for( int i=0 ; i<k ; i++){ obj[i]="";}
+    for(int i=0 ; i<n-1 ; i++){
+        for(int j=0 ; j<m-1 ;j++){
+            obj[dem++]=nap_string(a[i][j],a[i][j+1],a[i+1][j],a[i+1][j+1]);
+        }
+    }
+  int x[]=new int[dem];
+    for(int i=0 ; i<dem ; i++) {
+        x[i]=Integer.parseInt(obj[i]);
+    }
+    int chuaxet[]=new int[k];
+    for(int i=0 ; i<k ;i++)chuaxet[i]=1;
+    for(int i=0; i<dem-1 ; i++){
+        for(int j=i+1; j<dem ; j++){
+            if(x[i]==x[j] && chuaxet[i]==1){
+                        chuaxet[j]=0;}
+        }
+    }
+    int k1=0;
+    for(int i=0 ; i<k; i++){
+        if(chuaxet[i]==1){
+            k1++;
+        }
+    }
+    return k1;
+ 
+}
+String nap_string(int a,int b,int c ,int d){
+    
+    char x[]=new char[4];
+     x[0]=(char)(a+48);
+     x[1]=(char)(b+48);
+    x[2]=(char)(c+48);
+    x[3]=(char)(d+48);
+    String obj=new String(x);
+    return obj;
+}

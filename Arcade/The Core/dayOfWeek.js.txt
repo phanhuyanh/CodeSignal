@@ -1,0 +1,37 @@
+function dayOfWeek(birthdayDate) {
+    
+    const getDay = new Date(birthdayDate).toDateString().split` `[0];
+    
+    var [mm,dd,yy] = birthdayDate.split`-`;
+    
+    const mark = `${mm}-${dd}` == `02-29` ? 1 : 0
+    
+    var r = mark ? 4 : 1;
+    
+    while( !(getYear( birthdayDate, r ) == getDay &&  leapYear(birthdayDate,r,mark) )  ) r = mark ? r + 4 : r + 1;
+
+    return r
+ 
+}
+
+function getYear(date , r){
+    
+    var [mm,dd,yy] = date.split`-`;
+    
+    date = `${mm}-${dd}-${+yy+r}`;
+
+    return new Date(date).toDateString().split` `[0];
+}
+function leapYear(date , r , mark){
+    
+    if( mark === 0 ) return true;
+    
+    var [mm,dd,yy] = date.split`-`;
+    
+    yy = +yy + r;
+    
+    if( yy % 400 === 0 || ( yy % 4 === 0 && yy % 100 )) return true;
+    
+    return false;
+    
+}

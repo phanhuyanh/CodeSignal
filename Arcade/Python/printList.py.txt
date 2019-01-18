@@ -1,0 +1,2 @@
+def printList(lst):
+    return  "This is your list: [" + ''.join(map(lambda x : ', ' + str(x) , lst))[2:] + "]"

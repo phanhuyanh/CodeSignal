@@ -1,0 +1,39 @@
+function mostViewedWriters(topicIds, answerIds, views) {
+
+        var hash_View = {} , results = [];
+                
+        for( let answerId of answerIds ){
+                        
+                for( let ID of answerId ){
+                                
+                        if( hash_View[ID] ) continue;
+                                
+                        const View = views.find(view => view[0] === ID ).slice(1);
+                                
+                        hash_View[ID] = View;
+                                
+                }
+                        
+        }
+                
+        for(let topicId in topicIds){
+                        
+                for( let ID of topicIds[topicId] ){
+                                
+                        if(!results[ID]) results[ID] = [];
+                                
+                        for( let view of answerIds[topicId] ){
+                                                
+                                const duplicate = results[ID].find(e => e[0] === hash_View[view][0] );
+                 
+                                if(duplicate == undefined)                
+                                    results[ID].push(hash_View[view]);
+                                else                    
+                                    results[ID] = results[ID].map(e => e[0] == hash_View[view][0] ? [e[0] , e[1] + hash_View[view][1]] : e );                  
+                        }
+                                
+                }
+                 
+        }
+        return results.filter(e=>e).map(e=> e.sort((a,b) => b[1] - a[1] || a[0] - b[0] ) );
+}

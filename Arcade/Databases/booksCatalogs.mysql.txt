@@ -1,0 +1,7 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE booksCatalogs()
+BEGIN
+   select  substring_index(ExtractValue(xml_doc,'//catalog//book//author'),' ',2) as author
+   from catalogs
+   order by author asc;
+END

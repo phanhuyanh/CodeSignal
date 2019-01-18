@@ -1,0 +1,45 @@
+function allianceVersusMonster(healthPoints, attackDamage) {
+
+        var HealthMonster = healthPoints.shift();
+        
+        var DamageMonster = attackDamage.shift();
+       
+        var Warror = [];
+            
+        for(let i = 0 ; i<healthPoints.length ; i++) {
+                
+                Warror.push([healthPoints[i] , attackDamage[i]]);
+                
+        }
+        Warror.sort((a,b) => b[1]-a[1] || b[0]-a[0] )
+        
+        for(let i = 0 ; i < Warror.length ; i++ ) {
+            
+            let a = Warror[i][0];
+                
+            let b = Warror[i][1];    
+            
+            let count = a%DamageMonster  ? Math.floor(a/DamageMonster) : a/DamageMonster-1  ;
+            
+            Warror[i][0]  -= count*DamageMonster;
+            
+            HealthMonster -= count*b;
+            
+        }
+           
+        for(let i = 0 ; i < Warror.length ; i++ ) {
+            
+            let a = Warror[i][0];
+                
+            let b = Warror[i][1];    
+            
+            HealthMonster -= b;
+                
+            if( HealthMonster <= 0 ) return Warror.filter(e=>e[0] > 0).length;
+                
+            Warror[i][0] -= DamageMonster;    
+            
+        }    
+        return 0    
+
+}

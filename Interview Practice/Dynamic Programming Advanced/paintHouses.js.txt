@@ -1,0 +1,24 @@
+function paintHouses(cost) {
+    
+    let dp = [0,0,0];
+    
+    for(let i = 0 ; i < cost.length ; i++){
+        
+        let temp = [];
+        
+        for(let j = 0 ; j < 3 ; j++){
+            
+            let min = 1e9;
+            
+            for(let k = 0 ; k < 3 ; k++){
+                
+                if(j === k) continue;
+                
+                min = Math.min(cost[i][j] + dp[k],min);
+            }
+            temp[j] = min;
+        }
+        dp = temp;
+    }
+    return Math.min(...dp);
+}

@@ -1,0 +1,63 @@
+function spamClusterization(requests, ids, threshold) {
+        
+        var hash = new Array(requests.length+1);
+            
+        for(let i =0 ; i< hash.length ; i++) hash[i] = new Array(requests.length+1).fill(-1);
+        
+        function jaccard(a,b,r) {
+            
+            var intersection =  [...new Set(a)].filter(x => new Set(b).has(x));
+            
+            return intersection.length / r.length;
+            
+        }
+        
+        requests = requests.map(e=> [...new Set(e.split(/\W+/g).filter(e=>e!=``).map(e=>e.toLowerCase()))] )
+   
+        for(let i = 0 ; i<requests.length ; i++) {
+                
+                for(let j = 0 ; j< requests.length ; j++) {
+                        
+                        if( i == j ) continue;
+                         
+                        let r = [...new Set(requests[i].concat(requests[j]))];
+                    
+                        hash[i+1][j+1] = jaccard( requests[i] , requests[j] , r );
+                }
+                
+        }   
+        
+        var results = [];
+        
+        var mark = {};
+        
+        for( let i = 1; i<= requests.length ; i++ ) {
+                
+                let arr = [i];
+            
+                let array = [i];
+                
+                mark[i] = 1;
+                
+                while(arr.length) {
+                        
+                        let tmp = arr.shift();
+                        
+                        for( let j = 1 ; j < hash[tmp].length ; j++ ) {
+                                
+                                if( hash[tmp][j] >= threshold && mark[j] == null ){
+                                        
+                                        arr.push(j);
+                                    
+                                        mark[j] = 1;
+                                        
+                                        array.push(j);
+                                }
+                        }
+                        
+                }
+                results.push(array);
+        }
+   
+        return results.filter(e=> e.length > 1).map(e=>e.map(f=> ids[f-1])).map(e=>e.sort((a,b)=>a-b)).sort((a,b)=>a[0]-b[0])   
+}

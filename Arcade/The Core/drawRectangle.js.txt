@@ -1,0 +1,14 @@
+function drawRectangle(c, r) {
+    var y1=r[0];var x1=r[1]; var y2=r[2]; var x2=r[3];
+    c[x1][y1]="*";
+    c[x2][y2]="*";
+    c[x1][y2]="*";
+    c[x2][y1]="*";
+    for( i = x1+1 ; i<x2 ; i++){
+        c[i][x1]="|"; c[i][y2]="|";
+    }
+    for( i =y1+1 ; i<y2 ; i++){
+        c[x1][i]="-";c[x2][i]="-";
+    }
+      return c;
+}

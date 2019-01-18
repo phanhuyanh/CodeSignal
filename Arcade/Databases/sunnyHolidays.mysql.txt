@@ -1,0 +1,7 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE sunnyHolidays()
+
+select h.holiday_date ski_date
+from holidays h , weather w
+
+where h.holiday_date = w.sunny_date

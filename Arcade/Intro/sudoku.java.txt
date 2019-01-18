@@ -1,0 +1,35 @@
+boolean sudoku(int[][] a) {
+int[] chuaxet=new int[9];
+    for(int i=0 ; i<9 ; i++ ){
+        for(int m=0 ; m< 9 ;m++){chuaxet[m]=1;}
+        for(int j=0 ; j< 9 ; j++){
+            if(chuaxet[a[i][j]-1]==1){
+                chuaxet[a[i][j]-1]=0;continue;
+            }
+            else{return false;}
+        }
+    }
+     for(int j=0 ; j<9 ; j++ ){
+        for(int m=0 ; m< 9 ;m++){chuaxet[m]=1;}
+        for(int i=0 ; i< 9 ; i++){
+            if(chuaxet[a[i][j]-1]==1){
+                chuaxet[a[i][j]-1]=0;continue;
+            }
+            else{return false;}
+        }
+    }
+    for(int i=0 ; i+3<=9 ; i=i+3){
+        for(int j=0 ; j+3 <=9 ; j=j+3){
+          for(int m=0 ; m< 9 ;m++){chuaxet[m]=1;}
+            for(int k=i ; k<3+i ; k++){
+                for(int k1 =j ; k1<3+j ; k1++){
+                    if(chuaxet[a[k][k1]-1]==1){
+                        chuaxet[a[k][k1]-1]=0;
+                    }
+                    else{return false;}
+                }
+            }
+        }
+    }
+    return true;
+}

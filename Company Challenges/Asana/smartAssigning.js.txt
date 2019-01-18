@@ -1,0 +1,15 @@
+function smartAssigning(names, statuses, projects, tasks) {
+    
+    
+    Result = []
+    
+    names.map((e,i) => {
+        
+        r = [e , statuses[i] , projects[i] , tasks[i]]
+        
+        Result.push(r)
+        
+    } )
+    
+    return Result.filter(e=> e[1] == false).sort((a,b)=>a[3]-b[3] || a[2]-b[2])[0][0]
+}

@@ -1,0 +1,9 @@
+boolean isPower(int n) {
+int x=(int)Math.sqrt(n);
+    if(n==1){return true;}
+    if(n==x*x){return true;}
+    for(int i=2; i<=x/2 ; i++){
+        if(n==i*i*i){return true;}
+    }
+    return false;
+}

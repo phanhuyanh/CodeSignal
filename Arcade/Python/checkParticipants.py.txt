@@ -1,0 +1,2 @@
+def checkParticipants(participants):
+    return  filter(lambda x : x >= 0 , [i if i > participants[i] else -1 for i in range(len(participants)) ])

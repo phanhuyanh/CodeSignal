@@ -1,0 +1,59 @@
+function lrc2subRip(lrcLyrics, songLength) {
+    
+    var results = [];
+    
+    lrcLyrics  = lrcLyrics.map(e => e.indexOf(` `) !== -1 ? [ e.slice(0,e.indexOf(" "))  , e.slice( e.indexOf(" ") + 1 )] : [e,""] );
+
+    for( let i = 0 ; i < lrcLyrics.length ; i++ ){
+        
+        results.push("" + (i + 1));
+        
+        if( i === lrcLyrics.length - 1 ) {
+            
+            const timeS = Convert_time(lrcLyrics[i][0],0); 
+            const timeE = Convert_time(songLength,1); 
+                
+            results.push( timeS + " --> " + timeE );    
+            
+        }
+        else{
+            
+            const timeS = Convert_time(lrcLyrics[i][0],0); 
+            const timeE = Convert_time(lrcLyrics[i+1][0],0); 
+
+                
+            results.push( timeS + " --> " + timeE );  
+            
+        }
+        
+        results.push(lrcLyrics[i][1]);
+            
+        if( i !== lrcLyrics.length-1 ) results.push("");    
+    }
+    return results
+  
+}
+function Convert_time(ts , mark){
+        
+        if(mark){
+                
+                const [hh,mm,ss] = ts.split`:`;
+                
+                return hh + ":" + mm + ":" + `${ss}`.padStart('0',2) + ",000";
+                
+        }
+        
+        ts = ts.replace(/\[|\]/g,"");
+
+        const [MMs , SSs] = ts.split`:`;
+
+        const [SS,xxx] = SSs.split`.`;
+        
+        var start;
+        
+        if( MMs > 59 ) start = "01:" + `${(+MMs-60)}`.padStart(2,'0') + ":" + `${SS}`.padStart(2,'0') + "," + (""+xxx).padEnd(3,'0');
+        
+        else start = "00:" + `${MMs}`.padStart(2,'0') + ":" + `${SS}`.padStart(2,'0') + "," + (""+xxx).padEnd(3,'0');
+
+        return start;
+}

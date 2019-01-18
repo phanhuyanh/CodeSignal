@@ -1,0 +1,20 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE marketReport()
+BEGIN
+	select country,count(country)as competitors
+from (
+select *
+    from foreignCompetitors
+    order by country asc
+
+) t
+group by country
+
+union
+select    case when(count(country) !=0) then 'Total:' end  as country 
+
+
+,count(country) as competitors
+from foreignCompetitors;
+
+END

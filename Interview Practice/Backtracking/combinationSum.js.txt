@@ -1,0 +1,48 @@
+function combinationSum(a, sum) {
+    
+    function S(a,b){
+                
+        let A = a.split` `;
+        let B = b.split` `;
+                
+        for(let i = 0 ; i<Math.min(A.length, B.length) ; i++){
+            
+            if(A[i] == B[i]) continue
+            
+            if(A[i] < B[i]) return -1
+            
+            else return 1
+        }
+        
+        return A.length - B.length
+    }
+    
+    a.sort((a,b)=>a-b);
+    
+    var r = new Set();
+    
+    function thu( i , c , n ){
+        
+        if(i == a.length && !n)
+            r.add(c);
+        else{
+            
+            for(var k = 0 ; k<= Math.floor(n/a[i]) ; k++){
+                
+                let arr = new Array(k).fill(a[i]).join` `;
+                
+                thu(i+1 , c + " " +arr , n-a[i]*k );
+                
+            }
+            
+        }
+    }
+    thu(0 , [] , sum );
+    
+    var results = new Set();
+    
+    [...r].map(e=> e.trim().split` `.filter(f=> f!="").join` ` ).sort((a,b)=> S(a,b)).sort((a,b) => S(a,b) ).map(e=>results.add(e))
+    
+    return  [...results].map(e=> "(" + e + ")").join`` || "Empty";
+    
+}

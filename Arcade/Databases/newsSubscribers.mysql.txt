@@ -1,0 +1,13 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE newsSubscribers()
+BEGIN
+	select subscriber
+from full_year
+where newspaper like '%Daily%'
+
+union
+	select subscriber
+from half_year
+where newspaper like '%Daily%'
+order by subscriber asc;
+END

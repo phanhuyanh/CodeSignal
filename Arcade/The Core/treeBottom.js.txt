@@ -1,0 +1,49 @@
+function treeBottom(tree) {
+    
+    var hash_tree = {} , i = 0 , dept = 0;
+    
+    tree = tree.slice(1,tree.length-1);
+    
+    while(tree[i]){
+        
+        let element = tree[i];
+        
+        if( element === '(' ) {
+            
+            dept++;
+            i++;
+            continue;
+            
+        }
+        
+        if( element === ')' ){
+                
+                dept--;
+                i++;
+                continue;
+                
+        }
+        
+        
+        if( tree[i] >= 0 && tree[i] <= 9 ){
+            
+            let j = i + 1;
+                
+            while( tree[j] != '(' && tree[j] != ')' ) j++;
+            
+            const num = tree.slice(i,j);
+
+            if(hash_tree[dept]) hash_tree[dept].push( num );     
+            
+            else hash_tree[dept] = [+tree.slice(i,j)];
+                
+            i = j;    
+        }
+        
+        
+        
+    }
+    const deptMax = Object.keys(hash_tree).sort((a,b) => b - a )[0];
+    
+    return hash_tree[deptMax].filter(e => e!= ` ` ).map(e => +e );
+}

@@ -1,0 +1,5 @@
+def modulus(n):
+    if round(n)==n :
+        return n % 2
+    else:
+        return -1

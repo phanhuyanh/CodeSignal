@@ -1,0 +1,28 @@
+composeRanges=s=>{
+    n = s.length
+    
+    a = []
+    
+    i = 1
+    
+    pre = 0
+    
+    if(!n) return []
+    
+    while(i<n){
+        if(s[i]-1 !== s[i-1]){
+            
+            
+           pre!=i-1 ? a.push(s[pre]+`->`+s[i-1]) : a.push(``+s[pre])
+            
+            pre = i
+            
+        }
+        
+        i++
+        
+        
+    }
+    i-1 == pre ? a.push(``+s[pre]) : a.push(s[pre]+`->`+s[i-1])
+    return a
+}

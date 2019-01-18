@@ -1,0 +1,21 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE alarmClocks()
+BEGIN
+
+SET @time = (select UNIX_TIMESTAMP(input_date) from userInput);
+set @y = (select year(input_date) from userInput);
+set @i:=1;
+
+
+ while ( @y = year( from_unixtime(@time + 604800*@i) )) DO
+    
+    insert into userInput(input_date) values(from_unixtime(@time + 604800*@i)) ;
+    
+    set @i:=@i+1;
+   
+end while ;
+
+select input_date as  alarm_date
+from userInput
+;
+END

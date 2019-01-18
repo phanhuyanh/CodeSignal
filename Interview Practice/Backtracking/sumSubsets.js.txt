@@ -1,0 +1,47 @@
+function sumSubsets(arr, num) {
+    'use strict';
+    if (num == 0) return [ [] ];
+    const subsets = [],        // all found subsets
+          currentSubset = [],  // the values of the current subset
+          currentIndices = [], // the indices of each value in the current subset
+          length = arr.length;
+    let i = 0,                 // current index within arr
+        total = 0;             // sum of values of the current subset
+    while (true) {
+        const n = arr[i];
+        if (total + n < num) {
+            
+            // Add the current number and move to the next index
+            currentSubset.push(n);
+            currentIndices.push(i);
+            total += n;
+            i++;
+            
+        } else {
+            
+            // If the total has reached num, clone the subset array and add it
+            // to the result
+            if (total + n == num) {
+                subsets.push(currentSubset.concat(n));
+            }
+            
+            do {
+                
+                // If there are no more values to remove from the subset, we're done
+                if (total == 0) return subsets;
+
+                // There are no more values we can add to the current subset, so
+                // remove the last value of the subset and move the value before
+                // to the next value in arr
+                const previousValue = currentSubset.pop();
+                i = currentIndices.pop() + 1;
+                total -= previousValue;
+
+                // Move i to the next number which is different to the previous
+                // value (so that we don't add duplicates)
+                //while (arr[i] == previousValue) i++;
+
+            } while (i >= length);
+        }
+    }
+}

@@ -1,0 +1,53 @@
+
+String[] fileNaming(String[] s) {
+int n=s.length;
+    for(int i=1 ; i< n ; i++){
+        if(diffString(s,i)){continue;}
+        else{
+            int dem=1;
+            while(!diffString(s,i)){
+                s[i]=change(s[i],dem++);
+            }
+        }
+    }
+    return s;
+}
+boolean diffString(String[] s,int n){
+    for(int i=0 ; i<n ; i++){
+        if(equals(s[i],s[n])){return false;}
+    }
+    return true;
+}
+boolean equals(String s1, String s2){
+    char x[]=s1.toCharArray();
+    char y[]=s2.toCharArray();
+    if(x.length!=y.length){return false;}
+    for(int i=0 ; i<x.length; i++){
+        if(x[i]!=y[i]){
+            return false;
+        }
+    }
+    return true;
+}
+String change(String s,int n){
+    if(n>=10){
+        char x[]=new char[4];
+        x[0]='(';x[1]=(char)(n/10+48);x[2]=(char)(n%10+48);x[3]=')';
+        String obj=new String(x);
+    if(n==10){
+        return (s.substring(0,s.length()-3)+obj);
+        
+    }
+        else{
+            return (s.substring(0,s.length()-4)+obj);
+        }
+    }
+    else{
+        char x[]=new char[3];
+        x[0]='(';x[1]=(char)(n+48);x[2]=')';
+        String obj=new String(x);
+    return (n>1)?(s.substring(0,s.length()-3)+obj):(s+obj);
+    }
+    
+}
+

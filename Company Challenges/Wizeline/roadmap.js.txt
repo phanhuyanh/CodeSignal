@@ -1,0 +1,60 @@
+function roadmap(tasks, queries) {
+
+    
+        function compare_Date( d , d1 , d2 ) {
+                
+                return Date.parse(d) >= Date.parse(d1) && Date.parse(d) <= Date.parse(d2);    
+        }
+        
+        var task_list = {};
+        
+        for( let i = 0 ; i< tasks.length ; i++ ) {
+            
+                let tmp = tasks[i];
+                
+                for( let j = 3 ; j<tmp.length ; j++ ) {
+                        
+                        let temp = tmp[j];
+                        
+                        if( !task_list[temp] ) {
+                                
+                            task_list[temp] = [[tasks[i][0] , tasks[i][1] , tasks[i][2]]];
+                                
+                        }
+                        else{
+                                task_list[temp].push([tasks[i][0] , tasks[i][1] , tasks[i][2]])
+                        }
+                        
+                }
+                
+        }
+            
+            var results = [];
+            
+            for( let i = 0 ; i<queries.length ; i++ ){
+                
+                    let r = [];    
+                
+                    let query = queries[i];
+                    
+                    for( let j = 0 ; j< task_list[query[0]].length ; j++ ) {
+                            
+                            let [a,b,c] = task_list[query[0]][j];
+                            
+                            if( compare_Date( query[1] , b , c ) ){
+                                    
+                                    r.push( [a , Date.parse(c)  ] );
+                                    
+                            }
+                    }
+                    
+                    results.push(r)
+                    
+            }
+            
+        return results.map(e=> e.sort((a,b) => a[1] - b[1] || ( a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0 ) ) ).map(e=> e.map(f=>f[0]))
+        
+
+    
+    
+}

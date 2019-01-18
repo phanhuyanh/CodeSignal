@@ -1,0 +1,12 @@
+function delivery(order, shoppers) {
+    
+    var delivery = new Array(shoppers.length).fill(true)
+        
+        for( i = 0 ; i< shoppers.length ; i++){
+            
+            let time = (shoppers[i][0] + order[0] )/shoppers[i][1] + shoppers[i][2]
+            if( time <order[1] || time > (order[2]+order[1])) delivery[i] = false
+            
+        }
+       return delivery
+}

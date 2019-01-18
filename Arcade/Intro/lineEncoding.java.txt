@@ -1,0 +1,25 @@
+
+String lineEncoding(String s) {
+int n=s.length();int d_d=0;
+    String ojb="";
+    for(int i=0 ; i<n-1; i++){
+        if(s.charAt(i)!=s.charAt(i+1)){
+            ojb+=thu_gon(s.substring(d_d,i+1));
+            d_d=i+1;
+        }
+    }
+    ojb+=thu_gon(s.substring(d_d,n));
+    return ojb;
+}
+String thu_gon(String s1){
+    if(s1.length()==1){
+        return s1;
+    }
+    int n=s1.length()+48;  
+char y[]=new char[2];
+    y[0]=(char)n;
+    y[1]=s1.charAt(0);    
+    String obj=new String(y);
+    return obj;
+}
+

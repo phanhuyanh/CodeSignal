@@ -1,0 +1,18 @@
+maximumSum  = (a, q) => {
+    
+    max = 0
+    
+    R= []
+    
+    q.map(e=>{
+        
+        for(i = e[0] ; i++<=e[1] ; )
+            R[i] = R[i] ? ++R[i] : 1
+    })
+    
+    R.sort((a,b)=>b-a)
+    
+    a.sort((a,b)=>b-a)
+    
+    return R.map((e,i)=> max += e*a[i]) | max
+}

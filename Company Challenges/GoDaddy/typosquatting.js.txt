@@ -1,0 +1,54 @@
+function typosquatting(n, domain) {
+  
+     function swap(a , i) {
+            
+            let t = a.map(e=>e);
+            
+            let temp = t[i];
+            
+            t[i] = t[i+1];
+            
+            t[i+1] = temp;
+            
+            return t.join``;
+            
+      }
+            
+      var Queue = [domain] ,
+          k = 0 ,
+          numEror = 0,
+          hashSet = new Set();
+            
+      while(1) {
+                  
+            let temp = new Set();
+                  
+            for( let e of Queue ){
+                        
+                  let a = [...e].map(e=>e);
+                        
+                  for( let i = 0 ; i < a.length-1 ; i++ ) {
+                              
+                        if( a[i] === '.' || a[i+1] === '.' ) continue;
+                              
+                        const gen = swap(a , i );
+                              
+                        if(gen != domain && !hashSet.has(gen)) {
+                                    
+                              temp.add(gen);
+                              hashSet.add(gen);
+                        }
+                  }
+                        
+            }
+                  
+            Queue = [...temp];
+                  
+            if(temp.size === 0) return -1;
+
+            if(hashSet.size > n) return k;
+                  
+            k++;
+      
+      }    
+}

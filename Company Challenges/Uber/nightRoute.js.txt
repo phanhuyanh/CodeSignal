@@ -1,0 +1,22 @@
+function nightRoute(city) {
+    
+                city = city.map((e,i) => e.map((f,j) => f >= 0  ? f : i == j ? 0 :  1e9 ) )
+                
+                for( let k = 0 ; k < city.length ; k++ ){
+                        
+                        for( let i = 0 ; i < city.length ; i++ ){
+                                
+                                for( let j = 0 ; j < city.length ; j++ ){
+                                        if( city[i][k] + city[k][j] < city[i][j] )
+                                           city[i][j] = city[i][k] + city[k][j];
+                                        
+                                }
+                                
+                        }
+                        
+                }
+                
+                
+                return city[0][city.length-1];
+    
+}

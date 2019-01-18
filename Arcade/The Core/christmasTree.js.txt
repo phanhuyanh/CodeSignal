@@ -1,0 +1,81 @@
+m1=2;k2=3;
+    var x=[];
+		christmasTree =(ln,lh)=>{
+			var a=[];
+			var count=0;
+			 n=m= Math.floor((3+2*(ln-1)+lh*2)/2);
+			for(let i= 0 ; i<=1 ; i++){
+				a[count++]=the_crown(n);
+			}
+			a[count++]=the_last_crown(++n);
+			for( let k =1 ; k<=ln ; k++){
+            for(let i =1 ; i<=lh ; i++){
+				a[count++]=level_height(++n);
+			}
+                n=m+m1++;
+               
+                for(let k1 =0 ; k1<m-k2 ; k1++) x[k1]=0;
+                k2++;
+            }
+			for(let i=1; i<=ln ; i++){
+				a[count++]=the_root(lh,m);
+			}
+			return a;
+		}
+		the_root =(lh,n) =>{
+            var s="";
+            if(lh%2==0) lh++;
+            for(let i=0 ; i<=Math.floor(lh/2) ; i++)
+                x[n-i]=x[n+i]=2;
+            for(let i =0 ; i<=n+Math.floor(lh/2) ; i++){
+                if(x[i]==2) {
+                    s+="*";
+                }
+                else s+=" ";
+            }
+            return s;
+		}
+		level_height = n =>{
+			var s="";
+			for(let i =0 ; i<=n ; i++){
+				if(x[i]!=1){
+					s+=" ";
+				}
+				else{
+					x[i-1]=1;
+					x[i+1]=1;
+					s+="*";
+				}
+			}
+			return s;
+
+		}
+		the_last_crown =n=>{
+			var s="";
+            x[n]=x[n-2]=1;
+			for(let i=0 ; i<=n ; i++){
+				if(x[i]!=1){
+					s+=" ";
+				}
+				else {
+					x[i-1]=1;
+					x[i+1]=1;
+					s+="*";
+				};
+			}
+			return s;
+		}
+		the_crown = n =>{
+			
+			x[n]=1;
+			var s="";
+			for( var i = 0; i<=n ; i++){
+				if(i!=n){
+					s+=" ";
+				}
+				else{ 
+					s+="*";}
+			}
+			return s;
+		}
+

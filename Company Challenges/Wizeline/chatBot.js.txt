@@ -1,0 +1,41 @@
+function chatBot(conversations, currentConversation) {
+
+            var max = 0 ,I = -1;
+        
+            var h = {};
+            
+            for( let e of currentConversation ) h[e] = 1;
+           
+            var list_chat_bot = [];
+            
+            for( let i in  conversations ) {
+                    
+                    let t = 0;
+                    
+                    for( let f of [...new Set(conversations[i])] )
+                            if(h[f])
+                                    t++
+                    
+                    if( t > max ) {
+                            
+                            max = t;
+                        
+                            I = +i;
+                            
+                    }
+                    
+            }
+        
+            if( I <  0 ) return currentConversation
+        
+            for( let i = conversations[I].length-1 ; i>=0 ; i-- ) {
+            
+                if( h[conversations[I][i]]) {
+                        
+                        return currentConversation.concat( conversations[I].slice(i+1) );
+                        
+                }
+                
+            }
+ 
+}

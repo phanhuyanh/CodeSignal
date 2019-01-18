@@ -1,0 +1,31 @@
+int sum=0;
+int numberOfClans(int[] d, int k) {
+int n=d.length;
+    int dem=0;
+    int a[]=new int[11];
+    int b[]=new int[11];
+    for(int i =0 ; i< n ; i++){
+        a[d[i]]=d[i];
+    }
+    for(int i =0 ; i<11 ; i++){
+        if(a[i]!=0){
+            b[dem++]=a[i];
+        }
+    }
+    for(int i =0 ; i<dem-1 ; i++){
+        for(int j=i+1 ; j< dem ; j++){
+            if(b[j]%b[i]!=0&& b[i]*b[j]<=k){
+                sum++;
+            }
+        }
+    }
+    for(int i =0 ; i<dem ; i++){
+        if(b[i]>k){sum--;}
+    }
+    return (check(b)==true)?(sum+dem):(sum+dem+1);
+}
+boolean check(int[]b){
+    for(int i =0 ; i<b.length ; i++)
+        if(b[i]==1) return true;
+    return false;
+}

@@ -1,0 +1,11 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE localCalendar()
+
+select e.event_id , 
+if(s.hours = 24  , 
+   DATE_FORMAT(DATE_ADD( e.date , INTERVAL s.timeshift MINUTE ),  "%Y-%m-%d %H:%i") ,
+   DATE_FORMAT(DATE_ADD( e.date , INTERVAL s.timeshift MINUTE ) , "%Y-%m-%d %I:%i %p")) as formatted_date
+from events e , settings s
+where e.user_id = s.user_id
+
+ORDER by 1

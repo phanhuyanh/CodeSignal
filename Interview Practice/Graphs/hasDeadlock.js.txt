@@ -1,0 +1,33 @@
+function hasDeadlock(connections) {
+    
+    for( let edge = 0 ; edge < connections.length ; edge++ ) {
+        
+        const mark = new Array(connections.length).fill(true);
+        
+        let res = false;    
+            
+        function DFS( k , mark , matrix ,r) {    
+            
+            if( k === edge && r.length > 0 ) res = true;    
+                
+            for( let visit of matrix[k] ){
+                    
+                if( mark[visit] ){
+                        
+                        mark[visit] = false;
+                        
+                        DFS(visit , mark , matrix , [...r,k]);
+                }    
+                    
+            }
+                
+            //return false;    
+        }
+        
+        DFS( edge , mark , connections , []);     
+            
+        if(res) return true;    
+    }
+    return false;
+    
+}

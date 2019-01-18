@@ -1,0 +1,179 @@
+/*Please add ; after each select statement*/
+
+create function sub( chara varchar(200) , pos int ) returns varchar(200) deterministic
+BEGIN
+
+return substring(chara , pos , 1);
+
+END;
+
+create function score(board varchar(200)) returns int deterministic
+BEGIN
+
+if sub(board,1) = sub(board,2) and sub(board,1) = sub(board,3) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,1) = sub(board,2) and sub(board,1) = sub(board,3) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,4) = sub(board,5) and sub(board,4) = sub(board,6) and cast(sub(board,4) as char) != '.' and cast(sub(board,4) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,4) = sub(board,5) and sub(board,4) = sub(board,6) and cast(sub(board,4) as char) != '.' and cast(sub(board,4) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,7) = sub(board,8) and sub(board,7) = sub(board,9) and cast(sub(board,7) as char) != '.' and cast(sub(board,7) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,7) = sub(board,8) and sub(board,7) = sub(board,9) and cast(sub(board,7) as char) != '.' and cast(sub(board,7) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,1) = sub(board,5) and sub(board,1) = sub(board,9) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,1) = sub(board,5) and sub(board,1) = sub(board,9) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,3) = sub(board,5) and sub(board,3) = sub(board,7) and cast(sub(board,3) as char) != '.' and cast(sub(board,3) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,3) = sub(board,5) and sub(board,3) = sub(board,7) and cast(sub(board,3) as char) != '.' and cast(sub(board,3) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,1) = sub(board,4) and sub(board,1) = sub(board,7) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,1) = sub(board,4) and sub(board,1) = sub(board,7) and cast(sub(board,1) as char) != '.' and cast(sub(board,1) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,2) = sub(board,5) and sub(board,2) = sub(board,8) and cast(sub(board,2) as char) != '.' and cast(sub(board,2) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,2) = sub(board,5) and sub(board,2) = sub(board,8) and cast(sub(board,2) as char) != '.' and cast(sub(board,2) as char )= 'X' then return 0;
+          
+end if;
+
+if sub(board,3) = sub(board,6) and sub(board,3) = sub(board,9) and cast(sub(board,3) as char) != '.' and cast(sub(board,3) as char )= 'O' then return 2;
+          
+end if;
+
+if sub(board,3) = sub(board,6) and sub(board,3) = sub(board,9) and cast(sub(board,3) as char) != '.' and cast(sub(board,3) as char )= 'X' then return 0;
+          
+end if;
+
+
+return 1;
+
+
+END;
+
+CREATE PROCEDURE tictactoeTournament()
+BEGIN
+
+
+declare done int default 0;
+declare nau varchar(255) default "";
+declare cro varchar(255) default "";
+declare matches int default 0;
+
+declare cur cursor for 
+    select name_naughts , name_crosses , score(board)
+    from results;
+
+declare continue handler for not found set done = 1;
+
+
+drop table if exists tmp;
+
+create table tmp(
+    
+    name varchar(255),
+    points int default 0,
+    played int default 0,
+    won int default 0,
+    draw int default 0,
+    lost int default 0
+);
+
+insert into tmp(name)
+    select distinct name_naughts
+    from results
+    union 
+    select distinct name_crosses
+    from results;
+
+ 
+
+open cur;
+
+read_loop:loop
+
+    fetch cur into nau , cro , matches;
+
+    if done = 1 then leave read_loop; end if;
+
+    set @p1 = ( select points from tmp where name = nau );
+    set @pl1 = ( select played from tmp where name = nau );
+    set @w1 = ( select won from tmp where name = nau );
+    set @d1 = ( select draw from tmp where name = nau );
+    set @l1 = ( select lost from tmp where name = nau );
+
+    set @p2 = ( select points from tmp where name = cro );
+    set @pl2 = ( select played from tmp where name = cro );
+    set @w2 = ( select won from tmp where name = cro );
+    set @d2 = ( select draw from tmp where name = cro );
+    set @l2 = ( select lost from tmp where name = cro );
+    
+    if matches = 2 then 
+       set @p1 = @p1 + 2;
+       set @w1 = @w1 + 1;
+       set @l2 = @l2 + 1;
+   end if;
+   
+   if matches = 1 then
+
+       set @p1 = @p1 + 1;
+       set @p2 = @p2 + 1;
+       set @d1 = @d1 + 1;
+       set @d2 = @d2 + 1;
+   
+   end if;
+
+    if matches = 0 then
+    
+    set @l1 = @l1 + 1;
+
+    set @p2 = @p2 + 2;
+
+    set @w2 = @w2 + 1;
+
+    end if;
+
+    update tmp set points = @p1, played = @pl1 + 1 ,won = @w1 , draw = @d1 , lost = @l1 where name = nau;
+    update tmp set points = @p2,  played = @pl2 + 1,won = @w2 , draw = @d2 , lost = @l2 where name = cro;
+    
+end loop;
+
+close cur;
+
+
+select name , points , played , won ,draw , lost
+from tmp
+order by points desc , played , won desc , name
+
+
+;
+END

@@ -1,0 +1,15 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE consecutiveIds()
+BEGIN
+	
+
+set @count:=0;
+
+select id as oldId , @count:= @count+1 as newId
+
+from itemIds
+
+order by id ;
+
+
+END

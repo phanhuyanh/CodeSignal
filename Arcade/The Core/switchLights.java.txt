@@ -1,0 +1,19 @@
+int[] switchLights(int[] a) {
+for(int i= 0; i<a.length-1; i++){
+    if(a[i]==1 && count_digits1(a,i+1)%2==0){
+        a[i]=0;
+    }
+    if(a[i]==0 && count_digits1(a,i+1)%2!=0){
+        a[i]=1;
+    }
+}
+    a[a.length-1]=0;
+    return a;
+}
+int count_digits1(int[]s,int n){
+    int sum=0;
+    for(int i=n; i<s.length ; i++){
+        if(s[i]==1) sum++;
+    }
+    return sum;
+}

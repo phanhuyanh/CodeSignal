@@ -1,0 +1,28 @@
+function possibleSums(coins, quantity) {
+   
+   var n = coins.length ,
+       s = 0 ,
+       c = 0 ,
+       r = {};
+   
+   function Try( k ){
+      
+      if( k === n) return;
+      
+      for(var i = 0 ; i <= quantity[k] ; i++){
+         
+         c += coins[k] * i
+         
+         if( !r[c] ) s++
+         
+         Try(k+1 , r[c] = 1)
+         
+         c -= coins[k]*i
+      }
+      
+   }
+   
+   Try(0)
+
+   return --s;
+}

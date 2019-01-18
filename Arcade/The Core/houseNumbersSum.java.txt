@@ -1,0 +1,12 @@
+int sum=0;
+int houseNumbersSum(int[] a) {
+  
+
+    for(int i =0 ; i<a.length ; i++)
+        if(a[i]!=0){
+            sum+=a[i];
+        }
+    else break;
+
+    return sum;
+}

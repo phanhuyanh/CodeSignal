@@ -1,0 +1,7 @@
+function questionCorrectionBot(question) {
+    
+     question =  question.split`,`.map(e => e.split(/\s+/g).filter(e=>e !=`` ).join` ` ).join`, `.replace(/\?+$/g,``)
+        
+     return question[0].toUpperCase() + question.slice(1) + "?"
+ 
+}

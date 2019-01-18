@@ -1,0 +1,10 @@
+int depositProfit(int deposit, int rate, int threshold) {
+int dem=0;
+    float depositFloat=(float)deposit;
+    float thresholdFloat=(float)threshold;
+    while(depositFloat<thresholdFloat){
+        depositFloat+=depositFloat*rate/100;
+        dem++;
+    }
+    return dem;
+}

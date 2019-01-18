@@ -1,0 +1,7 @@
+int[] concatenateArrays(int[] a, int[] b) {
+int c[]=new int[a.length+b.length];
+    int dem=0;
+    for(int i=0; i<a.length ; i++) c[dem++]=a[i];
+    for(int i=0 ; i<b.length ; i++) c[dem++]=b[i];
+    return c;
+}

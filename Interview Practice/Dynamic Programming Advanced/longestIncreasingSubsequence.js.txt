@@ -1,0 +1,16 @@
+function longestIncreasingSubsequence(sequence) {
+    
+    var dp = [1];
+    
+    for(let i = 1 ; i < sequence.length ; i++) {
+        
+        dp[i] = 1;
+        
+        for(let j = i - 1 ; j >= 0 ; j--) {
+            if(sequence[i] > sequence[j])
+                dp[i] = Math.max(dp[i] , dp[j] + 1); 
+        }
+        
+    }
+    return Math.max(...dp);
+}

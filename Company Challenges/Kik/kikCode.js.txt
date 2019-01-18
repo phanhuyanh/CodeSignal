@@ -1,0 +1,53 @@
+function kikCode(userId) {
+  
+         var results = [];
+         
+         var t =  [...(+userId).toString(2).padStart(52,'0')].reverse().join``;
+         
+         var circumference  = [ t.slice(0,3) , t.slice(3,7) , t.slice(7,15) , t.slice(15,25) , t.slice(25,37) , t.slice(37) ];
+         
+         circumference.map((e,i)=>{
+          
+             let degree = 360 / e.length;
+             
+             let k = e.length-1;
+             
+             if( e[0] == e[k] && e[0] == 1 )  while( e[k]!=0 && k >= 0 ) k--
+
+             if( k < 0 ) results.push([ [i+1 , 0 ] , [i+1,360] ]); 
+             
+             else{
+                     let j = 0;
+                     
+                     while( j <= k ){
+                         
+                         if(e[j] == 0) {
+                             
+                             j++;
+                             
+                             continue;
+                         }
+                         
+                         let g = j + 1;
+                         
+                         while(  e[g] !=0 && g < e.length ) g++;
+
+                         
+                         if( k != e.length-1 && j == 0 ) {
+                                 
+                                 results.push( [[ i + 1 , degree*(k+1) ] , [i + 1 , degree*(e.length + g) ] ] );
+     
+                         }
+                         else{
+   
+                             results.push( [ [ i + 1 , degree*j ] , [i + 1 ,degree*g ] ] ); 
+
+                         }
+                         
+                         j = g;
+                   
+                     }
+            }
+         })
+         return results;    
+}

@@ -1,0 +1,4 @@
+from collections import Counter
+
+def frequencyAnalysis(encryptedText):
+    return list(sorted( map(lambda (key,val) : [val,key] , Counter(encryptedText).items()) , key = lambda x : (-x[0],x[1])))[0][1]

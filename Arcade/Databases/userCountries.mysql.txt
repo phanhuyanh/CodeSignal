@@ -1,0 +1,13 @@
+create procedure userCountries()
+BEGIN
+
+select id , ifnull(c.country , "unknown") as country
+
+from users u 
+
+left join cities c on u.city = c.city
+
+order by 1
+;
+
+END

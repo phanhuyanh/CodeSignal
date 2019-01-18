@@ -1,0 +1,14 @@
+int chessKnight(std::string cell) {
+int x=(int)cell.at(0)-96;
+    int y=(int)cell.at(1)-48;
+    int dem=0;
+    if(x+2<=8 && y+1<=8) dem++;
+    if(x+2<=8 && y-1>=1) dem++;
+    if(x-2>=1 && y-1>=1) dem++;
+    if(x-2>=1 && y+1<=8) dem++;
+    if(x+1<=8 && y+2<=8) dem++;
+    if(x-1>=1 && y+2<=8) dem++;
+    if(x+1 <=8 && y-2>=1) dem++;
+    if(x-1>=1 && y-2>=1) dem++;
+    return dem;
+}

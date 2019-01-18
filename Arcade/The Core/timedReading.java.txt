@@ -1,0 +1,28 @@
+int sum=0;
+int timedReading(int m, String t) {
+    int n=t.length();
+    int head=0;
+    t=t.toUpperCase();
+    for(int i=0 ; i<n ; i++){
+        if(t.charAt(i)<'A' || t.charAt(i)>'Z'){
+            if(check(t.substring(head,i),m)){
+                sum++;
+            }
+            head=i;
+        }
+         if(i==n-1){
+                if(check(t.substring(head,n),m)) sum++;
+            }
+    }
+        return sum;
+}
+boolean check(String s,int m){
+    int count=0;
+    for(int i=0 ; i<s.length() ; i++){
+        if(s.charAt(i)>='A' && s.charAt(i)<='Z'){
+            count++;
+        }
+    }
+    if(count==0 || count>m) return false;
+    return true;
+}

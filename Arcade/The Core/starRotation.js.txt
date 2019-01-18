@@ -1,0 +1,36 @@
+function starRotation(a, w,[c1,c2], t) {
+    var wd =Math.floor(w/2);
+    for( i =1 ; i<=wd ;i++){
+        var s= F(a,[c1,c2],i,t);
+        a[c1-i][c2-i] =s.shift();
+        a[c1-i][c2] =s.shift();
+        a[c1-i][c2+i] =s.shift();
+        a[c1][c2+i] =s.shift();
+        a[c1+i][c2+i] =s.shift();
+        a[c1+i][c2] =s.shift();
+        a[c1+i][c2-i] =s.shift();
+        a[c1][c2-i] =s.shift();
+    }
+    return a;
+}
+F =(a,[c1,c2],i ,t) =>{
+    var s=[];
+      s[0] =  a[c1-i][c2-i]; 
+        s[1] =a[c1-i][c2] ;
+       s[2] = a[c1-i][c2+i] ;
+        s[3] = a[c1][c2+i] ;
+        s[4] = a[c1+i][c2+i]; 
+       s[5] = a[c1+i][c2] ;
+        s[6] = a[c1+i][c2-i]; 
+        s[7] = a[c1][c2-i];
+    var s1 = xoay(s,t%8);
+    return s1;
+}
+xoay=(s,t) =>{
+    while(t!=0){
+        var x =s.pop();
+        s.unshift(x);
+        t--;
+    }
+    return s;
+}

@@ -1,0 +1,19 @@
+function tasksTypes(deadlines, day) {
+    
+    today = 0
+    
+    Upcoming = 0
+    
+    Later = 0
+    
+    for(e of deadlines){
+        
+        if(e<=day) today++
+        
+        else if(e <= day+7) Upcoming++
+        
+        else Later++
+        
+    }
+    return [today,Upcoming,Later]
+}

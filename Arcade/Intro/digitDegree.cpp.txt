@@ -1,0 +1,23 @@
+int digitDegree(int n) {
+    int dem=0;
+if(n<10){
+    return dem;
+}
+    else{
+        int k=n;
+        while(sum(k)>=10){
+            dem++;
+            k=sum(k);
+        }
+    }
+    return dem+1;
+}
+int sum (int n){
+    int sum=0;
+    while(n!=0){
+        int du=n%10;
+        sum+=du;
+        n=n/10;
+    }
+    return sum;
+}

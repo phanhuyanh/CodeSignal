@@ -1,0 +1,19 @@
+function volleyballPositions(f, k) {
+var s=[f[0][1],f[1][2],f[3][2],f[2][1],f[3][0],f[1][0]];
+    var s1=change(s,k%6);
+   f[0][1]=s1[0];
+    f[1][2]=s1[1];    
+    f[3][2]=s1[2];
+    f[2][1]=s1[3];
+    f[3][0]=s1[4];    
+    f[1][0]=s1[5];
+    return f;
+}
+change=(s,n)=>{
+    while(n!=0){
+        var a=s.shift();
+        s.push(a);
+        n--;
+    }
+    return s;
+}

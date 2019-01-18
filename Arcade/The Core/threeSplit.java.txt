@@ -1,0 +1,20 @@
+int dem=0;int sum1=0;int sum2=0;
+int threeSplit(int[] a) {int sum=0;
+int n=a.length;
+    for(int i= 0; i<n ; i++)
+        sum+=a[i];
+    if(sum%3!=0) return 0;
+    int k=sum/3;
+    for(int i=0 ; i<n-2 ; i++){
+        sum1+=a[i];
+        if(sum1!=k) continue;
+        else{
+            for(int j=i+1 ; j<n-1 ; j++){
+                sum2+=a[j];
+                if(sum2==k) dem++;
+            }
+        }
+        sum2=0;
+    }
+    return dem;
+}

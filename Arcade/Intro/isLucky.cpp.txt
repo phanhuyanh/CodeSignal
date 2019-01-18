@@ -1,0 +1,21 @@
+bool isLucky(int n) {
+int dem=0;int x=n;
+    while(x!=0){
+        dem++;
+        x=x/10;
+    }
+    int y=dem/2;
+    int sum1=0;int sum2=0;int i=1;
+    while(n!=0){
+        if(i<=y){
+            sum1+=n%10;
+        }
+        else{
+            sum2+=n%10;
+        }
+        i++;
+        n=n/10;
+    }
+    if(sum1==sum2){return true;}
+    else{return false;}
+}

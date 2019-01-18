@@ -1,0 +1,7 @@
+isInformationConsistent=e=>{
+    for( j =0 ; j<e[0].length ; j++){
+        a= e.map(t=> t[j])
+        if( [-1,1].every(v=> a.includes(v))) return false
+    }
+    return true
+}

@@ -1,0 +1,38 @@
+DROP PROCEDURE IF EXISTS orderAnalytics;
+CREATE PROCEDURE orderAnalytics()
+BEGIN
+
+    DROP TABLE IF EXISTS order_analytics;
+
+    CREATE TABLE order_analytics(
+        
+        id int primary key,
+        year int ,
+        quarter int,
+        type varchar(200),
+        total_price int
+        
+    );
+
+    INSERT INTO order_analytics
+        select id , year(order_date)  , quarter(order_date) , type , price*quantity
+        from orders;
+    SELECT *
+    FROM order_analytics
+    ORDER by id;
+END;
+
+
+
+CREATE PROCEDURE orderAnalytics1()
+BEGIN
+
+    DROP TABLE IF EXISTS order_analytics;
+
+    CREATE TABLE order_analytics as
+        select id , year(order_date)  , quarter(order_date) , type , price*quantity
+        from orders;
+    SELECT *
+    FROM order_analytics
+    ORDER by id;
+END;

@@ -1,0 +1,11 @@
+int countBlackCells(int n, int m) {
+return m+n+UCLN(n,m)-2;
+}
+int UCLN(int a,int b){int du;
+    while(b!=0){
+         du=a%b;
+        a=b;
+        b=du;
+    }
+    return a;
+}

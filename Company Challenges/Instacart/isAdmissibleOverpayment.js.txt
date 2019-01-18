@@ -1,0 +1,29 @@
+function isAdmissibleOverpayment(prices, notes, x) {
+    
+    var Overpayment = 0;
+        
+    for(let i = 0 ; i<notes.length ; i++) {
+        
+        let tmp = notes[i];
+                
+        if( tmp == "Same as in-store" ) continue;
+                
+        if( tmp.match(/[0-9.]+(?=% higher than in-store)/) ) {
+                      
+            let count = tmp.match(/[0-9.]+(?=% higher than in-store)/);
+                        
+            Overpayment += prices[i] -  prices[i]*100/( 100 + +count );
+                        
+        }
+                
+        else{
+                        
+            let count = tmp.match(/[0-9.]+(?=% lower than in-store)/);
+                        
+            Overpayment -= prices[i]*100/( 100 - +count ) - prices[i];
+                        
+        }
+                
+    }       
+    return Overpayment <= x;
+}

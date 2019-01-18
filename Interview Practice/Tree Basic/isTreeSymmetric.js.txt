@@ -1,0 +1,24 @@
+//
+// Definition for binary tree:
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+function isTreeSymmetric(t) {
+    
+    
+    function CheckisTreeSymmetric( root1 , root2 ) {
+        
+        if( root1 == null && root2 == null ) return true;
+        
+        if( root1 != null && root2 != null && root1.value == root2.value ) {
+            
+                return CheckisTreeSymmetric( root1.left , root2.right ) && CheckisTreeSymmetric(root1.right,root2.left);
+        }
+        return false
+    }
+        
+       return CheckisTreeSymmetric( t ,t );
+    
+}

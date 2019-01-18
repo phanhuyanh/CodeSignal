@@ -1,0 +1,57 @@
+function dailyOHLC(timestamp, instrument, side, price, size) {
+                
+        var hash = {};
+                
+        for( let i in timestamp ){
+                        
+                const time = Change(timestamp[i]);
+                        
+                if( hash[time] == null ) hash[time] = {};
+
+                if(hash[time][instrument[i]] == null) hash[time][instrument[i]] = [[timestamp[i] , price[i].toFixed(2)]];
+                                
+                else hash[time][instrument[i]].push([timestamp[i],price[i].toFixed(2)]);
+                        
+                        
+        }
+
+        var results = [];
+                
+        for( let day of Object.keys(hash) ){
+                        
+                let Q = [];
+                        
+                for( let Instrument of Object.keys(hash[day]) ){
+                               
+                        let temp = [day , Instrument];
+                                
+                        const list = hash[day][Instrument];
+                                
+                        const first_price = list.map((_,i)=>i).sort((a,b) => list[a][0] - list[b][0]  || a - b  ).map(e=> list[e])[0][1];
+                                
+                        const second_price = list.map((_,i)=>i).sort((a,b) => list[b][1] - list[a][1]  || a - b  ).map(e=> list[e])[0][1];
+                                
+                        const third_price = list.map((_,i)=>i).sort((a,b) => list[a][1] - list[b][1]  || a - b  ).map(e=> list[e])[0][1];
+                                
+                        const fouth_price = list.map((_,i)=>i).sort((a,b) => list[b][0] - list[a][0]  || b - a  ).map(e=> list[e])[0][1];
+                                
+                        temp.push(first_price);
+                        temp.push(second_price);
+                        temp.push(third_price);
+                        temp.push(fouth_price);
+                                
+                        Q.push(temp);
+                }
+                Q.sort((a,b)=> a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0 );
+                        
+                Q.map(e => results.push(e) )
+                        
+        }
+        return results
+
+}
+function Change(time){
+        
+        return new Date(time*1e3).toISOString().slice(0,10);
+        
+}

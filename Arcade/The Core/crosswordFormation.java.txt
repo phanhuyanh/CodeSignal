@@ -1,0 +1,56 @@
+int crosswordFormation(String[] words) {
+    char[] s1, s2, s3, s4;
+    int dem = 0;
+    for (int i = 0; i < 4; i ++){
+        s1 = words[i].toCharArray();
+        for (int j = 0; j < 4; j ++) {
+            if (j != i) {
+                s2 = words[j].toCharArray();
+                for (int k = 0; k < 4; k ++) {
+                    if (k != j && k != i) {
+                        s3 = words[k].toCharArray();
+                        for (int l = 0; l < 4; l ++) {
+                            if (l != k && l != j && l != i) {
+                                s4 = words[l].toCharArray();
+                                dem += count(s1, s2, s3, s4);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return dem;
+}
+
+int count(char[] s1, char[] s2, char[] s3, char[] s4) {
+    int dem = 0;
+    s1:
+    for (int i = 0; i < s1.length; i ++) {
+    for (int j = 0; j < s2.length; j ++) {
+        if (s1[i] == s2[j]) {
+            s2:
+            for (int k = i + 2; k < s1.length; k ++) {
+            for (int l = 0; l < s3.length; l ++) {
+                if (s1[k] == s3[l]) {
+                    if (s4.length < k - i + 1)
+                        continue s2;
+                    s3:
+                    for (int m = j + 2; m < s2.length; m ++)
+                    for (int n = 0; n < s4.length - k + i; n ++) {
+                        if (s4[n] == s2[m]) {
+                            if (n+k-i <= 0 || n+k-i >= s4.length || l+m-j <= 0 || l+m-j >= s3.length)
+                                continue s3;
+                            if (s4[n+k-i] == s3[l+m-j])
+                                dem ++;
+                        }
+                    }
+                }
+            }
+            }
+        }
+    }
+    }
+    return dem;
+}
+ 

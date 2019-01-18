@@ -1,0 +1,21 @@
+boolean isMAC48Address(String s) {
+int dem=0; int dem1=0;int n=s.length();
+    for(int i =0 ; i<n ; i++){
+        if(s.charAt(i)=='-'){
+            if(!kiemtra(s.substring(dem1,i))){return false;}
+            else{
+                dem1=i+1;
+                dem++;
+            }
+        }
+    }
+    if(dem!=5 || kiemtra(s.substring(dem1,n))==false){ return false;}
+    return true;
+}
+boolean kiemtra(String s){
+    if(s.length()!=2) return false;
+    for(int i = 0; i<2 ; i++)
+        if((s.charAt(i)>='0' && s.charAt(i)<='9') || (s.charAt(i)>='A' && s.charAt(i)<='F')) {continue;}
+    else {return false;}
+    return true;
+}

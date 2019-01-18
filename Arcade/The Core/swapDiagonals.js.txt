@@ -1,0 +1,14 @@
+function swapDiagonals(matrix) {
+    var k=0;
+    for( i = 0 ; i<Math.floor(matrix.length/2) ; i++){
+        let temp = matrix[i][k];
+        matrix[i][k] = matrix[i][matrix[i].length-k-1];
+        matrix[i][matrix[i].length-k-1] = temp;
+        let x=matrix.length-i-1;
+        temp = matrix[x][k];
+        matrix[x][k] = matrix[x][matrix[x].length-k-1];
+        matrix[x][matrix[x].length-k-1] =temp;
+        k++;
+    }
+    return matrix;
+}

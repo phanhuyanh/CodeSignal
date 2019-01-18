@@ -1,0 +1,2 @@
+def groupDating(male, female):
+    return [map( lambda x : x[0] , filter( lambda x : x[0] != x[1] , zip(male,female))) , map( lambda x : x[1] , filter( lambda x : x[0] != x[1] , zip(male,female)))]

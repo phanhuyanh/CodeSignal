@@ -1,0 +1,29 @@
+function holiday(x, weekDay, month, yearNumber) {
+    
+    const first_day = new Date(`${month}-01-${yearNumber}`).toDateString().split` `[0];
+    
+    var hash_day = { "Mon" : 1 , "Tue" : 2 , "Wed" : 3 , "Thu" : 4 , "Fri" : 5 , "Sat" : 6 , "Sun" : 7 };
+    
+    var hash_month = {
+        
+        January : 31,
+        February :[28,29],
+        March : 31,
+        April : 30,
+        May : 31 ,
+        June : 30,
+        July : 31 ,
+        August : 31,
+        September : 30,
+        October :31 ,
+        November :30,
+        December : 31
+    };
+    
+    var distance = ( hash_day[weekDay.slice(0,3)] - hash_day[first_day] + 7 ) % 7;
+    
+    const dayOfMonth = hash_month[month].length == 2 ?  yearNumber % 400 == 0 || (yearNumber % 4 == 0 && yearNumber % 100  )  ? 29 : 28 : hash_month[month];
+    
+    return 1 + distance + --x*7 <= dayOfMonth ? 1 + distance + x*7 : -1 ;
+    
+}

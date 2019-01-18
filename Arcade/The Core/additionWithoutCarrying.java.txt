@@ -1,0 +1,15 @@
+int additionWithoutCarrying(int p1, int p2) {
+   int dem=0;int sum=0;
+    while(p1 !=0 || p2!=0){
+        if(p1%10 +p2%10 >=10){
+            int a=(p1%10 +p2%10)%10;
+           sum+= a*(int)Math.pow(10,dem++);
+        }
+        else{
+            sum+= (p1%10+p2%10)*(int)Math.pow(10,dem++);
+        }
+        p1=p1/10;
+        p2=p2/10;
+    }
+    return sum;
+}

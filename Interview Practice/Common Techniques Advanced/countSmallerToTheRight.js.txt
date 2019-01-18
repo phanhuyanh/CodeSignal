@@ -1,0 +1,12 @@
+t = 0  
+b = []
+countSmallerToTheRight = a => 
+    a.map((_, r) => {
+        l = 0
+        v = a[--i]
+        for (; l < r; )
+            b[m = l + r >> 1] < v
+                ? l = m + 1
+                : r = m 
+        b.splice(a[i] = l, 0, v)
+    }, i = a.length) && a.map(e=> t += e ) | t

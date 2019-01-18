@@ -1,0 +1,15 @@
+function arrayPreviousLess(items) {
+    var count=1;
+    var a=[];
+    a.push(-1);
+    for(var i=1 ; i<items.length ; i++){
+        for(var j=0 ; j<i ; j++){
+            if(items[j] <items[i]){
+                a[count]=items[j];
+            }
+        }
+        if(a[count]==undefined) a[count]=-1;
+        count++;
+    }
+    return a;
+}
