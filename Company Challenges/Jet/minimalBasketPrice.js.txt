@@ -1,0 +1,63 @@
+function minimalBasketPrice(maxPrice, vendorsDelivery, vendorsProducts) {
+    
+    function jet(maxPrice, vendorsDelivery, vendorsProducts) {
+        
+        var hash = {};
+        var queue = [];
+        
+        for(let i = 0; i < vendorsDelivery.length; i++) {
+
+            const delivery = vendorsDelivery[i];
+            const product  = vendorsProducts[i];
+            
+            for(let item of queue) {
+                
+                let newProduct = item.map(e => e);
+                
+                for(let j = 0; j < item.length; j++) {
+                    
+                    if(item[j] === -1) newProduct[j] = product[j];
+                    
+                    else if(product[j] === -1) newProduct[j] = item[j];
+                    
+                    else newProduct[j] = Math.min(item[j], product[j]);
+                    
+                }
+
+                let days = Math.max(delivery, hash[item][1]);
+                
+                if(hash[newProduct] == null || days < hash[item][1]) {
+                        
+                        queue.push(newProduct);
+                        hash[newProduct] = [[...hash[item][0], i], days];
+                }
+
+            }
+                      
+            queue.push(product);
+            hash[product] = [[i], delivery];
+        }
+        
+        var min = 1e9;
+        var r = [];
+        for(let combation of Object.keys(hash)) {
+                
+                const a = combation.split`,`;
+                
+                if(a.some(e => e == -1)) continue;
+                
+                if(a.reduce((a,b) => +a + +b) > maxPrice) continue;
+
+                const [res, days] = hash[combation];
+                
+                if(days < min) 
+                   //
+                   min = days, r = res;      
+                        
+                
+        }
+        
+        return r;
+    }
+    return jet(maxPrice, vendorsDelivery, vendorsProducts);
+}
