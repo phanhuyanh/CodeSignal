@@ -1,0 +1,75 @@
+function merchantMinimization(items, merchants) {
+
+     function merge(combation, merchant) {
+          
+          var res = new Set();
+          
+          combation.map(e => res.add(e));
+          
+          merchant.map(e => res.add(e));
+          
+          return [...res].sort((a,b) => a - b);
+          
+     }
+     function S(a,b) {
+          
+          for(let i = 0; i < a.length; i++) {
+               
+               if(a[i] < b[i]) return -1;
+               
+               if(a[i] > b[i]) return 1;
+               
+          }
+          return 0;
+     }
+    
+     function f(items, merchants) {
+          
+          var hash = {};
+          
+          var h = {}, d = 1;
+          
+          items = items.map(e => h[e] ? h[e] : h[e] = d++);
+          
+          merchants = merchants.map(e => e.map(f => h[f] ? h[f] : h[f] = d++))
+                               .map(e => e.sort((a,b) => a - b))
+                               .map((e,i) => [e, i]);
+          
+          var queue = [];
+          
+          for(let i = 0; i < merchants.length; i++) {
+               
+               let [merchant, index] = merchants[i];
+               
+               for(let combation of queue) {
+                    
+                    let item = merge(combation, merchant);
+                    
+                    if(!hash[item] || hash[item].length > hash[combation].length + 1) {
+                         
+                         
+                         if(!hash[item]) queue.push(item);
+                         
+                         hash[item] = [...hash[combation], index];
+                    }
+                    
+               }
+               if(!hash[merchant] || hash[merchant].length > 1) {
+                    
+                    if(!hash[merchant]) queue.push(merchant);
+                    hash[merchant] = [i];
+               }
+          }
+
+          var res = [];
+          
+          for(let item of Object.keys(hash)) 
+               res.push([item.split`,`.map(e => +e), hash[item]]);
+               
+          res = res.filter(e => items.every(f => e[0].find(g => g == f)));
+
+          return res.length ? res.map(e => e[1]).sort((a,b) => a.length - b.length || S(a,b))[0] : [-1];
+     }  
+     
+     return f(items, merchants);
+}
