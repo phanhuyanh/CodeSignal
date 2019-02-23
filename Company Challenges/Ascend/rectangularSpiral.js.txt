@@ -1,0 +1,105 @@
+function rectangularSpiral(firstPoint, secondPoint) {
+
+       const [x1,y1] = firstPoint;
+       const [x2,y2] = secondPoint;
+       
+       
+       if(x1 == x2 || y1 == y2) return [firstPoint,secondPoint]
+       
+       var direction = [[-1,0], [0,-1], [1,0], [0,1]];
+       var index;
+    
+       if(x2 > x1 && y2 > y1) {
+          index = 2;
+              
+       } else if(x2 > x1 && y2 < y1) {
+          index = 1;
+              
+       } else if(y2 < y1 && x2 < x1) {
+          index = 0;
+              
+       } else index = 3;
+       
+       var step = 0;
+    
+       var thresholdX = [Math.min(firstPoint[0], secondPoint[0]), Math.max(firstPoint[0], secondPoint[0])];
+    
+       var thresholdY = [Math.min(firstPoint[1], secondPoint[1]), Math.max(firstPoint[1], secondPoint[1])];
+    
+       var res = [firstPoint];
+       
+       var curPoint = firstPoint;
+      
+       while(1) {
+        
+           let [dirX,dirY] = direction[index++];
+       
+           if(step < 3) {
+             
+                if(dirX) {
+                   
+                   curPoint = [dirX < 0 ? thresholdX[0] : thresholdX[1], curPoint[1]];
+                 
+                } else {
+                 
+                   curPoint = [curPoint[0], dirY < 0 ? thresholdY[0] : thresholdY[1]];
+                }
+              
+           }
+           else {
+            
+              if(dirX !== 0) {
+               
+                 if(dirX < 0) {
+                  
+
+                    if(thresholdX[0] + 1 == curPoint[0]) break;
+                  
+                    curPoint = [thresholdX[0] + 1,curPoint[1]];
+                  
+                    thresholdX[0]++;
+
+                 }
+                 else {
+                  
+                    if(thresholdX[1] - 1 == curPoint[0]) break;
+                  
+                    curPoint = [thresholdX[1] - 1,curPoint[1]];
+
+                    thresholdX[1]--;
+
+                 }
+              }
+              else {
+
+                  if(dirY < 0) {
+
+                    if(thresholdY[0] + 1 == curPoint[1]) break;
+                    
+                    curPoint = [curPoint[0],thresholdY[0] + 1];
+ 
+                    thresholdY[0]++;
+
+                                        
+  
+                 }
+                 else {
+                  
+                    if(thresholdY[1] - 1 == curPoint[1]) break;
+                  
+                    curPoint = [curPoint[0],thresholdY[1] - 1];
+                  
+                    thresholdY[1]--;
+
+                 }
+                     
+              }
+
+           }
+              
+           res.push(curPoint);
+           index %= 4;
+           step++;
+       }
+       return res;
+}

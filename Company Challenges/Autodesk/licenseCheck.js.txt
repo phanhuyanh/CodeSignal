@@ -1,0 +1,42 @@
+var mysql = require('mysql');
+ 
+var connection = mysql.createConnection(
+    {
+      host     : 'localhost',
+      user     : 'test',
+      password : '',
+      database : 'ri_db',
+    }
+);
+ 
+connection.connect();
+ 
+var queryString = 'SELECT product_name,products.product_licenses as p1 , user_name,users.product_licenses as p2 FROM products,users';
+
+connection.query(queryString, function(err, rows, fields) {
+    if (err) throw err;
+  
+    var hash = {};
+    
+    rows.map(e => {
+        var pro = e.p1.split(",");
+
+        if(hash[e.user_name])
+            hash[e.user_name].push([e.product_name, pro.some(f => e.p2.includes(f))]);
+        else hash[e.user_name] = [[e.product_name, pro.some(f => e.p2.includes(f))]];
+        
+    })
+
+    for(let user_name of Object.keys(hash)) {
+        
+        console.log(`User ${user_name}:`);
+        for(let [product_name, correct] of hash[user_name]) {
+            
+            console.log(`  ${product_name}: ${correct}`)
+            
+        }
+        
+    }
+});
+ 
+connection.end();

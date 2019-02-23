@@ -1,0 +1,30 @@
+var fs = require('fs');
+
+var root = "/root/devops/logs";
+
+var hash = {};
+
+fs.readdirSync(root).map(e => {
+    
+    if(e.match(/.+\.log/)) read(root +"/" + e);
+    
+});
+
+function read(path) {
+
+    var file = fs.readFileSync(path,"utf8");
+
+    file.split("\n").map(info => {
+       
+        let attr = info.split`|`;
+        
+        if(attr[1] === "ERROR")
+            
+            hash[attr[2]] = ~~hash[attr[2]] + 1;
+ 
+    });
+    
+}
+Object.entries(hash).sort((a,b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+                    .map(e => console.log(`${e[0]} ${e[1]}`))
+

@@ -1,0 +1,54 @@
+function groupingPipelineNodes(n, g, v) {
+    
+      
+    var hash_group = {};
+    var mark = {};
+
+    v.map(e => hash_group[e] = "x");
+
+    for(let [start, end] of g) {
+
+        let s = hash_group[start] ? hash_group[start] : start;
+        let e = hash_group[end] ? hash_group[end] : end;
+        
+        if(s === e) continue;
+        
+        if(mark[s] == null) {
+            
+           mark[s] = new Set();
+            
+        }
+        mark[s].add(e);
+        
+    }
+    // BFS
+    var queue = ["x"];
+    var isVisited = {};
+    var res = true;
+        
+    while(queue.length) {
+     
+        let edge = queue.shift();
+     
+        isVisited[edge] = 1;
+        
+        if(mark[edge] == null) continue;
+        
+        for(let edgeNear of ([...mark[edge]])) {
+            
+            if(edgeNear == "x") {
+               res = false;
+               break;
+            }
+            
+            if(isVisited[edgeNear] == null) {
+             
+               queue.push(edgeNear);
+               isVisited[edgeNear] = 1;
+            }
+         
+        }
+     
+    }
+    return res;
+}

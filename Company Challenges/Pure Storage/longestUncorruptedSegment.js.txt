@@ -1,0 +1,24 @@
+function longestUncorruptedSegment(a, b) {
+    
+    return f(a, b);
+}
+
+function f(a,b) {
+
+    var max = 0, pos = 0;
+
+    var c = a.map((e,i) => [e, b[i], i]).filter(e => e[0] != e[1]).map(e => e[2]);
+
+    c.push(a.length);
+
+    c.unshift(-1);
+
+    for(let i = 1; i < c.length; i++) {
+           if(c[i] - c[i-1] - 1 > max) {
+                max = c[i] - c[i-1] - 1;
+
+                pos = c[i-1] + 1;
+           }
+    }
+    return [max, pos];
+}
