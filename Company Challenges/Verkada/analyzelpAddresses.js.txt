@@ -1,0 +1,54 @@
+var fs = require('fs');
+
+var root = "/root";
+
+var res = new Set();
+
+var dir;
+
+var stat = fs.statSync(root);
+
+if(stat.isDirectory()) {
+    
+    dir = fs.readdirSync(root);
+    
+    for(let e of dir)
+        readDirx(root + "/" + e);
+}
+
+function read(path) {
+     
+   if(!fs.existsSync(path)) return;     
+
+   var data = fs.readFileSync(path,"utf8");
+        
+   var IP = data.split("\n")
+                .map(e => e.match(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g))
+                .map(e => e ? e.map(f => res.add(f)): 0)
+}
+function readDirx(path) {
+        
+    var s = fs.statSync(path)
+    
+    if(s.isFile()) read(path);
+    
+    else if(s.isDirectory()) {
+        
+        let file = fs.readdirSync(path);
+        
+        for(let e of file)
+            readDirx(path + "/" + e);
+    }
+        
+}
+
+res = [...res].filter(e => {
+        
+    let num = e.split`.`;
+        
+    return num.every(f => +f >= 0 && +f <= 255);    
+        
+}).sort((a,b) => a < b ? -1 : a > b ? 1 : 0)
+.map(e => console.log(e));
+
+
