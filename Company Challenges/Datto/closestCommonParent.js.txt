@@ -1,0 +1,21 @@
+function closestCommonParent(files, parents, file1, file2) {
+       
+       
+       var hash1 = filePath(files, parents, file1);
+       var hash2 = filePath(files, parents, file2);
+              
+       for(let i in hash1) 
+              for(let j in hash2) 
+                     if(hash2[j] == hash1[i])
+                            return hash1[i];
+}
+
+function filePath(files, parent, file1) {
+       
+       var hash = [file1];
+              
+       while(file1 != -1) 
+              hash.push(file1 = parent[files.indexOf(file1)]);
+       
+       return hash;
+}

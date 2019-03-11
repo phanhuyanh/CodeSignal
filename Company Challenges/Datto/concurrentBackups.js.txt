@@ -1,0 +1,29 @@
+function concurrentBackups(threads, documents) {
+       
+       // Use DFS
+       
+       var arrThreads = Array.from({length : threads}, _ => 0);
+              
+       var min = 1e9;
+              
+       function DFS(arr, i, r) {
+              
+              if(i >= arr.length) min = Math.min(min, Math.max(...r));
+                     
+              else 
+                  for(let k = 0; k < threads; k++) {
+                                   
+                     r[k] += arr[i];
+                                   
+                     DFS(arr, i + 1, r);
+                                   
+                     r[k] -= arr[i];
+                                   
+                  }   
+       }
+              
+       DFS(documents, 0, arrThreads);
+              
+       return min       
+       
+}                                  

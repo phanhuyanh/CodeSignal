@@ -1,0 +1,55 @@
+Array.prototype.markForDelete = function (idx){
+    if(typeof this._markedForDeletes === "undefined") this._markedForDeletes = [];
+    this._markedForDeletes.push(idx);
+}
+Array.prototype.performDeletes = function () {
+    if(typeof this._markedForDeletes === "undefined") return;
+    console.log('deletes', this._markedForDeletes.map(idx => this[idx]));
+    this._markedForDeletes.forEach((idx, did) => {
+        this.splice(idx-did, 1);
+    })
+    this._markedForDeletes = [];
+}
+function troubleFiles(files, backups) {
+    const tracker = [];
+    const availFiles = files.slice(0);
+    //console.log(availFiles)
+    backups.forEach( (backupTime, idx) => {
+        tracker[idx] = 0;
+        console.log('backupTime', backupTime)
+        
+        const queueSize = availFiles.reduce( (qSize, file, idx) => {
+            const addedTime = file[0],
+                  size = file[1];
+            if (addedTime <= backupTime) {
+                console.log(addedTime + ' is marked for delete', idx, qSize, size);
+                availFiles.markForDelete(idx);
+                console.log(availFiles)
+                return qSize + size;
+            } else {
+                return qSize;
+            }
+        }, 0);
+        
+        availFiles.performDeletes();
+        console.log('queueSize', queueSize);
+        
+        for (var i=0; i < availFiles.length; i++) {
+            if(availFiles[i][0] > backupTime+queueSize) {
+                break;
+            }else{
+                console.log(availFiles[i][0] + ' is trouble');
+                availFiles.markForDelete(i);
+                tracker[idx]++;
+            }
+        }
+        availFiles.performDeletes();
+        
+        console.log('availFiles\n', availFiles)
+        
+    });
+    
+     //tracker[tracker.length-1] += availFiles.length;
+    
+    return tracker;
+}
