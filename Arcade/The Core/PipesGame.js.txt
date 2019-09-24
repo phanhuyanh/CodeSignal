@@ -1,0 +1,91 @@
+function pipesGame(state) {
+    
+    var hash = {},
+        queue = [],
+        sourcePosition = [];
+    
+    var pipesConnect = state.map((e,i) =>
+                                 [...e].map((f,j) => 
+                                            f == 0 ? [[[-1, -1], [-1, -1]]] :
+                                            f == 1 ? [[[i-1, j], [i+1, j]]] :
+                                            f == 2 ? [[[i, j -1], [i, j + 1]]] :
+                                            f == 3 ? [[[i, j + 1], [i + 1, j]]] :
+                                            f == 4 ? [[[i, j-1], [i + 1, j]]] :
+                                            f == 5 ? [[[i, j-1], [i -1, j]]] :
+                                            f == 6 ? [[[i -1, j], [i, j + 1]]] :
+                                            f == 7 ? [[[i -1, j], [i + 1, j]],[[i,  j - 1], [i,  j + 1]]] : f));
+        
+    
+    for(let i = 0; i < state.length; i++) 
+        
+        for(let j = 0; j < state[0].length; j++) 
+            
+            if(/[a-z]/.test(state[i][j])) sourcePosition.push([i, j]);
+        
+    
+
+    for(let [x, y] of sourcePosition) {
+        
+        for(let [dx, dy] of [[-1,0], [1, 0], [0, -1], [0, 1]]) {
+            
+            if((x + dx) >= 0 && (x + dx) < state.length &&
+               (y + dy) < state[0].length && (y + dy) >= 0) {
+                 
+                if(/[a-zA-Z]/.test(state[x + dx][y + dy])) continue;
+
+                if(pipesConnect[x + dx][y + dy].some(e => e.some(f => f[0] == x && f[1] == y))) 
+                    
+                    queue.push([x + dx, y + dy, x, y, state[x][y]]); 
+            }
+        }
+        
+    }
+
+    while(queue[0]) {
+        
+        let temp = [];
+        let err = false;
+        
+        for(let [x, y, preX, preY, source] of queue) {
+            
+            if(/[A-Z]/.test(pipesConnect[x][y])) {
+                
+                if(pipesConnect[x][y].toLowerCase() != source) err = true;
+            }
+            
+            else {
+                
+                if(/[1-7]/.test(state[preX][preY])){
+                            
+                    hash[preX + "-" + preY] = 1;
+                }
+                if(/[1-7]/.test(state[x][y])){
+                            
+                    hash[x + "-" + y] = 1;
+                }
+                
+                let [a] = pipesConnect[x][y].filter(e => e.some(f => f[0] == preX && f[1] == preY));
+                
+                let [nextX, nextY] = a.filter(e => !(e[0] == preX && e[1] == preY))[0];
+                
+                if(nextX >= 0 && nextX < state.length && nextY >= 0 && nextY < state[0].length) {
+                    
+                    if(state[nextX][nextY] == '0') err = true;
+                    
+                    else if(/[A-Z]/.test(state[nextX][nextY]) && 
+                            state[nextX][nextY].toLowerCase() != source) err = true;
+                    
+                    else temp.push([nextX, nextY, x, y, source]);
+                }
+                else err = true;
+            }
+        }
+        
+        if(err) return -Object.keys(hash).length;
+        
+        queue = temp;
+    }
+
+    return Object.keys(hash).length;
+}
+
