@@ -1,0 +1,87 @@
+function befunge93(program) {
+    
+    var res = "",
+        stack = [],
+        command = 0,
+        lengthRow = program.length,
+        lengthCol = program[0].length,
+        directX = 0,
+        directY = 1,
+        positionX = 0,
+        positionY = 0,
+        setDirect = (dX, dY) => {
+            
+            directX = dX;
+            directY = dY;
+            
+        },
+        setPosition = _ => {
+            
+            positionX =  (pX = positionX += directX) < 0 ?
+                         lengthRow - 1 : 
+                         pX === lengthRow ? 0 : pX;
+            
+            positionY =  (pY = positionY += directY) < 0 ?
+                         lengthCol - 1 : 
+                         pY === lengthCol ? 0 : pY;     
+        },
+        resolution = (symbol) => {
+            if(res.length > 99 || command++ > 1e5 || symbol === '@')
+                return;
+            
+            switch (symbol) {
+                
+                case '>' : setDirect(0, 1);  break;  
+                case '<' : setDirect(0, -1); break; 
+                case '^' : setDirect(-1, 0); break; 
+                case 'v' : setDirect(1, 0);  break;
+                case '#' : setPosition(); break;    
+                
+                    
+                case '_' : ~~stack.pop() ? setDirect(0, -1) : setDirect(0, 1);break;
+                case '|' : ~~stack.pop() ? setDirect(-1, 0) : setDirect(1, 0);break;  
+                    
+                    
+
+                case '+' : stack.push(~~stack.pop() + ~~stack.pop()); break;
+                case '-' : a = ~~stack.pop(); b = ~~stack.pop(); stack.push(b - a); break;
+                case '*' : stack.push(~~stack.pop() * ~~stack.pop()); break;
+                case '/' : a = ~~stack.pop(); b = ~~stack.pop(); stack.push(b / a | 0); break;    
+                case '%' : a = ~~stack.pop(); b = ~~stack.pop(); stack.push(b % a); break; 
+                    
+                case '!' : stack.push(~~stack.pop() ? 0 : 1);break;
+                case '`' : a = ~~stack.pop(); b = ~~stack.pop(); stack.push(b > a ? 1 : 0); break;
+                    
+                case ':' : stack.push(v = ~~stack.pop(), v);break;
+                case '\\' : a = ~~stack.pop(); b = ~~stack.pop(); stack.push(a, b);break;
+                case '$' : stack.pop();break; 
+                    
+                case '.' : v = ~~stack.pop(); res += /\d+/.test(v) ? `${v} ` : `${v.charCodeAt(0)} `;break;
+                case ',' : v = stack.pop(); res += /[^\d+]/.test(v) ? v : String.fromCharCode(v); break;
+                case ' ' : break;   
+                    
+            }
+            
+            if(/[0-9]/.test(symbol)) stack.push(+symbol);
+            
+            if(symbol === "\"") {
+                
+                setPosition();
+                
+                while(program[positionX][positionY] !== "\"") {
+                    
+                    let char = program[positionX][positionY];
+                    
+                    stack.push(char.charCodeAt(0));
+                    
+                    setPosition();
+                }
+            }
+            setPosition();
+            
+            resolution(program[positionX][positionY]);
+        };
+    
+    resolution(program[0][0]);
+    return res;
+}
