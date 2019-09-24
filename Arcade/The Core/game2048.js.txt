@@ -1,0 +1,45 @@
+function game2048(grid, path) {
+
+    [...path].map(dir => grid = move(grid, /[RL]/.test(dir) ? "Horizontal" : "Vertical", dir))
+
+    return grid;
+}
+function move(grid, direction, state) {
+    
+    var matrix = grid;
+    
+    for(let i = 0; i < 4; i++) {
+        
+        let arr = direction == "Vertical" ?
+                                grid.map(e => e[i]) : 
+                                grid[i];
+        
+        if((direction === "Vertical" && state === "D") || 
+           (direction === "Horizontal" && state === "R"))
+            arr = arr.reverse();
+        
+        arr = arr.filter(e => e);
+        
+        let queue = arr.concat(new Array(8).fill(0));
+        
+        for(let k = j = 0; k < 4; k++) {
+                
+            if(~~queue[j] === ~~queue[j + 1]) {
+                    
+                if(direction === "Vertical") matrix[state === "D" ? 3 - k : k][i] = 2 * ~~queue[j];
+                    
+                else matrix[i][state === "R" ? 3 - k : k] = 2 * ~~queue[j];
+                    
+                j += 2;
+            }
+            else {
+                    
+                if(direction === "Vertical") matrix[state ===  "D" ? 3 - k : k][i] = ~~queue[j++];
+                    
+                else matrix[i][state === "R" ? 3 - k : k] = ~~queue[j++];
+            }
+                
+        }
+    }
+    return matrix;
+}
