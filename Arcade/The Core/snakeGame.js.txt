@@ -1,0 +1,105 @@
+function snakeGame(gameBoard, commands) {
+    
+    var mark = gameBoard.map(e => e.map(f => '.')),
+        lengthRowBoard = gameBoard.length,
+        lengthColBoard = gameBoard[0].length,
+        direction = {
+            '^' : [-1, 0],
+            'v' : [1, 0],
+            '>' : [0, 1],
+            '<' : [0, -1]
+        },
+        directionReverse = {
+            '-1-0' : '^',
+            '1-0' : 'v',
+            '0-1' : '>',
+            '0--1' : '<'
+        },
+        curDiection;
+    
+    var findPositionHeadSnake = function() {
+        
+        for(let i in gameBoard)
+            for(let j in gameBoard[i])
+                if('^v><'.includes(gameBoard[i][j])){
+                    
+                    curDiection = direction[gameBoard[i][j]];
+                    
+                    return [+i,+j];
+                }
+    } 
+    
+    var snake = function(lrow, lcol) {
+        
+        let list = [];
+        let headSnake = findPositionHeadSnake();
+        
+        list.push(headSnake);
+        
+        while(1) {
+            
+            let [x,y] = list[list.length - 1];
+            let error = true;
+
+            for(let [dx,dy] of [[-1,0], [1,0], [0,-1], [0,1]]) {
+                
+                if(gameBoard[x + dx] && gameBoard[x + dx][y + dy] === '*' &&
+                  !list.some(e => e[0] === x + dx && e[1] === y + dy)){
+
+                    list.push([x + dx, y + dy]);
+                    error = false;
+                }
+            }
+
+            if(error) break;
+        }
+        
+        return list;
+    }
+    
+    var snake = snake(lengthRowBoard, lengthColBoard);
+    
+    // Output
+    var gameOver = function(char, condition) {
+        
+        for(let i in snake) {
+            
+            let [x, y] = snake[i];
+            
+            if(i == 0 && condition) 
+                mark[x][y] = directionReverse[curDiection[0] + "-" + curDiection[1]];
+            
+            else mark[x][y] = char;
+        }
+        
+        return mark;
+    }
+
+    for(let dir of [...commands]) {
+       
+        if(dir !== 'F') 
+            
+            curDiection =  initDirection(curDiection, dir === 'L' ? 1 : 0);
+        else {
+            
+            let [x, y] = snake[0];
+            let [dx, dy] = curDiection;
+            
+            if(!gameBoard[x + dx] || !gameBoard[x + dx][y + dy] ||
+              snake.some(e => e[0] === x + dx && e[1] === y + dy))
+                return gameOver('X', false);
+            
+            else {
+                if(snake.length > 1) snake.pop();
+                
+                snake.unshift([x + dx, y + dy]);
+            }
+        }
+        
+    }
+    return gameOver('*', true);
+}
+function initDirection([dirX, dirY], left) {
+    
+    return dirX ? left ? [dirY, dirX] : [0, -dirX] : left ? [-dirY, 0] : [dirY, 0];
+}
