@@ -1,0 +1,31 @@
+function coverDebts(s, debts, interests) {
+  
+  var payEachMoney = s / 10,
+      res = 0,
+      arrDebtsAndInterests = debts.map((e,i) => [e, interests[i]]).sort((a,b) => b[1] - a[1] || a[0] - b[0]);
+
+  while(arrDebtsAndInterests[0]) {
+
+    var pay = payEachMoney;
+    
+    for(let i in arrDebtsAndInterests) {
+      
+      let [debt] = arrDebtsAndInterests[i];
+      
+      if(debt > pay) {
+        res += pay;
+        arrDebtsAndInterests[i][0] -= pay;
+        break;
+      }
+      else {
+        res += debt;
+        pay -= debt;
+        arrDebtsAndInterests[i][0] = 0;
+      }
+
+    }
+
+    arrDebtsAndInterests = arrDebtsAndInterests.filter(e => e[0]).map(([d, i]) => [d + d * i / 100, i]);
+  }
+  return res;
+}
