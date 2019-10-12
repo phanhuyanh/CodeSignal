@@ -1,0 +1,14 @@
+function strangeCode(s, e) {
+    var res = '';
+    
+    while(s < e - 1) {
+        s++;
+        e--;
+        
+        if(!res || res[res.length - 1] == 'b') res += 'a';
+        
+        else  res += 'b';
+        
+    }
+    return res;
+}
