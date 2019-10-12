@@ -1,0 +1,1 @@
+f = minimalMultiple = (d, l) => l % d ? f(d, l + 1) : l
