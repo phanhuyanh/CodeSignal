@@ -1,0 +1,1 @@
+piecesOfDistinctLengths = k => (8 * k + 1)**.5 - 1 >> 1
