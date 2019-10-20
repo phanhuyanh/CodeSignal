@@ -1,0 +1,48 @@
+function findSquareSide(x, y) {
+    
+    for(let j = 0; j < 4; j++) {
+        
+        for(let k = 0; k  < 4; k++) {
+            if(k == j) continue;
+            
+            for(let m = 0; m < 4; m++) {
+                if(m == k || m == j) continue;
+                
+                for(let n = 0; n < 4; n++) {
+                    if(n == m || n == k || n == j) continue;                 
+                    
+                    let a =  [ [x[0], y[j]],  [x[1], y[k]], [x[2], y[m]] , [x[3], y[n]] ]
+                    
+                    let [edge1, edge2, edge3, edge4] = a
+                    
+                    if(check(edge1, edge2, edge3)) return check(edge1, edge2, edge3)
+                }
+            }
+        }
+    }
+    
+}
+function check(e1, e2, e3) {
+    if(isPerpendicular(e1, e2, e3) && isEqual(e1, e2, e3)) return (e1[0] - e2[0])**2 + (e1[1] - e2[1])**2;
+    
+    if(isPerpendicular(e2, e1, e3) && isEqual(e2, e1, e3)) return (e1[0] - e2[0])**2 + (e1[1] - e2[1])**2;;
+    
+    if(isPerpendicular(e3, e2, e1) && isEqual(e3, e2, e1)) return (e3[0] - e2[0])**2 + (e3[1] - e2[1])**2;;
+                        
+    return false;
+}
+
+function isPerpendicular(e1, e2, e3) {
+    
+    var vector1 = [e1[0] - e2[0], e1[1] - e2[1]]
+    var vector2 = [e1[0] - e3[0], e1[1] - e3[1]]
+    
+    return vector1[0] * vector2[0] + vector1[1] * vector2[1] == 0;
+}
+
+function isEqual([x1, y1], [x2, y2], [x3, y3]) {
+    var distance1 = Math.hypot(x1 - x2, y1 - y2);
+    var distance2 = Math.hypot(x1 - x3, y1 - y3);
+
+    return distance1 == distance2;
+}
