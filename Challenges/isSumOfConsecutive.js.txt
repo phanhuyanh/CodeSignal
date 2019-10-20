@@ -1,0 +1,2 @@
+k = 2
+f = isSumOfConsecutive = n => k < n / 2 ? (m = - k / 2 + n /++k) - (m | 0) ? f(n) : !0 : !1
