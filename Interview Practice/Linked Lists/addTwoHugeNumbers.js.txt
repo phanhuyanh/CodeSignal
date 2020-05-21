@@ -1,33 +1,42 @@
-// Definition for singly-linked list:
+// Singly-linked lists are already defined with this interface:
 // function ListNode(x) {
 //   this.value = x;
 //   this.next = null;
 // }
 //
 function addTwoHugeNumbers(a, b) {
-     r = []
-     e = []
-     
-     while(a!=null){
-          r.push(a.value);
-          a=a.next;
-     }
-     while(b!=null){
-          e.push(b.value);
-          b=b.next;
-     }
-     r.reverse()
-     e.reverse()
-     i = 0
-     H = []
-     while(r[i]!=null || e[i]!=null){
-          e[i] ==null ? t=r[i] : r[i]==null ? t= e[i] : t=r[i]+e[i]
-          if( t >9999){
-               H.push(t%10000);
-               r[i+1] == null ? e[i+1]==null ? H.push(1) :e[i+1]++ : r[i+1]++;
-          }
-          else H.push(t)
-          i++
-     }
-     return H.reverse()
+    var x = reverseLinkedList(a)
+    var y = reverseLinkedList(b)
+    var remember = 0
+    var list = new ListNode(-1)
+    var p = list
+
+    while(x || y) {
+        let m = ~~(x || {}).value
+        let n = ~~(y || {}).value
+        let r = (m + n + remember) % 1e4
+        remember = (m + n + remember) / 1e4 | 0
+        p = p.next = new ListNode(r)
+        if(x) x = x.next
+        if(y) y = y.next
+    }
+    if(remember) 
+        p = p.next = new ListNode(remember)
+
+    return reverseLinkedList(list.next)
+}
+function reverseLinkedList(l) {
+    var r
+
+    while(l) {
+        if(r) {
+            let node = new ListNode(l.value)
+            node.next = r
+            r = node
+        }
+        else  r = new ListNode(l.value)
+        
+        l = l.next
+    }
+    return r
 }
