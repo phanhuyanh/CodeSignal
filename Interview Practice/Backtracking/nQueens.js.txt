@@ -1,4 +1,4 @@
-nQueens= n => {
+nQueens = n => {
     var row = new Array(n).fill(true)
     var col = new Array(n).fill(true)
     var diagonal1 = new Array(2 * n - 1).fill(true)
